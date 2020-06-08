@@ -6,24 +6,32 @@
 #include <QGraphicsView>
 
 #include "config.h"
+#include "level.h"
+#include "map.h"
 
 class GameEngine: public QGraphicsView
 {
     Q_OBJECT
 
 private:
-    QGraphicsScene * levelScene;
+    QGraphicsScene * scene;
 
-    QGraphicsItemGroup * gamePlan;
+    QGraphicsItemGroup * mapPlan;
 
     int windowWidth;
 
     int windowHeight;
 
+    Level * level;
+
 public:
     GameEngine();
 
     ~GameEngine();
+
+    void loadMap(QString MapName);
+
+    void drawMap(Map map);
 };
 
 #endif // GAMEENGINE_H

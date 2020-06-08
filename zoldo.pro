@@ -22,7 +22,8 @@ SOURCES += \
     main.cpp \
     map.cpp \
     player.cpp \
-    unit.cpp
+    unit.cpp \
+    wall.cpp
 
 HEADERS += \
     config.h \
@@ -31,13 +32,13 @@ HEADERS += \
     level.h \
     map.h \
     player.h \
-    unit.h
+    unit.h \
+    wall.h
 
 FORMS += \
-    mainwindow.ui
 
-TRANSLATIONS += \
-    zoldo_fr_FR.ts
+RESOURCES += \
+    ressources/images/
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

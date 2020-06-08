@@ -1,5 +1,6 @@
 #include "element.h"
 
+
 Element::Element()
 {
     height = 0;
@@ -16,7 +17,7 @@ void Element::setSprite(QString ressource)
 {
     // set graphic
     QPixmap img = QPixmap(ressource);
-    img = img.scaled(width,height);
+    img = img.scaled(width, height);
 
     setPixmap(img);
 
@@ -41,29 +42,4 @@ int Element::getHeight() const
 void Element::setHeight(int value)
 {
     height = value;
-}
-
-int Element::getSpawnX() const
-{
-    return spawnX;
-}
-
-void Element::setSpawnX(int value)
-{
-    spawnX = value;
-}
-
-int Element::getSpawnY() const
-{
-    return spawnY;
-}
-
-void Element::setSpawnY(int value)
-{
-    spawnY = value;
-}
-
-void Element::respawn()
-{
-    setPos(spawnX,spawnY);
 }

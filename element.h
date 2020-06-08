@@ -11,9 +11,6 @@ protected:
 
     int height;
 
-    int spawnX;
-
-    int spawnY;
 
 public:
     Element();
@@ -29,16 +26,6 @@ public:
     void setHeight(int value);
 
     void setSprite(QString ressource);
-
-    int getSpawnX() const;
-
-    void setSpawnX(int value);
-
-    int getSpawnY() const;
-
-    void setSpawnY(int value);
-
-    void respawn();
 
 };
 

@@ -1,7 +1,7 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
-#import "unit.h"
+#include "unit.h"
 
 class Player : public Unit
 {

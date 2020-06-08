@@ -1,8 +1,8 @@
 #include "gameengine.h"
 
+
 GameEngine::GameEngine()
 {
-
     windowWidth = WIN_WIDTH;
     windowHeight = WIN_HEIGHT;
 
@@ -10,18 +10,37 @@ GameEngine::GameEngine()
     resize(windowWidth, windowHeight);
 
     // create the scene
-    levelScene = new QGraphicsScene();
+    scene = new QGraphicsScene();
 
-    gamePlan = new QGraphicsItemGroup();
-    levelScene->addItem(gamePlan);
+    mapPlan = new QGraphicsItemGroup();
+    scene->addItem(mapPlan);
 
 
+    // init map TEST
+    level = new Level();
+    level->generateTestLevel();
 
-    // init map
-    //map = new Map();
+    scene->setBackgroundBrush(QImage(level->getBackground()));
+
+    for(Element * element : *level->getElementList()){
+        mapPlan->addToGroup(element);
+    }
+
+    setScene(scene);
 }
 
 GameEngine::~GameEngine()
 {
 
 }
+
+void GameEngine::loadMap(QString mapName)
+{
+
+}
+
+void GameEngine::drawMap(Map map)
+{
+
+}
+
