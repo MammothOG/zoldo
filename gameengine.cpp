@@ -10,11 +10,10 @@ GameEngine::GameEngine()
     resize(windowWidth, windowHeight);
 
     // create the scene
-    scene = new QGraphicsScene();
+    scene = new QGraphicsScene(-100, -100, WIN_WIDTH, WIN_HEIGHT);
 
     mapPlan = new QGraphicsItemGroup();
     scene->addItem(mapPlan);
-
 
     // init map TEST
     level = new Level();
@@ -27,7 +26,7 @@ GameEngine::GameEngine()
     }
 
     setScene(scene);
-}
+ }
 
 GameEngine::~GameEngine()
 {

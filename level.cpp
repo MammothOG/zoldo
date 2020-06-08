@@ -23,13 +23,18 @@ void Level::generateTestLevel()
     background = QImage(backgroundPath);
     background = background.scaledToHeight(height);
 
-    Wall * wall1 = new Wall();
-    wall1->setPos(0, 0);
-    Wall * wall2 = new Wall();
-    wall2->setPos(75, 75);
+    for (int w = 0; w < HORIZONTAL_BLOCK; w++){
+        for (int h = 0; h < VERTICAL_BLOCK; h++){
+            int posx = w * BLOCK_SIZE;
+            int posy = h * BLOCK_SIZE;
 
-    elementList->append(wall1);
-    elementList->append(wall2);
+            Wall * wall = new Wall();
+
+            wall->setPos(posx, posy);
+
+            elementList->append(wall);
+        }
+    }
 }
 
 void Level::clearLevel()
