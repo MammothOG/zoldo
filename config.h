@@ -4,7 +4,7 @@
 #define TITLE "zoldo"
 
 #define WIN_HEIGHT 800
-#define WIN_WIDTH 750
+#define WIN_WIDTH 600
 
 #define BLOCK_SIZE 50
 

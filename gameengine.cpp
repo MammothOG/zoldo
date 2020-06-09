@@ -3,6 +3,9 @@
 
 GameEngine::GameEngine()
 {
+    setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+
     windowWidth = WIN_WIDTH;
     windowHeight = WIN_HEIGHT;
 

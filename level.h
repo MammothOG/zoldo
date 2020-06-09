@@ -27,6 +27,9 @@ private:
 
     int width;
 
+    int spawnX;
+
+    int spawnY;
 
 public:
     Level();
