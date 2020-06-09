@@ -1,11 +1,11 @@
 #ifndef WALL_H
 #define WALL_H
 
-#include "element.h"
+#include "block.h"
 #include "config.h"
 
 
-class Wall: public Element
+class Wall: public Block
 {
 public:
     Wall();

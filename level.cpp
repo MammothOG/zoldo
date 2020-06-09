@@ -21,18 +21,23 @@ void Level::generateTestLevel()
 
     backgroundPath = ":/ressources/images/level_bg_test.png";
     background = QImage(backgroundPath);
-    background = background.scaledToHeight(height);
+    background = background.scaled(width, height);
 
     for (int w = 0; w < HORIZONTAL_BLOCK; w++){
         for (int h = 0; h < VERTICAL_BLOCK; h++){
             int posx = w * BLOCK_SIZE;
             int posy = h * BLOCK_SIZE;
 
-            Wall * wall = new Wall();
+            if(posx == 0 || posy == 0 ||
+                    posx == (HORIZONTAL_BLOCK-1)*BLOCK_SIZE ||
+                    posy == (VERTICAL_BLOCK-1)*BLOCK_SIZE)
+            {
+                Wall * wall = new Wall();
 
-            wall->setPos(posx, posy);
+                wall->setPos(posx, posy);
 
-            elementList->append(wall);
+                elementList->append(wall);
+            }
         }
     }
 }

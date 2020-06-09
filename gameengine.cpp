@@ -10,7 +10,7 @@ GameEngine::GameEngine()
     resize(windowWidth, windowHeight);
 
     // create the scene
-    scene = new QGraphicsScene(-100, -100, WIN_WIDTH, WIN_HEIGHT);
+    scene = new QGraphicsScene(0, 0, WIN_WIDTH, WIN_HEIGHT);
 
     mapPlan = new QGraphicsItemGroup();
     scene->addItem(mapPlan);
@@ -38,8 +38,7 @@ void GameEngine::loadMap(QString mapName)
 
 }
 
-void GameEngine::drawMap(Map map)
+void GameEngine::drawMap(Adventure map)
 {
 
 }
-

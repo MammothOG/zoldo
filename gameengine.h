@@ -31,7 +31,7 @@ public:
 
     void loadMap(QString MapName);
 
-    void drawMap(Map map);
+    void drawMap(Adventure map);
 };
 
 #endif // GAMEENGINE_H

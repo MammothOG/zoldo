@@ -17,6 +17,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     adventure.cpp \
+    block.cpp \
     element.cpp \
     gameengine.cpp \
     level.cpp \
@@ -27,6 +28,7 @@ SOURCES += \
 
 HEADERS += \
     adventure.h \
+    block.h \
     config.h \
     element.h \
     gameengine.h \
