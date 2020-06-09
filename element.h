@@ -11,7 +11,6 @@ protected:
 
     int height;
 
-
 public:
     Element();
 

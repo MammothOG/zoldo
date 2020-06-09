@@ -6,4 +6,6 @@ Adventure::Adventure()
 {
     levelList = new QList<Level*>();
     player = new Player();
+
+    currentLevel = 0;
 }

@@ -19,6 +19,7 @@ SOURCES += \
     adventure.cpp \
     block.cpp \
     element.cpp \
+    enemy.cpp \
     gameengine.cpp \
     level.cpp \
     main.cpp \
@@ -31,6 +32,7 @@ HEADERS += \
     block.h \
     config.h \
     element.h \
+    enemy.h \
     gameengine.h \
     level.h \
     player.h \

@@ -14,6 +14,8 @@ private:
 
     Player * player;
 
+    int currentLevel;
+
 public:
     Adventure();
 

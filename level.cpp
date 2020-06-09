@@ -3,12 +3,15 @@
 
 Level::Level()
 {
+    // listing the level item
     elementList = new QList<Element*>();
     unitList = new QList<Unit*>();
 
+    // set info level
     difficulty = 0;
     name = "noNamedLevel";
 
+    // set level dimension
     height = BLOCK_SIZE * VERTICAL_BLOCK;
     width = BLOCK_SIZE * HORIZONTAL_BLOCK;
 
@@ -23,6 +26,10 @@ void Level::generateTestLevel()
     background = QImage(backgroundPath);
     background = background.scaled(width, height);
 
+    spawnX = 300;
+    spawnY = 300;
+
+    // set block wall around the level
     for (int w = 0; w < HORIZONTAL_BLOCK; w++){
         for (int h = 0; h < VERTICAL_BLOCK; h++){
             int posx = w * BLOCK_SIZE;
@@ -40,6 +47,7 @@ void Level::generateTestLevel()
             }
         }
     }
+
 }
 
 void Level::clearLevel()
