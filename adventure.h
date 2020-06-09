@@ -7,7 +7,7 @@
 #include "player.h"
 
 
-class Map
+class Adventure
 {
 private:
     QList<Level*> * levelList;
@@ -15,7 +15,7 @@ private:
     Player * player;
 
 public:
-    Map();
+    Adventure();
 
 };
 

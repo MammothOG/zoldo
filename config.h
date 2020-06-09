@@ -8,7 +8,7 @@
 
 #define BLOCK_SIZE 75
 
-#define VERTICAL_BLOCK 15
-#define HORIZONTAL_BLOCK 11
+#define VERTICAL_BLOCK 16
+#define HORIZONTAL_BLOCK 12
 
 #endif // CONFIG_H

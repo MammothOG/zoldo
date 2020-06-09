@@ -1,8 +1,8 @@
-#include "map.h"
+#include "adventure.h"
 #include "level.h"
 
 
-Map::Map()
+Adventure::Adventure()
 {
     levelList = new QList<Level*>();
     player = new Player();

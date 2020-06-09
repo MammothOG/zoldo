@@ -7,7 +7,7 @@
 
 #include "config.h"
 #include "level.h"
-#include "map.h"
+#include "adventure.h"
 
 class GameEngine: public QGraphicsView
 {
