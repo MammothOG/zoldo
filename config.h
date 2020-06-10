@@ -11,4 +11,6 @@
 #define VERTICAL_BLOCK 16
 #define HORIZONTAL_BLOCK 12
 
+#define FPS 60
+
 #endif // CONFIG_H

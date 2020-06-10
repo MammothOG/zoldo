@@ -18,10 +18,11 @@ GameEngine::GameEngine()
     sceneElements = new QGraphicsItemGroup();
     scene->addItem(sceneElements);
 
+    loadAdventure();
+
     clock  = new QTimer(this);
     connect(clock, SIGNAL(timeout()), this, SLOT(updateState()));
-
-    loadAdventure();
+    clock->start(1000/FPS);
  }
 
 GameEngine::~GameEngine()
@@ -40,7 +41,6 @@ void GameEngine::drawLevel(Level * level)
 
     for(Unit * unit : *level->getUnitList()){
         sceneElements->addToGroup(unit);
-        qDebug() << "unit";
     }
 
 }
@@ -51,8 +51,9 @@ void GameEngine::loadAdventure()
     adventure = new Adventure();
     adventure->generateTestAdventure();
 
-    drawLevel(adventure->getCurrentLevel());
+    currentLevel = adventure->getCurrentLevel();
 
+    drawLevel(currentLevel);
     setScene(scene);
 
 }
@@ -64,5 +65,16 @@ void GameEngine::updateState()
 
 void GameEngine::updateUnitState()
 {
+    for(Unit * unit: *currentLevel->getUnitList()){
+        Enemy * enemy = dynamic_cast<Enemy*>(unit);
+        enemy->move();
 
+        int nextX = enemy->x() + enemy->getHorizontalMov();
+        int nextY = enemy->y() + enemy->getVerticalMov();
+
+        enemy->setPos(nextX, nextY);
+        qDebug() << nextX << " " << nextY;
+
+
+    }
 }

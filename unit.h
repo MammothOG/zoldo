@@ -39,6 +39,10 @@ public:
     void setVerticalMov(float vMov);
 
     void setHorizontalMov(float hMov);
+
+    float getVerticalMov() const;
+
+    float getHorizontalMov() const;
 };
 
 #endif // UNIT_H

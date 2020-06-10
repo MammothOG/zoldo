@@ -6,7 +6,7 @@ Enemy::Enemy()
     setHeight(50);
     setWidth(50);
 
-    movementSpeed = 0;
+    movementSpeed = 5;
 
     movementFrequency = 0;
     movementFrequencyCounter = 0;

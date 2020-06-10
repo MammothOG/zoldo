@@ -22,10 +22,20 @@ Unit::Unit()
 
 void Unit::setVerticalMov(float vMov)
 {
-    verticalMov = vMov;
+    verticalMov = vMov * movementSpeed;
+}
+
+float Unit::getVerticalMov() const
+{
+    return verticalMov;
 }
 
 void Unit::setHorizontalMov(float hMov)
 {
-    horizontalMov = hMov;
+    horizontalMov = hMov * movementSpeed;
+}
+
+float Unit::getHorizontalMov() const
+{
+    return horizontalMov;
 }

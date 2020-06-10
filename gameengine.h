@@ -25,7 +25,12 @@ private:
 
     Adventure * adventure;
 
+    Level * currentLevel;
+
     QTimer * clock;
+
+public slots:
+    void updateState();
 
 public:
     GameEngine();
@@ -35,8 +40,6 @@ public:
     void loadAdventure();
 
     void drawLevel(Level * level);
-
-    void updateState();
 
     void updateUnitState();
 };
