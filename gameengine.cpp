@@ -18,8 +18,8 @@ GameEngine::GameEngine()
     sceneElements = new QGraphicsItemGroup();
     scene->addItem(sceneElements);
 
-    //clock  = new QTimer(this);
-    //connect(clock,SIGNAL(timeout()), this, SLOT(updatePositions()));
+    clock  = new QTimer(this);
+    connect(clock, SIGNAL(timeout()), this, SLOT(updateState()));
 
     loadAdventure();
  }
@@ -57,7 +57,12 @@ void GameEngine::loadAdventure()
 
 }
 
-void GameEngine::updatePositions()
+void GameEngine::updateState()
+{
+    updateUnitState();
+}
+
+void GameEngine::updateUnitState()
 {
 
 }

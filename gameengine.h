@@ -36,7 +36,9 @@ public:
 
     void drawLevel(Level * level);
 
-    void updatePositions();
+    void updateState();
+
+    void updateUnitState();
 };
 
 #endif // GAMEENGINE_H
