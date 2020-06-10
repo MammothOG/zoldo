@@ -9,3 +9,16 @@ Adventure::Adventure()
 
     currentLevel = 0;
 }
+
+void Adventure::generateTestAdventure()
+{
+    Level * level = new Level();
+    level->generateTestLevel();
+
+    levelList->append(level);
+}
+
+Level * Adventure::getCurrentLevel()
+{
+    return levelList->at(currentLevel);
+}

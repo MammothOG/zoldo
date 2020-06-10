@@ -1,6 +1,6 @@
 #include "gameengine.h"
 
-
+#include <QDebug>
 GameEngine::GameEngine()
 {
     setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
@@ -15,20 +15,13 @@ GameEngine::GameEngine()
     // create the scene
     scene = new QGraphicsScene(0, 0, WIN_WIDTH, WIN_HEIGHT);
 
-    mapPlan = new QGraphicsItemGroup();
-    scene->addItem(mapPlan);
+    sceneElements = new QGraphicsItemGroup();
+    scene->addItem(sceneElements);
 
-    // init map TEST
-    level = new Level();
-    level->generateTestLevel();
+    //clock  = new QTimer(this);
+    //connect(clock,SIGNAL(timeout()), this, SLOT(updatePositions()));
 
-    scene->setBackgroundBrush(QImage(level->getBackground()));
-
-    for(Element * element : *level->getElementList()){
-        mapPlan->addToGroup(element);
-    }
-
-    setScene(scene);
+    loadAdventure();
  }
 
 GameEngine::~GameEngine()
@@ -36,12 +29,35 @@ GameEngine::~GameEngine()
 
 }
 
-void GameEngine::loadMap(QString mapName)
+
+void GameEngine::drawLevel(Level * level)
 {
+    scene->setBackgroundBrush(QImage(level->getBackground()));
+
+    for(Element * element : *level->getElementList()){
+        sceneElements->addToGroup(element);
+    }
+
+    for(Unit * unit : *level->getUnitList()){
+        sceneElements->addToGroup(unit);
+        qDebug() << "unit";
+    }
 
 }
 
-void GameEngine::drawMap(Adventure map)
+void GameEngine::loadAdventure()
+{
+    // init TEST adventure
+    adventure = new Adventure();
+    adventure->generateTestAdventure();
+
+    drawLevel(adventure->getCurrentLevel());
+
+    setScene(scene);
+
+}
+
+void GameEngine::updatePositions()
 {
 
 }

@@ -48,6 +48,9 @@ void Level::generateTestLevel()
         }
     }
 
+    Enemy * testEnemy = new Enemy();
+    testEnemy->setPos(200, 200);
+    unitList->append(testEnemy);
 }
 
 void Level::clearLevel()
@@ -66,6 +69,11 @@ void Level::clearLevel()
 QList<Element*> * Level::getElementList() const
 {
     return elementList;
+}
+
+QList<Unit*> * Level::getUnitList() const
+{
+    return unitList;
 }
 
 QImage Level::getBackground() const

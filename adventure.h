@@ -19,6 +19,9 @@ private:
 public:
     Adventure();
 
+    void generateTestAdventure();
+
+    Level * getCurrentLevel();
 };
 
 #endif // MAP_H

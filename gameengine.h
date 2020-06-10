@@ -4,6 +4,7 @@
 #include <QGraphicsScene>
 #include <QGraphicsItemGroup>
 #include <QGraphicsView>
+#include <QTimer>
 
 #include "config.h"
 #include "level.h"
@@ -16,22 +17,26 @@ class GameEngine: public QGraphicsView
 private:
     QGraphicsScene * scene;
 
-    QGraphicsItemGroup * mapPlan;
+    QGraphicsItemGroup * sceneElements;
 
     int windowWidth;
 
     int windowHeight;
 
-    Level * level;
+    Adventure * adventure;
+
+    QTimer * clock;
 
 public:
     GameEngine();
 
     ~GameEngine();
 
-    void loadMap(QString MapName);
+    void loadAdventure();
 
-    void drawMap(Adventure map);
+    void drawLevel(Level * level);
+
+    void updatePositions();
 };
 
 #endif // GAMEENGINE_H

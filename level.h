@@ -7,6 +7,7 @@
 #include "unit.h"
 #include "wall.h"
 #include "config.h"
+#include "enemy.h"
 
 class Level
 {
@@ -41,6 +42,8 @@ public:
     QImage getBackground() const;
 
     QList<Element*> * getElementList() const;
+
+    QList<Unit*> * getUnitList() const;
 };
 
 #endif // LEVEL_H
