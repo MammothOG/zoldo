@@ -6,9 +6,9 @@ Enemy::Enemy()
     setHeight(50);
     setWidth(50);
 
-    movementSpeed = 5;
+    movementSpeed = 2;
 
-    movementFrequency = 0;
+    movementFrequency = 10;
     movementFrequencyCounter = 0;
 
     health = 100;
@@ -19,8 +19,15 @@ Enemy::Enemy()
 
 void Enemy::move()
 {
-    setVerticalMov(1);
-    setHorizontalMov(1);
+    movementFrequencyCounter++;
+
+    if(movementFrequencyCounter == movementFrequency)
+    {
+        setVerticalMov((rand() % 3) - 1);
+        setHorizontalMov((rand() % 3) - 1);
+
+        movementFrequencyCounter = 0;
+    }
 }
 
 void Enemy::setMovementFrequency(int frequency)

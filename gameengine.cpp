@@ -73,8 +73,6 @@ void GameEngine::updateUnitState()
         int nextY = enemy->y() + enemy->getVerticalMov();
 
         enemy->setPos(nextX, nextY);
-        qDebug() << nextX << " " << nextY;
-
 
     }
 }
