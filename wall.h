@@ -2,7 +2,6 @@
 #define WALL_H
 
 #include "block.h"
-#include "config.h"
 
 
 class Wall: public Block

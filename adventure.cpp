@@ -1,4 +1,5 @@
 #include "adventure.h"
+#include "player.h"
 #include "level.h"
 
 
@@ -18,7 +19,12 @@ void Adventure::generateTestAdventure()
     levelList->append(level);
 }
 
-Level * Adventure::getCurrentLevel()
+Level * Adventure::getCurrentLevel() const
 {
     return levelList->at(currentLevel);
+}
+
+Player * Adventure::getPlayer()
+{
+    return player;
 }

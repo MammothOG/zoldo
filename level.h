@@ -3,11 +3,12 @@
 
 #include <QObject>
 
-#include "element.h"
-#include "unit.h"
-#include "wall.h"
-#include "config.h"
-#include "enemy.h"
+
+class Element;
+
+class Unit;
+
+class Background;
 
 class Level
 {
@@ -20,7 +21,7 @@ private:
 
     QString backgroundPath;
 
-    QImage background;
+    Background * background;
 
     QString name;
 
@@ -39,7 +40,7 @@ public:
 
     void clearLevel();
 
-    QImage getBackground() const;
+    Background * getBackground() const;
 
     QList<Element*> * getElementList() const;
 

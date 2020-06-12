@@ -1,4 +1,6 @@
 #include "block.h"
+#include "config.h"
+
 
 Block::Block()
 {

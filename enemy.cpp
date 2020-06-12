@@ -1,36 +1,50 @@
+#include <QtDebug>
+
 #include "enemy.h"
+
 
 Enemy::Enemy()
 {
+    moveRate = 1000;
+    shootRate = 100;
 
-    setHeight(50);
-    setWidth(50);
+    type = "Enemy";
 
-    movementSpeed = 2;
+    moveTimer  = new QTimer(this);
+    shootTimer = new QTimer(this);
 
-    movementFrequency = 10;
-    movementFrequencyCounter = 0;
+    connect(moveTimer, SIGNAL(timeout()), this, SLOT(move()));
+    connect(shootTimer, SIGNAL(timeout()), this, SLOT(shoot()));
 
-    health = 100;
-
-    setSprite(":/ressources/images/enemy_test.png");
-
+    moveTimer->start(moveRate);
 }
 
 void Enemy::move()
 {
-    movementFrequencyCounter++;
-
-    if(movementFrequencyCounter == movementFrequency)
-    {
-        setVerticalMov((rand() % 3) - 1);
-        setHorizontalMov((rand() % 3) - 1);
-
-        movementFrequencyCounter = 0;
-    }
+    qDebug() << "move method to be override";
 }
 
-void Enemy::setMovementFrequency(int frequency)
+void Enemy::shoot()
 {
-    movementFrequency = frequency;
+    qDebug() << "shoot method has to be override";
+}
+
+void Enemy::setShootRate(int rate)
+{
+    shootRate = rate;
+}
+
+int Enemy::getShootRate() const
+{
+    return shootRate;
+}
+
+void Enemy::setMoveRate(int rate)
+{
+    moveRate = rate;
+}
+
+int Enemy::getMoveRate() const
+{
+    return moveRate;
 }

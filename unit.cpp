@@ -1,7 +1,10 @@
 #include "unit.h"
 
+
 Unit::Unit()
 {
+
+    type = "GenericUnit";
 
     movingUp = false;
     movingDown = false;

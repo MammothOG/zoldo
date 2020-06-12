@@ -3,6 +3,7 @@
 
 #include "element.h"
 
+
 class Unit : public Element
 {
 private:
@@ -21,6 +22,9 @@ private:
     float horizontalMov;
 
 protected:
+    // unit type
+    QString type;
+
     //health of the unit
     int health;
 
@@ -38,11 +42,16 @@ public:
 
     void setVerticalMov(float vMov);
 
-    void setHorizontalMov(float hMov);
-
     float getVerticalMov() const;
 
+    void setHorizontalMov(float hMov);
+
     float getHorizontalMov() const;
+
+    void setType(QString t);
+
+    QString getType() const;
+
 };
 
 #endif // UNIT_H

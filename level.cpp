@@ -1,4 +1,10 @@
 #include "level.h"
+#include "element.h"
+#include "unit.h"
+#include "wall.h"
+#include "config.h"
+#include "testator.h"
+#include "background.h"
 
 
 Level::Level()
@@ -15,6 +21,7 @@ Level::Level()
     height = BLOCK_SIZE * VERTICAL_BLOCK;
     width = BLOCK_SIZE * HORIZONTAL_BLOCK;
 
+    background = new Background();
 }
 
 void Level::generateTestLevel()
@@ -22,9 +29,6 @@ void Level::generateTestLevel()
     name = "Test level";
     difficulty = 0;
 
-    backgroundPath = ":/ressources/images/level_bg_test.png";
-    background = QImage(backgroundPath);
-    background = background.scaled(width, height);
 
     spawnX = 300;
     spawnY = 300;
@@ -48,7 +52,7 @@ void Level::generateTestLevel()
         }
     }
 
-    Enemy * testEnemy = new Enemy();
+    Testator * testEnemy = new Testator();
     testEnemy->setPos(200, 200);
     unitList->append(testEnemy);
 }
@@ -76,7 +80,7 @@ QList<Unit*> * Level::getUnitList() const
     return unitList;
 }
 
-QImage Level::getBackground() const
+Background * Level::getBackground() const
 {
     return background;
 }

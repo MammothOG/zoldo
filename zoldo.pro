@@ -17,6 +17,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     adventure.cpp \
+    background.cpp \
     block.cpp \
     element.cpp \
     enemy.cpp \
@@ -24,11 +25,14 @@ SOURCES += \
     level.cpp \
     main.cpp \
     player.cpp \
+    projectile.cpp \
+    testator.cpp \
     unit.cpp \
     wall.cpp
 
 HEADERS += \
     adventure.h \
+    background.h \
     block.h \
     config.h \
     element.h \
@@ -36,6 +40,8 @@ HEADERS += \
     gameengine.h \
     level.h \
     player.h \
+    projectile.h \
+    testator.h \
     unit.h \
     wall.h
 

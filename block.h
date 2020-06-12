@@ -2,7 +2,6 @@
 #define BLOCK_H
 
 #include "element.h"
-#include "config.h"
 
 class Block : public Element
 {

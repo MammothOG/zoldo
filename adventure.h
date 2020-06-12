@@ -3,8 +3,8 @@
 
 #include <QList>
 
-#include "level.h"
-#include "player.h"
+class Level;
+class Player;
 
 
 class Adventure
@@ -21,7 +21,9 @@ public:
 
     void generateTestAdventure();
 
-    Level * getCurrentLevel();
+    Level * getCurrentLevel() const;
+
+    Player * getPlayer();
 };
 
 #endif // MAP_H

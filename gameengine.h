@@ -5,16 +5,22 @@
 #include <QGraphicsItemGroup>
 #include <QGraphicsView>
 #include <QTimer>
+#include <QKeyEvent>
 
-#include "config.h"
-#include "level.h"
-#include "adventure.h"
+
+class Adventure;
+
+class Level;
+
+class Player;
 
 class GameEngine: public QGraphicsView
 {
     Q_OBJECT
 
 private:
+    Player * player;
+
     QGraphicsScene * scene;
 
     QGraphicsItemGroup * sceneElements;
@@ -37,11 +43,19 @@ public:
 
     ~GameEngine();
 
+    void updatePlayer();
+
+    void keyPressEvent(QKeyEvent *event);
+
+    void keyReleaseEvent(QKeyEvent *event);
+
     void loadAdventure();
 
-    void drawLevel(Level * level);
+    void drawLevel();
 
     void updateUnitState();
+
+
 };
 
 #endif // GAMEENGINE_H

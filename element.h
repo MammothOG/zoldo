@@ -4,6 +4,7 @@
 #include <QObject>
 #include <QGraphicsPixmapItem>
 
+
 class Element :  public QObject, public QGraphicsPixmapItem
 {
 protected:
