@@ -21,6 +21,8 @@ private:
     //unit horizontal movement in range [-1, 1]
     float horizontalMov;
 
+    int direction [2];
+
 protected:
     // unit type
     QString type;
@@ -51,6 +53,8 @@ public:
     void setType(QString t);
 
     QString getType() const;
+
+    void lockTarget(Unit * Target);
 
 };
 
