@@ -73,8 +73,8 @@ void GameEngine::loadAdventure()
 
 void GameEngine::updateState()
 {
-    updateUnitState();
     updatePlayer();
+    updateUnitState();
 }
 
 void GameEngine::updateUnitState()
@@ -85,7 +85,9 @@ void GameEngine::updateUnitState()
         int nextX = enemy->x() + enemy->getHorizontalMov();
         int nextY = enemy->y() + enemy->getVerticalMov();
 
+        enemy->lockTarget(player);
         enemy->setPos(nextX, nextY);
+
     }
 }
 
@@ -95,6 +97,7 @@ void GameEngine::updatePlayer()
     int nextY = player->y() + player->getVerticalMov();
 
     player->setPos(nextX, nextY);
+
 }
 
 void GameEngine::keyPressEvent(QKeyEvent *event)

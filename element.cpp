@@ -43,3 +43,8 @@ void Element::setHeight(int value)
 {
     height = value;
 }
+
+void Element::setCenterAsReferencial()
+{
+    setOffset(-width/2, -height/2);
+}

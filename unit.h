@@ -7,19 +7,14 @@
 class Unit : public Element
 {
 private:
-    bool movingUp;
-
-    bool movingDown;
-
-    bool movingLeft;
-
-    bool movingRight;
 
     //unit vertical movement in range [-1, 1]
     float verticalMov;
 
     //unit horizontal movement in range [-1, 1]
     float horizontalMov;
+
+    int rotAngle;
 
 protected:
     // unit type
@@ -51,6 +46,8 @@ public:
     void setType(QString t);
 
     QString getType() const;
+
+    void lockTarget(Unit * Target);
 
 };
 
