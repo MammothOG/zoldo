@@ -54,6 +54,7 @@ void Level::generateTestLevel()
 
     Testator * testEnemy = new Testator();
     testEnemy->setPos(200, 200);
+    testEnemy->setCenterAsReferencial();
     unitList->append(testEnemy);
 }
 

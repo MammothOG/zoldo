@@ -5,7 +5,7 @@
 
 Unit::Unit()
 {
-
+    //referencial point for Unit are center
     type = "GenericUnit";
 
     immune = false;
@@ -19,8 +19,7 @@ Unit::Unit()
     horizontalMov = 0.;
     verticalMov = 0.;
 
-    direction[0] = 0;
-    direction[1] = -1;
+    rotAngle = 0;
 }
 
 void Unit::setVerticalMov(float vMov)
@@ -46,17 +45,19 @@ float Unit::getHorizontalMov() const
 #include <QtDebug>
 void Unit::lockTarget(Unit * t)
 {
-    int newDirX = t->x() - this->x();
+    int newDirX = t->x() - this->y();
     int newDirY = t->y() - this->y();
 
     float normNewDir = sqrt(newDirX * newDirX + newDirY * newDirY);
-    float normDir = sqrt(direction[0] * direction[0] + direction[1] * direction[1]);
-    //qDebug() << normNewDir << " " << normDir;
 
-    float scalar = newDirX * direction[0] + newDirY * direction[1];
+    rotAngle = acos( -newDirY /  normNewDir) * 180/3.14;
 
-    float rotAngle = scalar / (normDir * normNewDir);
+    if(newDirX < 0)
+        rotAngle *= -1;
+
     qDebug() << rotAngle;
 
     setRotation(rotAngle);
+
+
 }

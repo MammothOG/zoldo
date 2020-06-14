@@ -27,6 +27,8 @@ public:
 
     void setSprite(QString ressource);
 
+    void setCenterAsReferencial();
+
 };
 
 #endif // ELEMENT_H

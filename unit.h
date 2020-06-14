@@ -7,13 +7,6 @@
 class Unit : public Element
 {
 private:
-    bool movingUp;
-
-    bool movingDown;
-
-    bool movingLeft;
-
-    bool movingRight;
 
     //unit vertical movement in range [-1, 1]
     float verticalMov;
@@ -21,7 +14,7 @@ private:
     //unit horizontal movement in range [-1, 1]
     float horizontalMov;
 
-    int direction [2];
+    int rotAngle;
 
 protected:
     // unit type
