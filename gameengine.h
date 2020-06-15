@@ -14,6 +14,8 @@ class Level;
 
 class Player;
 
+class Unit;
+
 class GameEngine: public QGraphicsView
 {
     Q_OBJECT
@@ -36,6 +38,8 @@ private:
     Level * currentLevel;
 
     QTimer * clock;
+
+    Unit * enemyTargeted;
 
 public slots:
     void updateState();

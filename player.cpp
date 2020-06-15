@@ -12,7 +12,7 @@ Player::Player()
     crit=0.3;
     critdmg = 0.4;
 
-    shootRate = 2000;
+    shootRate = 200;
 
     projectileList = new QList<Projectile*>();
 
@@ -23,16 +23,15 @@ Player::Player()
     setSprite(":/ressources/images/player_test.png");
 
 }
-#include <QDebug>
 void Player::attack()
 {
 
     if (getHorizontalMov() == 0 && getVerticalMov() == 0)
     {
         Projectile * projectile = new Projectile();
-        projectile->setPos(int(this->x()),int(this->y()));
+        projectile->setPos(this->x(), this->y());
+
         projectile->setVerticalMov(directionVector[1]);
-        qDebug()<<directionVector[1];
         projectile->setHorizontalMov(directionVector[0]);
         projectileList->append(projectile);
     }

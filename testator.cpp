@@ -5,7 +5,7 @@ Testator::Testator()
 {
 
     //movement parameters
-    setMoveRate(500);
+    setMoveRate(10);
 
     // setup enemy stats
     movementSpeed = 2;

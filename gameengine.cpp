@@ -83,6 +83,8 @@ void GameEngine::updateState()
 
 void GameEngine::updateUnitState()
 {
+    float minPlayerDistance = 2 * WIN_HEIGHT;
+
     for(Unit * unit: *currentLevel->getUnitList()){
         Enemy * enemy = dynamic_cast<Enemy*>(unit);
 
@@ -92,15 +94,21 @@ void GameEngine::updateUnitState()
         enemy->setPos(nextX, nextY);
         enemy->lockTarget(player);
 
+        if (minPlayerDistance > enemy->getTargetDistance())
+        {
+          enemyTargeted = enemy;
+        }
     }
 }
-#include <QDebug>
+
 void GameEngine::updatePlayer()
 {
     int nextXPlayer = player->x() + player->getHorizontalMov();
     int nextYPlayer = player->y() + player->getVerticalMov();
 
     player->setPos(nextXPlayer, nextYPlayer);
+    if (enemyTargeted != nullptr)
+        player->lockTarget(enemyTargeted);
 
     for(Projectile * projectile: *player->getProjectileList()){
         int nextXProj = projectile->x() + projectile->getHorizontalMov();
@@ -108,16 +116,11 @@ void GameEngine::updatePlayer()
 
         if (projectile->group()== nullptr)
         {
-            qDebug()<<projectile->getVerticalMov()<<projectile->getHorizontalMov();
             sceneProjectiles->addToGroup(projectile);
         }
 
         projectile->setPos(nextXProj, nextYProj);
-
     }
-
-
-
 }
 
 void GameEngine::keyPressEvent(QKeyEvent *event)
@@ -149,8 +152,6 @@ void GameEngine::keyReleaseEvent(QKeyEvent *event)
         player-> setVerticalMov(0);
 
     }
-
-
 }
 
 
