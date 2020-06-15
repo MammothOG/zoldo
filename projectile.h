@@ -8,6 +8,7 @@ class Projectile : public Unit
 {
 public:
     Projectile();
+
 };
 
 #endif // PROJECTILE_H

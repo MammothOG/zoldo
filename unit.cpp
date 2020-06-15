@@ -22,6 +22,11 @@ Unit::Unit()
     rotAngle = 0;
 
     targetDistance = 0;
+
+    directionVector[0] = 0;
+
+    directionVector[1] = -1;
+
 }
 
 void Unit::setVerticalMov(float vMov)
@@ -50,6 +55,11 @@ void Unit::lockTarget(const Unit * const target)
     int newDirY = target->y() - this->y();
 
     targetDistance = sqrt(newDirX * newDirX + newDirY * newDirY);
+
+    directionVector[0] = newDirX / targetDistance;
+    directionVector[1] = newDirY / targetDistance;
+
+
 
     rotAngle = acos( -newDirY /  targetDistance) * 180/3.14;
 

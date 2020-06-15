@@ -7,6 +7,7 @@
 #include "enemy.h"
 #include "background.h"
 #include "player.h"
+#include "projectile.h"
 
 
 GameEngine::GameEngine()
@@ -26,6 +27,9 @@ GameEngine::GameEngine()
 
     sceneElements = new QGraphicsItemGroup();
     scene->addItem(sceneElements);
+
+    sceneProjectiles = new QGraphicsItemGroup();
+    scene->addItem(sceneProjectiles);
 
     loadAdventure();
 
@@ -90,13 +94,30 @@ void GameEngine::updateUnitState()
 
     }
 }
-
+#include <QDebug>
 void GameEngine::updatePlayer()
 {
-    int nextX = player->x() + player->getHorizontalMov();
-    int nextY = player->y() + player->getVerticalMov();
+    int nextXPlayer = player->x() + player->getHorizontalMov();
+    int nextYPlayer = player->y() + player->getVerticalMov();
 
-    player->setPos(nextX, nextY);
+    player->setPos(nextXPlayer, nextYPlayer);
+
+    for(Projectile * projectile: *player->getProjectileList()){
+        int nextXProj = projectile->x() + projectile->getHorizontalMov();
+        int nextYProj = projectile->y() + projectile->getVerticalMov();
+
+        if (projectile->group()== nullptr)
+        {
+            qDebug()<<projectile->getVerticalMov()<<projectile->getHorizontalMov();
+            sceneProjectiles->addToGroup(projectile);
+        }
+
+        projectile->setPos(nextXProj, nextYProj);
+
+    }
+
+
+
 }
 
 void GameEngine::keyPressEvent(QKeyEvent *event)
@@ -126,5 +147,10 @@ void GameEngine::keyReleaseEvent(QKeyEvent *event)
     }
     else if (event->key() == Qt::Key_Up||event->key() == Qt::Key_Down){
         player-> setVerticalMov(0);
+
     }
+
+
 }
+
+

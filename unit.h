@@ -34,6 +34,8 @@ protected:
     // speed movement of the unit
     float movementSpeed;
 
+    float directionVector [2];
+
 public:
     Unit();
 

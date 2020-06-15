@@ -25,6 +25,8 @@ private:
 
     QGraphicsItemGroup * sceneElements;
 
+    QGraphicsItemGroup * sceneProjectiles;
+
     int windowWidth;
 
     int windowHeight;
@@ -54,6 +56,7 @@ public:
     void drawLevel();
 
     void updateUnitState();
+
 
 
 };
