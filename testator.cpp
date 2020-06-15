@@ -21,5 +21,4 @@ void Testator::move()
 {
     setVerticalMov((rand() % 3) - 1);
     setHorizontalMov((rand() % 3) - 1);
-
 }

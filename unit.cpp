@@ -42,11 +42,10 @@ float Unit::getHorizontalMov() const
     return horizontalMov;
 }
 
-#include <QtDebug>
-void Unit::lockTarget(Unit * t)
+void Unit::lockTarget(const Unit * const target)
 {
-    int newDirX = t->x() - this->y();
-    int newDirY = t->y() - this->y();
+    int newDirX = target->x() - this->x();
+    int newDirY = target->y() - this->y();
 
     float normNewDir = sqrt(newDirX * newDirX + newDirY * newDirY);
 
@@ -55,9 +54,5 @@ void Unit::lockTarget(Unit * t)
     if(newDirX < 0)
         rotAngle *= -1;
 
-    qDebug() << rotAngle;
-
     setRotation(rotAngle);
-
-
 }

@@ -47,7 +47,7 @@ public:
 
     QString getType() const;
 
-    void lockTarget(Unit * Target);
+    void lockTarget(const Unit * const target);
 
 };
 

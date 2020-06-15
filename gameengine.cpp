@@ -85,8 +85,8 @@ void GameEngine::updateUnitState()
         int nextX = enemy->x() + enemy->getHorizontalMov();
         int nextY = enemy->y() + enemy->getVerticalMov();
 
-        enemy->lockTarget(player);
         enemy->setPos(nextX, nextY);
+        enemy->lockTarget(player);
 
     }
 }
@@ -97,7 +97,6 @@ void GameEngine::updatePlayer()
     int nextY = player->y() + player->getVerticalMov();
 
     player->setPos(nextX, nextY);
-
 }
 
 void GameEngine::keyPressEvent(QKeyEvent *event)
@@ -116,8 +115,6 @@ void GameEngine::keyPressEvent(QKeyEvent *event)
     else if (event->key() == Qt::Key_Down){
         player->setVerticalMov(1);
     }
-
-
 }
 
 
