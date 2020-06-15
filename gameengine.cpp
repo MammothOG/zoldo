@@ -63,9 +63,9 @@ void GameEngine::loadAdventure()
 
     player = adventure->getPlayer();
     sceneElements->addToGroup(player);
-    player->setPos(200, 200);
 
     currentLevel = adventure->getCurrentLevel();
+    player->setPos(currentLevel->getSpawnX(), currentLevel->getSpawnY());
 
     drawLevel();
     setScene(scene);

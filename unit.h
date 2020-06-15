@@ -16,6 +16,8 @@ private:
 
     int rotAngle;
 
+    float targetDistance;
+
 protected:
     // unit type
     QString type;
@@ -48,6 +50,8 @@ public:
     QString getType() const;
 
     void lockTarget(const Unit * const target);
+
+    float getTargetDistance() const;
 
 };
 

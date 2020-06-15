@@ -45,6 +45,10 @@ public:
     QList<Element*> * getElementList() const;
 
     QList<Unit*> * getUnitList() const;
+
+    int getSpawnX() const;
+
+    int getSpawnY() const;
 };
 
 #endif // LEVEL_H

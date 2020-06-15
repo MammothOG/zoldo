@@ -6,9 +6,12 @@
 Adventure::Adventure()
 {
     levelList = new QList<Level*>();
-    player = new Player();
-
     currentLevel = 0;
+
+    player = new Player();
+    player->setCenterAsReferencial();
+    player->setFlag(QGraphicsItem::ItemIsFocusable);
+    player->setFocus();
 }
 
 void Adventure::generateTestAdventure()

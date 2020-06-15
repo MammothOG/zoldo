@@ -20,6 +20,8 @@ Unit::Unit()
     verticalMov = 0.;
 
     rotAngle = 0;
+
+    targetDistance = 0;
 }
 
 void Unit::setVerticalMov(float vMov)
@@ -47,12 +49,17 @@ void Unit::lockTarget(const Unit * const target)
     int newDirX = target->x() - this->x();
     int newDirY = target->y() - this->y();
 
-    float normNewDir = sqrt(newDirX * newDirX + newDirY * newDirY);
+    targetDistance = sqrt(newDirX * newDirX + newDirY * newDirY);
 
-    rotAngle = acos( -newDirY /  normNewDir) * 180/3.14;
+    rotAngle = acos( -newDirY /  targetDistance) * 180/3.14;
 
     if(newDirX < 0)
         rotAngle *= -1;
 
     setRotation(rotAngle);
+}
+
+float Unit::getTargetDistance() const
+{
+    return targetDistance;
 }

@@ -85,3 +85,13 @@ Background * Level::getBackground() const
 {
     return background;
 }
+
+int Level::getSpawnX() const
+{
+    return spawnX;
+}
+
+int Level::getSpawnY() const
+{
+    return spawnY;
+}
