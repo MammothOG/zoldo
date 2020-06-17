@@ -3,15 +3,14 @@
 
 #include <QTimer>
 
-#include "unit.h"
+#include "unitanimate.h"
+
 
 class Projectile;
 
-
-class Player : public Unit
+class Player : public UnitAnimate
 {
 
-    Q_OBJECT
 protected:
     //chance of crit
     float crit;
@@ -19,20 +18,11 @@ protected:
     //dmg deal by crit
     float critdmg;
 
-    int shootRate;
-
-    QTimer * shootTimer;
-
-    QList<Projectile*> * projectileList;
-
 public:
     Player();
 
-    QList<Projectile*> * getProjectileList() const;
+    void shoot() override;
 
-public slots:
-
-    void attack();
 };
 
 #endif // PLAYER_H

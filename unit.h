@@ -14,10 +14,6 @@ private:
     //unit horizontal movement in range [-1, 1]
     float horizontalMov;
 
-    int rotAngle;
-
-    float targetDistance;
-
 protected:
     // unit type
     QString type;
@@ -25,16 +21,8 @@ protected:
     //health of the unit
     int health;
 
-    // true if the unit is imune against damage
-    bool immune;
-
-    // true if the unit can't move
-    bool fixed;
-
     // speed movement of the unit
     float movementSpeed;
-
-    float directionVector [2];
 
 public:
     Unit();
@@ -50,10 +38,6 @@ public:
     void setType(QString t);
 
     QString getType() const;
-
-    void lockTarget(const Unit * const target);
-
-    float getTargetDistance() const;
 
 };
 

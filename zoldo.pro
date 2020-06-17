@@ -28,6 +28,7 @@ SOURCES += \
     projectile.cpp \
     testator.cpp \
     unit.cpp \
+    unitanimate.cpp \
     wall.cpp
 
 HEADERS += \
@@ -43,6 +44,7 @@ HEADERS += \
     projectile.h \
     testator.h \
     unit.h \
+    unitanimate.h \
     wall.h
 
 FORMS += \
