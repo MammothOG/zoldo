@@ -98,6 +98,18 @@ void GameEngine::updateUnitState()
         {
           enemyTargeted = enemy;
         }
+
+        for(Projectile * projectile: *enemy->getProjectileList()){
+            int nextXProj = projectile->x() + projectile->getHorizontalMov();
+            int nextYProj = projectile->y() + projectile->getVerticalMov();
+
+            if (projectile->group()== nullptr)
+            {
+                sceneProjectiles->addToGroup(projectile);
+            }
+
+            projectile->setPos(nextXProj, nextYProj);
+        }
     }
 }
 
