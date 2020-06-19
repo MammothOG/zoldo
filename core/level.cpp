@@ -1,11 +1,11 @@
 #include "level.h"
 #include "element.h"
 #include "unit.h"
-#include "wall.h"
 #include "config.h"
-#include "testator.h"
 #include "background.h"
 
+#include "items/testator.h"
+#include "items/wall.h"
 
 Level::Level()
 {

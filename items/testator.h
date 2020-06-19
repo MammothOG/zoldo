@@ -1,7 +1,7 @@
 #ifndef TESTATOR_H
 #define TESTATOR_H
 
-#include "enemy.h"
+#include "core/enemy.h"
 
 
 class Testator : public Enemy

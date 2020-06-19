@@ -29,7 +29,7 @@ void Projectile::projectileTest()
 
     damage = 10;
 
-    movementSpeed = 2;
+    movementSpeed = 3;
 
     setCenterAsReferencial();
 }

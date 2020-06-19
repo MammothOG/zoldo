@@ -16,36 +16,46 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    adventure.cpp \
-    background.cpp \
-    block.cpp \
-    element.cpp \
-    enemy.cpp \
-    gameengine.cpp \
-    level.cpp \
+    core/custombutton.cpp \
+    items/pausebutton.cpp \
     main.cpp \
-    player.cpp \
-    projectile.cpp \
-    testator.cpp \
-    unit.cpp \
-    unitanimate.cpp \
-    wall.cpp
+    gameengine.cpp \
+    core/adventure.cpp \
+    core/background.cpp \
+    core/block.cpp \
+    core/element.cpp \
+    core/enemy.cpp \
+    core/level.cpp \
+    core/player.cpp \
+    core/projectile.cpp \
+    core/unit.cpp \
+    core/unitanimate.cpp \
+    items/testator.cpp \
+    items/wall.cpp \
+    scenes/gamescene.cpp \
+    scenes/menuscene.cpp \
+    scenes/pausemenu.cpp
 
 HEADERS += \
-    adventure.h \
-    background.h \
-    block.h \
     config.h \
-    element.h \
-    enemy.h \
+    core/custombutton.h \
     gameengine.h \
-    level.h \
-    player.h \
-    projectile.h \
-    testator.h \
-    unit.h \
-    unitanimate.h \
-    wall.h
+    core/adventure.h \
+    core/background.h \
+    core/block.h \
+    core/element.h \
+    core/enemy.h \
+    core/level.h \
+    core/player.h \
+    core/projectile.h \
+    core/unit.h \
+    core/unitanimate.h \
+    items/pausebutton.h \
+    items/testator.h \
+    items/wall.h \
+    scenes/gamescene.h \
+    scenes/menuscene.h \
+    scenes/pausemenu.h
 
 FORMS += \
 

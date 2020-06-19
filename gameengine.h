@@ -18,50 +18,18 @@ class Unit;
 
 class GameEngine: public QGraphicsView
 {
-    Q_OBJECT
-
 private:
-    Player * player;
-
-    QGraphicsScene * scene;
-
-    QGraphicsItemGroup * sceneElements;
-
-    QGraphicsItemGroup * sceneProjectiles;
-
     int windowWidth;
 
     int windowHeight;
 
-    Adventure * adventure;
+protected:
+    void mousePressEvent(QMouseEvent *event);
 
-    Level * currentLevel;
-
-    QTimer * clock;
-
-    Unit * enemyTargeted;
-
-public slots:
-    void updateState();
+    void mouseReleaseEvent(QMouseEvent *event);
 
 public:
     GameEngine();
-
-    ~GameEngine();
-
-    void updatePlayer();
-
-    void keyPressEvent(QKeyEvent *event);
-
-    void keyReleaseEvent(QKeyEvent *event);
-
-    void loadAdventure();
-
-    void drawLevel();
-
-    void updateUnitState();
-
-
 
 };
 
