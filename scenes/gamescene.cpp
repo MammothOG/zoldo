@@ -26,10 +26,11 @@ GameScene::GameScene()
     loadAdventure();
 
     pauseButton = new PauseButton();
+    connect(pauseButton, SIGNAL(onPressClick()), this, SLOT(onPause()));
     addItem(pauseButton);
 
     clock  = new QTimer(this);
-    connect(clock, SIGNAL(timeout()), this, SLOT(updateState()));
+    //connect(clock, SIGNAL(timeout()), this, SLOT(updateState()));
     clock->start(1000/FPS);
     setBackgroundBrush(Qt::black);
 }
@@ -123,6 +124,12 @@ void GameScene::updatePlayer()
 
         projectile->setPos(nextXProj, nextYProj);
     }
+}
+
+#include <QDebug>
+void GameScene::onPause()
+{
+    qDebug() << "click in scene";
 }
 
 void GameScene::keyPressEvent(QKeyEvent *event)

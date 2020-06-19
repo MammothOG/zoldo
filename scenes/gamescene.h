@@ -42,6 +42,8 @@ private:
 public slots:
     void updateState();
 
+    void onPause();
+
 public:
     GameScene();
 

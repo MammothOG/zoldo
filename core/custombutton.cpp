@@ -31,11 +31,13 @@ void CustomButton::setClickImage(const QString &clickImage)
 void CustomButton::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
     setSprite(clickImage);
+    emit onPressClick();
 }
 
 void CustomButton::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
     setSprite(idleImage);
+    emit onReleaseClick();
 }
 
 

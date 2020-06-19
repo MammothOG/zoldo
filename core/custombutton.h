@@ -8,10 +8,17 @@
 
 class CustomButton : public Element
 {
+    Q_OBJECT
+
 private:
     QString idleImage;
 
     QString clickImage;
+
+signals:
+    void onPressClick();
+
+    void onReleaseClick();
 
 public:
     CustomButton();
