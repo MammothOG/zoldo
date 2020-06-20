@@ -4,11 +4,14 @@
 #include "core/player.h"
 #include "core/adventure.h"
 #include "core/level.h"
-#include "core/background.h"
 #include "core/enemy.h"
 #include "core/unit.h"
 #include "core/projectile.h"
-#include "items/pausebutton.h"
+#include "items/background.h"
+#include "items/buttons/pausebutton.h"
+#include "items/buttons/restartbutton.h"
+#include "items/buttons/resumebutton.h"
+#include "scenes/pausemenu.h"
 
 
 GameScene::GameScene()
@@ -27,10 +30,16 @@ GameScene::GameScene()
 
     pauseButton = new PauseButton();
     connect(pauseButton, SIGNAL(onPressClick()), this, SLOT(onPause()));
+    pauseButton->setPos(BLOCK_SIZE*(HORIZONTAL_BLOCK-1), 0);
     addItem(pauseButton);
 
+    pauseMenu = new PauseMenu();
+    pauseMenu->setPos(WIN_WIDTH/2, WIN_HEIGHT/2);
+    connect(pauseMenu->getResumeButton(), SIGNAL(onReleaseClick()), this, SLOT(onResume()));
+    connect(pauseMenu->getRestartButton(), SIGNAL(onPressClick()), this, SLOT(onRestart()));
+
     clock  = new QTimer(this);
-    //connect(clock, SIGNAL(timeout()), this, SLOT(updateState()));
+    connect(clock, SIGNAL(timeout()), this, SLOT(updateState()));
     clock->start(1000/FPS);
     setBackgroundBrush(Qt::black);
 }
@@ -129,7 +138,20 @@ void GameScene::updatePlayer()
 #include <QDebug>
 void GameScene::onPause()
 {
-    qDebug() << "click in scene";
+    qDebug() << "click in pause";
+    addItem(pauseMenu);
+}
+
+void GameScene::onRestart()
+{
+    qDebug() << "click on restart";
+}
+
+void GameScene::onResume()
+{
+    qDebug() << "click on resume";
+    removeItem(pauseMenu);
+    pauseButton->setPressed(false);
 }
 
 void GameScene::keyPressEvent(QKeyEvent *event)
@@ -153,7 +175,6 @@ void GameScene::keyPressEvent(QKeyEvent *event)
 
 void GameScene::keyReleaseEvent(QKeyEvent *event)
 {
-    //qDebug() << "key released" ;
     if (event->key() == Qt::Key_Left ||event->key() == Qt::Key_Right){
         player-> setHorizontalMov(0);
     }

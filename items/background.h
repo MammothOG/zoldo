@@ -3,7 +3,7 @@
 
 #include <QString>
 
-#include "element.h"
+#include "core/element.h"
 
 
 class Background : public Element

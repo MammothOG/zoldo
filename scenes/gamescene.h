@@ -17,11 +17,17 @@ class Level;
 
 class PauseButton;
 
+class RestartButton;
+
+class PauseMenu;
+
 class GameScene : public QGraphicsScene
 {
      Q_OBJECT
 private:
     PauseButton * pauseButton;
+
+    PauseMenu * pauseMenu;
 
     QGraphicsItemGroup * sceneElements;
 
@@ -43,6 +49,10 @@ public slots:
     void updateState();
 
     void onPause();
+
+    void onRestart();
+
+    void onResume();
 
 public:
     GameScene();

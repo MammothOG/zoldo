@@ -2,10 +2,11 @@
 #include "element.h"
 #include "unit.h"
 #include "config.h"
-#include "background.h"
 
-#include "items/testator.h"
-#include "items/wall.h"
+#include "items/background.h"
+#include "items/enemies/testator.h"
+#include "items/blocks/wall.h"
+
 
 Level::Level()
 {

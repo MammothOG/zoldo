@@ -15,6 +15,11 @@ private:
 
     QString clickImage;
 
+    bool holdPressed;
+
+protected:
+    virtual void onClick();
+
 signals:
     void onPressClick();
 
@@ -31,9 +36,15 @@ public:
 
     void setClickImage(const QString &value);
 
+    void setPressed(bool isPressed);
+
     void mousePressEvent(QGraphicsSceneMouseEvent *event);
 
     void mouseReleaseEvent(QGraphicsSceneMouseEvent *event);
+
+    bool getHoldPressed() const;
+
+    void setHoldPressed(bool value);
 };
 
 #endif // CUSTOMBUTTON_H

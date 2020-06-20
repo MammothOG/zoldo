@@ -14,7 +14,7 @@ Testator::Testator()
     // setup graphics
     setHeight(50);
     setWidth(50);
-    setSprite(":/ressources/images/enemy_test.png");
+    setSprite(":/ressources/images/test/enemy_test.png");
 }
 
 void Testator::move()

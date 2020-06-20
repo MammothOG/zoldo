@@ -1,8 +1,10 @@
-#include <QDebug>
+#include "gameengine.h"
 
 #include "config.h"
-#include "gameengine.h"
 #include "scenes/gamescene.h"
+#include "scenes/menuscene.h"
+#include "items/buttons/playbutton.h"
+
 
 GameEngine::GameEngine()
 {
@@ -15,8 +17,10 @@ GameEngine::GameEngine()
     setWindowTitle(TITLE);
     resize(windowWidth, windowHeight);
 
-    setScene(new GameScene());
+    menuScene = new MenuScene();
+    setScene(menuScene);
 
+    connect(menuScene->getPlayButton(), SIGNAL(onReleaseClick()), this, SLOT(onPlay()));
 }
 
 void GameEngine::mousePressEvent(QMouseEvent *event)
@@ -27,4 +31,11 @@ void GameEngine::mousePressEvent(QMouseEvent *event)
 void GameEngine::mouseReleaseEvent(QMouseEvent *event)
 {
     QGraphicsView::mouseReleaseEvent(event);
+}
+
+#include <QDebug>
+void GameEngine::onPlay()
+{
+    GameScene * gameScene = new GameScene();
+    setScene(gameScene);
 }

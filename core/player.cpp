@@ -8,7 +8,7 @@ Player::Player()
     setHeight(75);
     setWidth(75);
 
-    setSprite(":/ressources/images/player.png");
+    setSprite(":/ressources/images/test/player_test.png");
 
     movementSpeed = 5;
 

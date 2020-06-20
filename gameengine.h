@@ -8,25 +8,25 @@
 #include <QKeyEvent>
 
 
-class Adventure;
-
-class Level;
-
-class Player;
-
-class Unit;
+class MenuScene;
 
 class GameEngine: public QGraphicsView
 {
+    Q_OBJECT
 private:
     int windowWidth;
 
     int windowHeight;
 
+    MenuScene * menuScene;
+
 protected:
     void mousePressEvent(QMouseEvent *event);
 
     void mouseReleaseEvent(QMouseEvent *event);
+
+public slots:
+    void onPlay();
 
 public:
     GameEngine();
