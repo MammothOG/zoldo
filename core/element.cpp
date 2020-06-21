@@ -3,6 +3,8 @@
 
 Element::Element()
 {
+    type = ELEMENT;
+
     height = 0;
     width = 0;
 }
@@ -47,4 +49,9 @@ void Element::setHeight(int value)
 void Element::setCenterAsReferencial()
 {
     setOffset(-width/2, -height/2);
+}
+
+int Element::getType() const
+{
+    return type;
 }

@@ -4,6 +4,8 @@
 Projectile::Projectile()
 {
 
+    type = PROJECTILE;
+
     movementSpeed = 0;
 
     damage = 0;

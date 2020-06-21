@@ -30,13 +30,12 @@ MenuScene::MenuScene()
 
 }
 
-#include <QDebug>
 PlayButton *MenuScene::getPlayButton() const
 {
     return playButton;
 }
 
-void MenuScene::setPlayButton(PlayButton *value)
+SettingButton *MenuScene::getSettingButton() const
 {
-    playButton = value;
+    return settingButton;
 }

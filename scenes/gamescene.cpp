@@ -7,7 +7,7 @@
 #include "core/enemy.h"
 #include "core/unit.h"
 #include "core/projectile.h"
-#include "items/background.h"
+#include "core/background.h"
 #include "items/buttons/pausebutton.h"
 #include "items/buttons/restartbutton.h"
 #include "items/buttons/resumebutton.h"
@@ -118,9 +118,10 @@ void GameScene::updatePlayer()
     int nextYPlayer = player->y() + player->getVerticalMov();
 
     player->setPos(nextXPlayer, nextYPlayer);
-    // TODO fix crash
-    //if (enemyTargeted != nullptr)
-        //player->lockTarget(enemyTargeted);
+
+    // TODO sometime crash (reopen fast)
+    if (enemyTargeted != nullptr)
+        player->lockTarget(enemyTargeted);
 
     for(Projectile * projectile: *player->getProjectileList()){
         int nextXProj = projectile->x() + projectile->getHorizontalMov();

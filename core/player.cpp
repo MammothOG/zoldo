@@ -5,6 +5,8 @@
 Player::Player()
 {
 
+    type = PLAYER;
+
     setHeight(75);
     setWidth(75);
 

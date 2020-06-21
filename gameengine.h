@@ -10,6 +10,8 @@
 
 class MenuScene;
 
+class LevelCreatorScene;
+
 class GameEngine: public QGraphicsView
 {
     Q_OBJECT
@@ -27,6 +29,8 @@ protected:
 
 public slots:
     void onPlay();
+
+    void onSetting();
 
 public:
     GameEngine();

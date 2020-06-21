@@ -6,7 +6,7 @@
 Unit::Unit()
 {
     //referencial point for Unit are center
-    type = "GenericUnit";
+    type = UNIT;
 
     health = 0;
 

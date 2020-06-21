@@ -3,9 +3,10 @@
 
 #include <QList>
 
-class Level;
-class Player;
 
+class Level;
+
+class Player;
 
 class Adventure
 {

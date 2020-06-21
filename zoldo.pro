@@ -16,6 +16,8 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    items/background/testbackground.cpp \
+    items/blocks/water.cpp \
     items/buttons/menubutton.cpp \
     items/buttons/playbutton.cpp \
     items/buttons/quitbutton.cpp \
@@ -34,12 +36,13 @@ SOURCES += \
     core/unit.cpp \
     core/unitanimate.cpp \
     core/custombutton.cpp \
-    items/background.cpp \
+    core/background.cpp \
     items/enemies/testator.cpp \
     items/blocks/wall.cpp \
     items/buttons/pausebutton.cpp \
     items/buttons/restartbutton.cpp \
     scenes/gamescene.cpp \
+    scenes/levelcreatorscene.cpp \
     scenes/menuscene.cpp \
     scenes/pausemenu.cpp
 
@@ -56,7 +59,9 @@ HEADERS += \
     core/projectile.h \
     core/unit.h \
     core/unitanimate.h \
-    items/background.h \
+    core/background.h \
+    items/background/testbackground.h \
+    items/blocks/water.h \
     items/buttons/menubutton.h \
     items/buttons/pausebutton.h \
     items/buttons/playbutton.h \
@@ -68,6 +73,7 @@ HEADERS += \
     items/blocks/wall.h \
     items/visual/menutitle.h \
     scenes/gamescene.h \
+    scenes/levelcreatorscene.h \
     scenes/menuscene.h \
     scenes/pausemenu.h
 

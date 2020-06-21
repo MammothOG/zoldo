@@ -3,7 +3,9 @@
 #include "config.h"
 #include "scenes/gamescene.h"
 #include "scenes/menuscene.h"
+#include "scenes/levelcreatorscene.h"
 #include "items/buttons/playbutton.h"
+#include "items/buttons/settingbutton.h"
 
 
 GameEngine::GameEngine()
@@ -21,6 +23,7 @@ GameEngine::GameEngine()
     setScene(menuScene);
 
     connect(menuScene->getPlayButton(), SIGNAL(onReleaseClick()), this, SLOT(onPlay()));
+    connect(menuScene->getSettingButton(), SIGNAL(onReleaseClick()), this, SLOT(onSetting()));
 }
 
 void GameEngine::mousePressEvent(QMouseEvent *event)
@@ -33,9 +36,14 @@ void GameEngine::mouseReleaseEvent(QMouseEvent *event)
     QGraphicsView::mouseReleaseEvent(event);
 }
 
-#include <QDebug>
 void GameEngine::onPlay()
 {
     GameScene * gameScene = new GameScene();
     setScene(gameScene);
+}
+
+void GameEngine::onSetting()
+{
+    LevelCreatorScene * levelCreatorScene = new LevelCreatorScene();
+    setScene(levelCreatorScene);
 }

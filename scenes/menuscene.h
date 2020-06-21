@@ -29,7 +29,7 @@ public:
 
     PlayButton *getPlayButton() const;
 
-    void setPlayButton(PlayButton *value);
+    SettingButton *getSettingButton() const;
 };
 
 #endif // MENUSCENE_H

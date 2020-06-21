@@ -3,7 +3,7 @@
 #include "unit.h"
 #include "config.h"
 
-#include "items/background.h"
+#include "items/background/testbackground.h"
 #include "items/enemies/testator.h"
 #include "items/blocks/wall.h"
 
@@ -22,7 +22,6 @@ Level::Level()
     height = BLOCK_SIZE * VERTICAL_BLOCK;
     width = BLOCK_SIZE * HORIZONTAL_BLOCK;
 
-    background = new Background();
 }
 
 void Level::generateTestLevel()
@@ -30,6 +29,7 @@ void Level::generateTestLevel()
     name = "Test level";
     difficulty = 0;
 
+    background =  new TestBackground();
 
     spawnX = 300;
     spawnY = 300;

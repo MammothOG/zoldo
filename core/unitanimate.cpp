@@ -8,6 +8,8 @@
 UnitAnimate::UnitAnimate()
 {
 
+    type = UNIT_ANIMATE;
+
     // angle de rotation of the image
     rotAngle = 0;
 

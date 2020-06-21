@@ -5,9 +5,10 @@
 
 Enemy::Enemy()
 {
-    moveRate = 1000;
 
-    type = "Enemy";
+    type = ENEMY;
+
+    moveRate = 1000;
 
     moveTimer  = new QTimer(this);
 

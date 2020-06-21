@@ -5,6 +5,8 @@
 
 CustomButton::CustomButton()
 {
+    type = CUSTOM_BUTTON;
+
     holdPressed = false;
 
     setZValue(1);

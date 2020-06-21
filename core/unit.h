@@ -15,9 +15,6 @@ private:
     float horizontalMov;
 
 protected:
-    // unit type
-    QString type;
-
     //health of the unit
     int health;
 
@@ -34,10 +31,6 @@ public:
     void setHorizontalMov(float hMov);
 
     float getHorizontalMov() const;
-
-    void setType(QString t);
-
-    QString getType() const;
 
 };
 
