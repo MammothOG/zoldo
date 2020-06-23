@@ -45,13 +45,14 @@ SOURCES += \
     scenes/levelcreatorscene.cpp \
     scenes/menuscene.cpp \
     scenes/pausemenu.cpp
+    tools/elementfactory.cpp \
 
 HEADERS += \
     config.h \
-    core/custombutton.h \
     gameengine.h \
     core/adventure.h \
     core/block.h \
+    core/custombutton.h \
     core/element.h \
     core/enemy.h \
     core/level.h \
@@ -75,7 +76,9 @@ HEADERS += \
     scenes/gamescene.h \
     scenes/levelcreatorscene.h \
     scenes/menuscene.h \
-    scenes/pausemenu.h
+    scenes/pausemenu.h \
+    tools/register.h
+    tools/elementfactory.h \
 
 FORMS += \
 

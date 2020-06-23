@@ -5,16 +5,17 @@
 #include <QGraphicsPixmapItem>
 
 
-enum ElementType {ELEMENT,
-                  BACKGROUND,
-                  BLOCK,
-                  PLAYER,
-                  ENEMY,
-                  UNIT,
-                  UNIT_ANIMATE,
-                  PROJECTILE,
-                  CUSTOM_BUTTON,
-                 };
+enum ElementType {
+    ELEMENT,
+    BACKGROUND,
+    BLOCK,
+    PLAYER,
+    ENEMY,
+    UNIT,
+    UNIT_ANIMATE,
+    PROJECTILE,
+    CUSTOM_BUTTON,
+};
 
 class Element :  public QObject, public QGraphicsPixmapItem
 {

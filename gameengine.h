@@ -1,6 +1,7 @@
 #ifndef GAMEENGINE_H
 #define GAMEENGINE_H
 
+#include <QMainWindow>
 #include <QGraphicsScene>
 #include <QGraphicsItemGroup>
 #include <QGraphicsView>
@@ -8,6 +9,7 @@
 #include <QKeyEvent>
 
 
+#include <QDebug>
 class MenuScene;
 
 class LevelCreatorScene;
@@ -22,6 +24,8 @@ private:
 
     MenuScene * menuScene;
 
+    QMainWindow * parent;
+
 protected:
     void mousePressEvent(QMouseEvent *event);
 
@@ -33,7 +37,7 @@ public slots:
     void onSetting();
 
 public:
-    GameEngine();
+    GameEngine(QMainWindow * parent);
 
 };
 

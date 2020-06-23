@@ -8,8 +8,10 @@
 #include "items/buttons/settingbutton.h"
 
 
-GameEngine::GameEngine()
+GameEngine::GameEngine(QMainWindow * parent)
 {
+    this->parent = parent;
+
     setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
@@ -44,6 +46,6 @@ void GameEngine::onPlay()
 
 void GameEngine::onSetting()
 {
-    LevelCreatorScene * levelCreatorScene = new LevelCreatorScene();
+    LevelCreatorScene * levelCreatorScene = new LevelCreatorScene(parent);
     setScene(levelCreatorScene);
 }

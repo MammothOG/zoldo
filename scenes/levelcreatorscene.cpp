@@ -2,15 +2,13 @@
 #include "levelcreatorscene.h"
 
 #include <QGraphicsSceneMouseEvent>
-#include <QGraphicsSceneWheelEvent>
 #include <QKeyEvent>
+#include <QDebug>
 
 #include "config.h"
 #include "core/element.h"
-#include "core/block.h"
-#include "core/background.h"
 #include "core/player.h"
-#include "core/unit.h"
+#include "core/level.h"
 
 #include "items/blocks/wall.h"
 #include "items/blocks/water.h"
@@ -18,125 +16,93 @@
 #include "items/enemies/testator.h"
 
 
-
-LevelCreatorScene::LevelCreatorScene()
+LevelCreatorScene::LevelCreatorScene(QMainWindow * parent)
 {
     setSceneRect(0, 0, WIN_WIDTH, WIN_HEIGHT);
-    setBackgroundBrush(Qt::white);
+    setBackgroundBrush(Qt::black);
 
-    elementIndex = 0;
-    elementListIndex = 1;
+    itemGroupSelected = new QGraphicsItemGroup();
+    addItem(itemGroupSelected);
 
-    // player region
-    QList<Element*> * playerList = new QList<Element*>();
-    Player * player = new Player();
-    playerList->append(player);
+    level = new Level();
 
-    // block region
-    QList<Element*> * blockList = new QList<Element*>();
+    elementSelected = new Element();
+    addItem(elementSelected);
 
-    Wall * wall = new Wall();
-    blockList->append(wall);
+    menuBar = new QMenuBar();
+    parent->setMenuBar(menuBar);
 
-    Water * water = new Water();
-    blockList->append(water);
+    playerMenu = new QMenu("Player");
+    blockMenu = new QMenu("Block");
+    unitMenu = new QMenu("Unit");
+    backgroundMenu = new QMenu("Background");
 
-    // background region
-    QList<Element*> * backgroundList = new QList<Element*>();
+    menuBar->addMenu(backgroundMenu);
+    menuBar->addMenu(blockMenu);
+    menuBar->addMenu(unitMenu);
+    menuBar->addMenu(playerMenu);
 
-    TestBackground * testBackground = new TestBackground();
-    backgroundList->append(testBackground);
+    createAction();
 
-    // unit region
-    QList<Element*> * unitList = new QList<Element*>();
-
-    Testator * testator = new Testator();
-    unitList->append(testator);
-
-    // global list off all list of elements
-    elementList = new QList<QList<Element*>*>();
-    elementList->append(backgroundList);
-    elementList->append(blockList);
-    elementList->append(playerList);
-    elementList->append(unitList);
-
-    initNewList();
 }
 
-void LevelCreatorScene::initNewList()
+void LevelCreatorScene::createAction()
 {
-    //init the first selected element list
-    elementListSelected = elementList->at(elementListIndex);
+    playerMenu->addAction(addNewElement("default player", new Player()));
 
-    //check if list in not empty
-    lengthList = elementListSelected->length();
-    if (lengthList > 0)
-    {
-        //init the first selected element
-        elementSelected = elementList->at(elementListIndex)->at(elementIndex);
-        addItem(elementSelected);
-    }
+    blockMenu->addAction(addNewElement("wall", new Wall()));
+    blockMenu->addAction(addNewElement("water", new Water()));
 
+    backgroundMenu->addAction(addNewElement("test background", new TestBackground()));
+
+    unitMenu->addAction(addNewElement("testator", new Testator()));
 }
 
-#include <QDebug>
+QAction * LevelCreatorScene::addNewElement(QString name, Element *newElement)
+{
+    QAction * newAction = new QAction(name);
+    connect(newAction, &QAction::triggered, [=](){
+        removeItem(elementSelected);
+        elementSelected = newElement;
+        addItem(newElement);
+    });
+    return newAction;
+}
+
 void LevelCreatorScene::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 {
     int posX = event->scenePos().x();
     int posY = event->scenePos().y();
 
-    switch (elementSelected->getType()) {
-    case BLOCK:
-        posX -= (posX % BLOCK_SIZE);
-        posY -= (posY % BLOCK_SIZE);
-        break;
-    case BACKGROUND:
-        posX = 0;
-        posY = 0;
+    if(posX > 0 && posY > 0)
+    {
+        switch (elementSelected->getType()) {
+        case BLOCK:
+            posX -= (posX % BLOCK_SIZE);
+            posY -= (posY % BLOCK_SIZE);
+            break;
+        case BACKGROUND:
+            posX = 0;
+            posY = 0;
+        }
     }
 
     elementSelected->setPos(posX, posY);
 }
 
-void LevelCreatorScene::keyPressEvent(QKeyEvent *event)
+void LevelCreatorScene::keyPressEvent(QKeyEvent *keyEvent)
 {
-    switch (event->key()) {
+    switch (keyEvent->key()) {
+    case Qt::Key_Escape:
+        emit backToMenu();
+        break;
     case Qt::Key_Space:
-        elementListIndex++;
-        elementListIndex %= elementList->length();
-
-        removeItem(elementSelected);
-        initNewList();
-        break;
-
-    case Qt::Key_Enter:
+        qDebug() << "space";
+        itemGroupSelected->addToGroup(elementSelected);
         break;
 
     }
 
 }
 
-void LevelCreatorScene::wheelEvent(QGraphicsSceneWheelEvent *event)
-{
-    lengthList = elementListSelected->length();
-
-    if (lengthList > 0)
-    {
-        if (event->delta() > 0)
-        {
-        elementIndex++;
-        } else if (event->delta() < 0 && elementIndex > 0)
-        {
-        elementIndex--;
-        } else if (elementIndex <= 0)
-        {
-        elementIndex = lengthList - 1;
-        }
-        elementIndex %= lengthList;
-
-        removeItem(elementSelected);
-        elementSelected = elementListSelected->at(elementIndex);
-        addItem(elementSelected);
-    }
-}
 
