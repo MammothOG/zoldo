@@ -16,14 +16,8 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    items/background/testbackground.cpp \
-    items/blocks/water.cpp \
-    items/buttons/menubutton.cpp \
-    items/buttons/playbutton.cpp \
-    items/buttons/quitbutton.cpp \
-    items/buttons/resumebutton.cpp \
-    items/buttons/settingbutton.cpp \
-    items/visual/menutitle.cpp \
+    elements/player/playertest.cpp \
+    tools/elementfactory.cpp \
     main.cpp \
     gameengine.cpp \
     core/adventure.cpp \
@@ -37,17 +31,26 @@ SOURCES += \
     core/unitanimate.cpp \
     core/custombutton.cpp \
     core/background.cpp \
-    items/enemies/testator.cpp \
-    items/blocks/wall.cpp \
-    items/buttons/pausebutton.cpp \
-    items/buttons/restartbutton.cpp \
+    elements/background/testbackground.cpp \
+    elements/blocks/water.cpp \
+    elements/buttons/menubutton.cpp \
+    elements/buttons/playbutton.cpp \
+    elements/buttons/quitbutton.cpp \
+    elements/buttons/resumebutton.cpp \
+    elements/buttons/settingbutton.cpp \
+    elements/visual/menutitle.cpp \
+    elements/enemies/testator.cpp \
+    elements/blocks/wall.cpp \
+    elements/buttons/pausebutton.cpp \
+    elements/buttons/restartbutton.cpp \
     scenes/gamescene.cpp \
     scenes/levelcreatorscene.cpp \
     scenes/menuscene.cpp \
     scenes/pausemenu.cpp
-    tools/elementfactory.cpp \
 
 HEADERS += \
+    elements/player/playertest.h \
+    tools/elementfactory.h \
     config.h \
     gameengine.h \
     core/adventure.h \
@@ -61,24 +64,22 @@ HEADERS += \
     core/unit.h \
     core/unitanimate.h \
     core/background.h \
-    items/background/testbackground.h \
-    items/blocks/water.h \
-    items/buttons/menubutton.h \
-    items/buttons/pausebutton.h \
-    items/buttons/playbutton.h \
-    items/buttons/quitbutton.h \
-    items/buttons/restartbutton.h \
-    items/buttons/resumebutton.h \
-    items/buttons/settingbutton.h \
-    items/enemies/testator.h \
-    items/blocks/wall.h \
-    items/visual/menutitle.h \
+    elements/background/testbackground.h \
+    elements/blocks/water.h \
+    elements/buttons/menubutton.h \
+    elements/buttons/pausebutton.h \
+    elements/buttons/playbutton.h \
+    elements/buttons/quitbutton.h \
+    elements/buttons/restartbutton.h \
+    elements/buttons/resumebutton.h \
+    elements/buttons/settingbutton.h \
+    elements/enemies/testator.h \
+    elements/blocks/wall.h \
+    elements/visual/menutitle.h \
     scenes/gamescene.h \
     scenes/levelcreatorscene.h \
     scenes/menuscene.h \
-    scenes/pausemenu.h \
-    tools/register.h
-    tools/elementfactory.h \
+    scenes/pausemenu.h
 
 FORMS += \
 

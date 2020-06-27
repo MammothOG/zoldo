@@ -17,10 +17,21 @@ enum ElementType {
     CUSTOM_BUTTON,
 };
 
+enum ElementName {
+    WALL,
+    WATER,
+    TEST_BACKGROUND,
+    TESTATOR,
+    PLAYER_TEST,
+};
+
+
 class Element :  public QObject, public QGraphicsPixmapItem
 {
 protected:
     int type;
+
+    int element_name;
 
     int width;
 
@@ -44,6 +55,8 @@ public:
     void setCenterAsReferencial();
 
     int getType() const;
+
+    int getElement_name() const;
 };
 
 #endif // ELEMENT_H

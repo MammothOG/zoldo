@@ -1,10 +1,10 @@
 #include "pausemenu.h"
 
 #include "config.h"
-#include "items/buttons/menubutton.h"
-#include "items/buttons/quitbutton.h"
-#include "items/buttons/resumebutton.h"
-#include "items/buttons/restartbutton.h"
+#include "elements/buttons/menubutton.h"
+#include "elements/buttons/quitbutton.h"
+#include "elements/buttons/resumebutton.h"
+#include "elements/buttons/restartbutton.h"
 
 
 RestartButton *PauseMenu::getRestartButton() const

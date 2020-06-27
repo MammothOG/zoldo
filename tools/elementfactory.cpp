@@ -1,44 +1,36 @@
 #include "elementfactory.h"
+
 #include "core/element.h"
 
+#include "elements/blocks/wall.h"
+#include "elements/blocks/water.h"
+#include "elements/background/testbackground.h"
+#include "elements/enemies/testator.h"
+#include "elements/player/playertest.h"
 
-ElementFactory & ElementFactory::get()
+
+Element * ElementFactory::create(int elementFlag)
 {
-    static ElementFactory instance;
+    Element * instance;
+
+    switch (elementFlag) {
+    case WALL:
+        instance = new Wall;
+        break;
+    case WATER:
+        instance = new Water;
+        break;
+    case TEST_BACKGROUND:
+        instance = new TestBackground;
+        break;
+    case TESTATOR:
+        instance = new Testator;
+        break;
+    case PLAYER_TEST:
+        instance = new PlayerTest;
+    default:
+        instance = nullptr;
+        break;
+    }
     return instance;
-}
-
-const char** ElementFactory::elementList(int &count)
-{
-    count = m_generators.size();
-    const char** arrayHead = new const char* [count];
-
-    int i = 0;
-    for (auto g : m_generators)
-    {
-        size_t bufferSize = g.first.length() + 1;
-        char* generatorIdBuffer = new char[bufferSize];
-        strncpy_s(generatorIdBuffer, bufferSize, g.first.c_str(), g.first.length());
-        arrayHead[i++] = generatorIdBuffer;
-    }
-
-    return arrayHead;
-}
-
-Element* ElementFactory::instanciateElement(const char *typeName)
-{
-    auto it = m_generators.find(typeName);
-    if (it != m_generators.end())
-    {
-        return it->second();
-    }
-
-    return nullptr;
-}
-
-bool ElementFactory::registerGenerator(
-        const char* typeName,
-        const elementInstanceGenerator & funcCreate)
-{
-    return m_generators.insert(std::make_pair(typeName, funcCreate)).second;
 }

@@ -13,21 +13,17 @@ class Background;
 class Level
 {
 private:
+    int height;
+
+    int width;
+
+    QString name;
+
     QList<Element*> * elementList;
 
     QList<Unit*> * unitList;
 
-    int difficulty;
-
-    QString backgroundPath;
-
     Background * background;
-
-    QString name;
-
-    int height;
-
-    int width;
 
     int spawnX;
 
@@ -49,6 +45,15 @@ public:
     int getSpawnX() const;
 
     int getSpawnY() const;
+
+    void setElementList(QList<Element *> *value);
+
+    void setUnitList(QList<Unit *> *value);
+
+    void setBackground(Background *value);
+
+    void setSpawn(int X, int Y);
+
 };
 
 #endif // LEVEL_H

@@ -8,9 +8,9 @@
 #include "core/unit.h"
 #include "core/projectile.h"
 #include "core/background.h"
-#include "items/buttons/pausebutton.h"
-#include "items/buttons/restartbutton.h"
-#include "items/buttons/resumebutton.h"
+#include "elements/buttons/pausebutton.h"
+#include "elements/buttons/restartbutton.h"
+#include "elements/buttons/resumebutton.h"
 #include "scenes/pausemenu.h"
 
 

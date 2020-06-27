@@ -4,8 +4,8 @@
 #include "scenes/gamescene.h"
 #include "scenes/menuscene.h"
 #include "scenes/levelcreatorscene.h"
-#include "items/buttons/playbutton.h"
-#include "items/buttons/settingbutton.h"
+#include "elements/buttons/playbutton.h"
+#include "elements/buttons/settingbutton.h"
 
 
 GameEngine::GameEngine(QMainWindow * parent)

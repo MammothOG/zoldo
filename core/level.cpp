@@ -3,9 +3,9 @@
 #include "unit.h"
 #include "config.h"
 
-#include "items/background/testbackground.h"
-#include "items/enemies/testator.h"
-#include "items/blocks/wall.h"
+#include "elements/background/testbackground.h"
+#include "elements/enemies/testator.h"
+#include "elements/blocks/wall.h"
 
 
 Level::Level()
@@ -15,7 +15,6 @@ Level::Level()
     unitList = new QList<Unit*>();
 
     // set info level
-    difficulty = 0;
     name = "noNamedLevel";
 
     // set level dimension
@@ -27,7 +26,6 @@ Level::Level()
 void Level::generateTestLevel()
 {
     name = "Test level";
-    difficulty = 0;
 
     background =  new TestBackground();
 
@@ -95,4 +93,25 @@ int Level::getSpawnX() const
 int Level::getSpawnY() const
 {
     return spawnY;
+}
+
+void Level::setElementList(QList<Element *> *value)
+{
+    elementList = value;
+}
+
+void Level::setUnitList(QList<Unit *> *value)
+{
+    unitList = value;
+}
+
+void Level::setBackground(Background *value)
+{
+    background = value;
+}
+
+void Level::setSpawn(int X, int Y)
+{
+    this->spawnX = X;
+    this->spawnY = Y;
 }

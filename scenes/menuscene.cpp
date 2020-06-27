@@ -1,10 +1,10 @@
 #include "menuscene.h"
 
 #include "config.h"
-#include "items/buttons/playbutton.h"
-#include "items/buttons/settingbutton.h"
-#include "items/buttons/quitbutton.h"
-#include "items/visual/menutitle.h"
+#include "elements/buttons/playbutton.h"
+#include "elements/buttons/settingbutton.h"
+#include "elements/buttons/quitbutton.h"
+#include "elements/visual/menutitle.h"
 
 
 MenuScene::MenuScene()

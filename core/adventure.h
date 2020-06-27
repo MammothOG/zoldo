@@ -24,7 +24,7 @@ public:
 
     Level * getCurrentLevel() const;
 
-    Player * getPlayer();
+    Player * getPlayer() const;
 };
 
 #endif // MAP_H

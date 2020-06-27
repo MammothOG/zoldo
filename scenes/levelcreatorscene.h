@@ -7,6 +7,7 @@
 #include <QMenu>
 #include <QMenuBar>
 #include <QGraphicsItemGroup>
+#include <QList>
 
 
 class Background;
@@ -35,7 +36,17 @@ private:
 
     Level * level;
 
+    QList<Element*> * elementList;
+
+    QList<Unit*> * unitList;
+
+    Background * background;
+
+    Player * player;
+
     QMenuBar * menuBar;
+
+    QMenu * menu;
 
     QMenu * backgroundMenu;
 
@@ -47,18 +58,12 @@ private:
 
     void createAction();
 
-    QAction * newWall;
-
-    QAction * newWater;
-
-    QAction * newTestBackground;
-
-    QAction * newTestator;
-
 public slots:
     void mouseMoveEvent(QGraphicsSceneMouseEvent *event) override;
 
     void keyPressEvent(QKeyEvent * keyEvent) override;
+
+    void createLevel();
 
 signals:
     void backToMenu();
@@ -67,6 +72,9 @@ public:
     LevelCreatorScene(QMainWindow * parent);
 
     QAction * addNewElement(QString name, Element * newElement);
+
+    void appendLevelElement(Element * element);
+
 
 };
 

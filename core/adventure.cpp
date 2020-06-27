@@ -1,6 +1,7 @@
 #include "adventure.h"
-#include "player.h"
 #include "level.h"
+
+#include "elements/player/playertest.h"
 
 
 Adventure::Adventure()
@@ -8,7 +9,7 @@ Adventure::Adventure()
     levelList = new QList<Level*>();
     currentLevel = 0;
 
-    player = new Player();
+    player = new PlayerTest();
     player->setCenterAsReferencial();
     player->setFlag(QGraphicsItem::ItemIsFocusable);
     player->setFocus();
@@ -27,7 +28,7 @@ Level * Adventure::getCurrentLevel() const
     return levelList->at(currentLevel);
 }
 
-Player * Adventure::getPlayer()
+Player * Adventure::getPlayer() const
 {
     return player;
 }
