@@ -2,6 +2,7 @@
 #define LEVEL_H
 
 #include <QObject>
+#include <QFile>
 
 
 class Element;
@@ -29,6 +30,8 @@ private:
 
     int spawnY;
 
+    void saveElement(QFile * levelFile, Element * elemen);
+
 public:
     Level();
 
@@ -46,6 +49,8 @@ public:
 
     int getSpawnY() const;
 
+    void appendLevelElement(Element * element);
+
     void setElementList(QList<Element *> *value);
 
     void setUnitList(QList<Unit *> *value);
@@ -54,6 +59,13 @@ public:
 
     void setSpawn(int X, int Y);
 
+    bool save();
+
+    bool load(QString levelName);
+
+    QString getName() const;
+
+    void setName(const QString &value);
 };
 
 #endif // LEVEL_H

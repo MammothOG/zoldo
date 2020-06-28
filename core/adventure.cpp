@@ -18,7 +18,8 @@ Adventure::Adventure()
 void Adventure::generateTestAdventure()
 {
     Level * level = new Level();
-    level->generateTestLevel();
+    //level->generateTestLevel();
+    level->load("test2");
 
     levelList->append(level);
 }

@@ -3,7 +3,7 @@
 
 Wall::Wall()
 {
-    element_name = WALL;
+    elementName = WALL;
 
     setSprite(":/ressources/images/test/wall_test.png");
 

@@ -5,8 +5,6 @@ Element::Element()
 {
     type = ELEMENT;
 
-    element_name = NULL;
-
     height = 0;
     width = 0;
 }
@@ -58,8 +56,8 @@ int Element::getType() const
     return type;
 }
 
-int Element::getElement_name() const
+int Element::getElementName() const
 {
-    return element_name;
+    return elementName;
 }
 

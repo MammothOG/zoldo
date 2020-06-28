@@ -3,7 +3,7 @@
 
 Testator::Testator()
 {
-    element_name = TESTATOR;
+    elementName = TESTATOR;
 
     //movement parameters
     setMoveRate(10);

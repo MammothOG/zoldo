@@ -6,10 +6,10 @@
 
 
 enum ElementType {
+    PLAYER,
     ELEMENT,
     BACKGROUND,
     BLOCK,
-    PLAYER,
     ENEMY,
     UNIT,
     UNIT_ANIMATE,
@@ -31,7 +31,7 @@ class Element :  public QObject, public QGraphicsPixmapItem
 protected:
     int type;
 
-    int element_name;
+    int elementName;
 
     int width;
 
@@ -56,7 +56,7 @@ public:
 
     int getType() const;
 
-    int getElement_name() const;
+    int getElementName() const;
 };
 
 #endif // ELEMENT_H

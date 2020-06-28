@@ -8,7 +8,7 @@
 #include "elements/enemies/testator.h"
 #include "elements/player/playertest.h"
 
-
+#include <QDebug>
 Element * ElementFactory::create(int elementFlag)
 {
     Element * instance;
@@ -28,6 +28,7 @@ Element * ElementFactory::create(int elementFlag)
         break;
     case PLAYER_TEST:
         instance = new PlayerTest;
+        break;
     default:
         instance = nullptr;
         break;

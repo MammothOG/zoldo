@@ -120,8 +120,8 @@ void GameScene::updatePlayer()
     player->setPos(nextXPlayer, nextYPlayer);
 
     // TODO sometime crash (reopen fast)
-    if (enemyTargeted != nullptr)
-        player->lockTarget(enemyTargeted);
+    //if (enemyTargeted != nullptr)
+        //player->lockTarget(enemyTargeted);
 
     for(Projectile * projectile: *player->getProjectileList()){
         int nextXProj = projectile->x() + projectile->getHorizontalMov();

@@ -36,17 +36,9 @@ private:
 
     Level * level;
 
-    QList<Element*> * elementList;
-
-    QList<Unit*> * unitList;
-
-    Background * background;
-
-    Player * player;
-
     QMenuBar * menuBar;
 
-    QMenu * menu;
+    QMenu * optionMenu;
 
     QMenu * backgroundMenu;
 
@@ -63,7 +55,7 @@ public slots:
 
     void keyPressEvent(QKeyEvent * keyEvent) override;
 
-    void createLevel();
+    bool createLevel();
 
 signals:
     void backToMenu();
@@ -72,8 +64,6 @@ public:
     LevelCreatorScene(QMainWindow * parent);
 
     QAction * addNewElement(QString name, Element * newElement);
-
-    void appendLevelElement(Element * element);
 
 
 };

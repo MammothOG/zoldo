@@ -2,7 +2,7 @@
 
 PlayerTest::PlayerTest()
 {
-    element_name = PLAYER_TEST;
+    elementName = PLAYER_TEST;
 
     setHeight(75);
     setWidth(75);

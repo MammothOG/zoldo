@@ -3,7 +3,8 @@
 
 #include <QGraphicsSceneMouseEvent>
 #include <QKeyEvent>
-#include <QDebug>
+#include <QDir>
+#include <QInputDialog>
 
 #include "config.h"
 #include "tools/elementfactory.h"
@@ -18,6 +19,7 @@
 #include "elements/enemies/testator.h"
 
 
+#include <QDebug>
 LevelCreatorScene::LevelCreatorScene(QMainWindow * parent)
 {
     setSceneRect(0, 0, WIN_WIDTH, WIN_HEIGHT);
@@ -27,10 +29,6 @@ LevelCreatorScene::LevelCreatorScene(QMainWindow * parent)
     addItem(itemGroupSelected);
 
     level = new Level();
-    unitList = new QList<Unit*>();
-    elementList = new QList<Element*>();
-
-    // Action for saving level
 
     // initialisation item selected
     elementSelected = new Element();
@@ -41,21 +39,22 @@ LevelCreatorScene::LevelCreatorScene(QMainWindow * parent)
     parent->setMenuBar(menuBar);
 
     // create menu with all category of element
-    menu = new QMenu("Menu");
+    optionMenu = new QMenu("Menu");
     playerMenu = new QMenu("Player");
     blockMenu = new QMenu("Block");
     unitMenu = new QMenu("Unit");
     backgroundMenu = new QMenu("Background");
 
-    menuBar->addMenu(menu);
+    menuBar->addMenu(optionMenu);
     menuBar->addMenu(backgroundMenu);
     menuBar->addMenu(blockMenu);
     menuBar->addMenu(unitMenu);
     menuBar->addMenu(playerMenu);
 
-    QAction * saveLevel = new QAction("save level");
-    //connect(saveLevel, &QAction::triggered, this, SLOT(createLevel()));
-    menu->addAction(saveLevel);
+    // Action for saving level
+    QAction * saveLevel = new QAction("Save level");
+    connect(saveLevel, SIGNAL(triggered()), this, SLOT(createLevel()));
+    optionMenu->addAction(saveLevel);
 
     createAction();
 
@@ -115,45 +114,20 @@ void LevelCreatorScene::keyPressEvent(QKeyEvent *keyEvent)
         break;
 
     case Qt::Key_Space:
-        Element * instance = ElementFactory::create(elementSelected->getElement_name());
-        instance->setPos(posX, posY);
+        Element * instance = ElementFactory::create(elementSelected->getElementName());
         itemGroupSelected->addToGroup(instance);
-
-        appendLevelElement(elementSelected);
-        break;
-
-    }
-}
-
-void LevelCreatorScene::appendLevelElement(Element * element)
-{
-    switch (element->getType()) {
-    case BLOCK:
-        elementList->append(element);
-        break;
-
-    case BACKGROUND:
-        background = dynamic_cast<Background*>(element);
-        break;
-
-    case ENEMY:
-        unitList->append(dynamic_cast<Unit*>(element));
-        break;
-
-    case PLAYER:
-        player = dynamic_cast<Player*>(element);
+        instance->setPos(posX, posY);
+        level->appendLevelElement(instance);
         break;
     }
 }
 
-void LevelCreatorScene::createLevel()
+bool LevelCreatorScene::createLevel()
 {
-    level->setSpawn(player->x(), player->y());
-    level->setUnitList(unitList);
-    level->setBackground(background);
-    level->setElementList(elementList);
+    level->setName("test2");
+    level->save();
 
-    // TODO save level here
+    return true;
 }
 
 
