@@ -22,8 +22,6 @@ private:
 
     int windowHeight;
 
-    MenuScene * menuScene;
-
     QMainWindow * parent;
 
 protected:
@@ -35,6 +33,8 @@ public slots:
     void onPlay();
 
     void onSetting();
+
+    void onMenu();
 
 public:
     GameEngine(QMainWindow * parent);

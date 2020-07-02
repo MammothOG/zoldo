@@ -2,7 +2,6 @@
 #include "element.h"
 
 
-
 CustomButton::CustomButton()
 {
     type = CUSTOM_BUTTON;

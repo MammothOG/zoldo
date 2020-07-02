@@ -56,6 +56,10 @@ LevelCreatorScene::LevelCreatorScene(QMainWindow * parent)
     connect(saveLevel, SIGNAL(triggered()), this, SLOT(createLevel()));
     optionMenu->addAction(saveLevel);
 
+    QAction * backMenu = new QAction("Back menu");
+    connect(backMenu, SIGNAL(triggered()), this, SLOT(createLevel()));
+    optionMenu->addAction(saveLevel);
+
     createAction();
 
 }

@@ -45,6 +45,9 @@ private:
 
     Level * currentLevel;
 
+signals:
+    void signalQuitScene();
+
 public slots:
     void updateState();
 

@@ -21,7 +21,7 @@ GameEngine::GameEngine(QMainWindow * parent)
     setWindowTitle(TITLE);
     resize(windowWidth, windowHeight);
 
-    menuScene = new MenuScene();
+    MenuScene * menuScene = new MenuScene();
     setScene(menuScene);
 
     connect(menuScene->getPlayButton(), SIGNAL(onReleaseClick()), this, SLOT(onPlay()));
@@ -48,4 +48,10 @@ void GameEngine::onSetting()
 {
     LevelCreatorScene * levelCreatorScene = new LevelCreatorScene(parent);
     setScene(levelCreatorScene);
+}
+
+void GameEngine::onMenu()
+{
+    MenuScene * menuScene = new MenuScene();
+    setScene(menuScene);
 }
