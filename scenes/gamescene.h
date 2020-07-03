@@ -68,6 +68,8 @@ public:
 
     void updatePlayer();
 
+    void updateProjectile();
+
     void keyPressEvent(QKeyEvent *event);
 
     void keyReleaseEvent(QKeyEvent *event);

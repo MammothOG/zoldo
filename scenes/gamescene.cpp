@@ -102,6 +102,8 @@ void GameScene::updateUnitState()
             int nextXProj = projectile->x() + projectile->getHorizontalMov();
             int nextYProj = projectile->y() + projectile->getVerticalMov();
 
+            if (nextXProj < 0 || nextYProj < 0 ||
+                nextXProj < 0 || nextYProj < 0)
             if (projectile->group()== nullptr)
             {
                 sceneProjectiles->addToGroup(projectile);
@@ -110,6 +112,11 @@ void GameScene::updateUnitState()
             projectile->setPos(nextXProj, nextYProj);
         }
     }
+}
+
+void GameScene::updateProjectile(Enemy * enemy)
+{
+
 }
 
 void GameScene::updatePlayer()
