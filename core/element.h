@@ -37,10 +37,20 @@ protected:
 
     int height;
 
+    int collider;
+
 public:
     Element();
 
     Element(int height,int width);
+
+    int getTop() const;
+
+    int getBottom() const;
+
+    int getLeft() const;
+
+    int getRight() const;
 
     int getWidth() const;
 
@@ -57,6 +67,10 @@ public:
     int getType() const;
 
     int getElementName() const;
+
+    int getCollider() const;
+
+    void setCollider(int value);
 };
 
 #endif // ELEMENT_H

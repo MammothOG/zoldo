@@ -21,6 +21,8 @@ class RestartButton;
 
 class PauseMenu;
 
+class UnitAnimate;
+
 class GameScene : public QGraphicsScene
 {
      Q_OBJECT
@@ -68,7 +70,9 @@ public:
 
     void updatePlayer();
 
-    void updateProjectile();
+    void updateProjectile(UnitAnimate * enemy);
+
+    void checkCollision(Unit * unit);
 
     void keyPressEvent(QKeyEvent *event);
 

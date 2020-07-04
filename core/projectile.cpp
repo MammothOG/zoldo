@@ -3,7 +3,6 @@
 
 Projectile::Projectile()
 {
-
     type = PROJECTILE;
 
     movementSpeed = 0;

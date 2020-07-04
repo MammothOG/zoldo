@@ -65,6 +65,11 @@ void GameScene::drawLevel()
 
     addItem(currentLevel->getBackground());
 
+    if (currentLevel->getUnitList()->length() > 0)
+        enemyTargeted = currentLevel->getUnitList()->at(0);
+    else
+        enemyTargeted = nullptr;
+
     for(Element * element : *currentLevel->getElementList()){
         sceneElements->addToGroup(element);
     }
@@ -87,10 +92,9 @@ void GameScene::updateUnitState()
     for(Unit * unit: *currentLevel->getUnitList()){
         Enemy * enemy = dynamic_cast<Enemy*>(unit);
 
-        int nextX = enemy->x() + enemy->getHorizontalMov();
-        int nextY = enemy->y() + enemy->getVerticalMov();
+        checkCollision(enemy);
 
-        enemy->setPos(nextX, nextY);
+        enemy->moveUnit();
         enemy->lockTarget(player);
 
         if (minPlayerDistance > enemy->getTargetDistance())
@@ -98,49 +102,47 @@ void GameScene::updateUnitState()
           enemyTargeted = enemy;
         }
 
-        for(Projectile * projectile: *enemy->getProjectileList()){
-            int nextXProj = projectile->x() + projectile->getHorizontalMov();
-            int nextYProj = projectile->y() + projectile->getVerticalMov();
-
-            if (nextXProj < 0 || nextYProj < 0 ||
-                nextXProj < 0 || nextYProj < 0)
-            if (projectile->group()== nullptr)
-            {
-                sceneProjectiles->addToGroup(projectile);
-            }
-
-            projectile->setPos(nextXProj, nextYProj);
-        }
+        updateProjectile(enemy);
     }
-}
-
-void GameScene::updateProjectile(Enemy * enemy)
-{
-
 }
 
 void GameScene::updatePlayer()
 {
-    int nextXPlayer = player->x() + player->getHorizontalMov();
-    int nextYPlayer = player->y() + player->getVerticalMov();
-
-    player->setPos(nextXPlayer, nextYPlayer);
-
     // TODO sometime crash (reopen fast)
     if (enemyTargeted != nullptr)
         player->lockTarget(enemyTargeted);
 
-    for(Projectile * projectile: *player->getProjectileList()){
-        int nextXProj = projectile->x() + projectile->getHorizontalMov();
-        int nextYProj = projectile->y() + projectile->getVerticalMov();
+    for(Element * el: *currentLevel->getElementList()){
+        player->isUnitColliding(el);
+    }
+
+    checkCollision(player);
+
+    player->moveUnit();
+
+    updateProjectile(player);
+
+}
+
+void GameScene::checkCollision(Unit * unit)
+{
+    for(Element * el: *currentLevel->getElementList()){
+        unit->isUnitColliding(el);
+    }
+}
+
+void GameScene::updateProjectile(UnitAnimate * unit)
+{
+    for(Projectile * projectile: *unit->getProjectileList()){
 
         if (projectile->group()== nullptr)
         {
             sceneProjectiles->addToGroup(projectile);
         }
 
-        projectile->setPos(nextXProj, nextYProj);
+        projectile->moveUnit();
     }
+
 }
 
 #include <QDebug>

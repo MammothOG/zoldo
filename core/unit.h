@@ -13,7 +13,6 @@ private:
 
     //unit horizontal movement in range [-1, 1]
     float horizontalMov;
-
 protected:
     //health of the unit
     int health;
@@ -21,8 +20,16 @@ protected:
     // speed movement of the unit
     float movementSpeed;
 
+    virtual void onCollision(Element * element){};
+
 public:
     Unit();
+
+    bool isUnitColliding(Element * element);
+
+    void moveUnit();
+
+    bool isColliding(Element * element);
 
     void setVerticalMov(float vMov);
 
@@ -31,7 +38,6 @@ public:
     void setHorizontalMov(float hMov);
 
     float getHorizontalMov() const;
-
 };
 
 #endif // UNIT_H

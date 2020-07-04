@@ -6,6 +6,8 @@ Block::Block()
 {
     type = BLOCK;
 
+    collider = true;
+
     setHeight(BLOCK_SIZE);
     setWidth(BLOCK_SIZE);
 }

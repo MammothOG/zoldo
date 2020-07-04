@@ -5,6 +5,8 @@ Element::Element()
 {
     type = ELEMENT;
 
+    collider = false;
+
     height = 0;
     width = 0;
 }
@@ -13,6 +15,26 @@ Element::Element(int height, int width)
 {
     this->height = height;
     this->width = width;
+}
+
+int Element::getTop() const
+{
+    return this->y() + this->offset().x();
+}
+
+int Element::getBottom() const
+{
+    return this->y() + this->height + this->offset().y();
+}
+
+int Element::getLeft() const
+{
+    return this->x() + this->offset().x(); // left
+}
+
+int Element::getRight() const
+{
+    return this->x() + this->width + this->offset().x(); // right
 }
 
 void Element::setSprite(QString ressource)
@@ -25,7 +47,6 @@ void Element::setSprite(QString ressource)
 
 }
 
-// getter and setter
 int Element::getWidth() const
 {
     return width;
@@ -61,3 +82,12 @@ int Element::getElementName() const
     return elementName;
 }
 
+int Element::getCollider() const
+{
+    return collider;
+}
+
+void Element::setCollider(int value)
+{
+    collider = value;
+}
