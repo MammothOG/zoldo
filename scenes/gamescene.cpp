@@ -8,17 +8,21 @@
 #include "core/unit.h"
 #include "core/projectile.h"
 #include "core/background.h"
+#include "core/healthbar.h"
 #include "elements/buttons/pausebutton.h"
 #include "elements/buttons/restartbutton.h"
 #include "elements/buttons/resumebutton.h"
 #include "scenes/pausemenu.h"
 
 
+#include <QDebug>
 GameScene::GameScene()
 {
     setSceneRect(0, 0, WIN_WIDTH, WIN_HEIGHT);
     setBackgroundBrush(Qt::black);
 
+    sceneVerticalSize = BLOCK_SIZE*HORIZONTAL_BLOCK;
+    sceneHorizontalSize = BLOCK_SIZE*VERTICAL_BLOCK;
 
     sceneElements = new QGraphicsItemGroup();
     addItem(sceneElements);
@@ -52,6 +56,7 @@ void GameScene::loadAdventure()
 
     player = adventure->getPlayer();
     sceneElements->addToGroup(player);
+    sceneElements->addToGroup(player->getHealthBar());
 
     Level * currentLevel = adventure->getCurrentLevel();
     player->setPos(currentLevel->getSpawnX(), currentLevel->getSpawnY());
@@ -95,11 +100,12 @@ void GameScene::updateUnitState()
         checkCollision(enemy);
 
         enemy->moveUnit();
+
         enemy->lockTarget(player);
 
         if (minPlayerDistance > enemy->getTargetDistance())
         {
-          enemyTargeted = enemy;
+            enemyTargeted = enemy;
         }
 
         updateProjectile(enemy);
@@ -134,18 +140,24 @@ void GameScene::checkCollision(Unit * unit)
 void GameScene::updateProjectile(UnitAnimate * unit)
 {
     for(Projectile * projectile: *unit->getProjectileList()){
-
+        // adding the projectile to the scene
         if (projectile->group()== nullptr)
         {
             sceneProjectiles->addToGroup(projectile);
         }
 
+        // remove projectile if projectile is not in the scene or hit target
+        if (!projectile->isInScene(sceneHorizontalSize, sceneVerticalSize))
+        {
+            removeItem(projectile);
+            unit->getProjectileList()->removeOne(projectile);
+            delete projectile;
+        }
+
         projectile->moveUnit();
     }
-
 }
 
-#include <QDebug>
 void GameScene::onPause()
 {
     qDebug() << "click in pause";
@@ -169,15 +181,13 @@ void GameScene::keyPressEvent(QKeyEvent *event)
     if (event->key() == Qt::Key_Left){
         player->setHorizontalMov(- 1);
     }
-    else if (event->key() == Qt::Key_Right){
+    if (event->key() == Qt::Key_Right){
         player->setHorizontalMov(1);
-
     }
-    else if (event->key() == Qt::Key_Up){
+    if (event->key() == Qt::Key_Up){
         player->setVerticalMov(-1);
     }
-
-    else if (event->key() == Qt::Key_Down){
+    if (event->key() == Qt::Key_Down){
         player->setVerticalMov(1);
     }
 }
@@ -188,8 +198,7 @@ void GameScene::keyReleaseEvent(QKeyEvent *event)
     if (event->key() == Qt::Key_Left ||event->key() == Qt::Key_Right){
         player-> setHorizontalMov(0);
     }
-    else if (event->key() == Qt::Key_Up||event->key() == Qt::Key_Down){
+    if (event->key() == Qt::Key_Up||event->key() == Qt::Key_Down){
         player-> setVerticalMov(0);
-
     }
 }

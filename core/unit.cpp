@@ -2,6 +2,8 @@
 
 #include <math.h>
 
+#include "healthbar.h"
+
 
 Unit::Unit()
 {
@@ -9,6 +11,8 @@ Unit::Unit()
     type = UNIT;
 
     health = 0;
+
+    healthBar = new HealthBar(this);
 
     movementSpeed = 0;
 
@@ -18,12 +22,14 @@ Unit::Unit()
 
 bool Unit::isUnitColliding(Element *element)
 {
-    if (this->isColliding(element))
-    {
-        this->setX(this->x() - horizontalMov);
-        this->setY(this->y() - verticalMov);
+    if (element->getCollider()) {
+        if (this->isColliding(element))
+        {
+            this->setX(this->x() - horizontalMov);
+            this->setY(this->y() - verticalMov);
 
-        return true;
+            return true;
+        }
     }
     return false;
 
@@ -31,21 +37,23 @@ bool Unit::isUnitColliding(Element *element)
 
 bool Unit::isColliding(Element *element)
 {
-    if (element->getCollider()) {
-        if (this->getBottom() + verticalMov > element->getTop() &&
-                this->getTop() + verticalMov < element->getBottom() &&
-                this->getLeft() + horizontalMov < element->getRight() &&
-                this->getRight() + horizontalMov > element->getLeft()) {
-            onCollision(element);
-            return true;
-        }
+    if (this->getBottom() + verticalMov > element->getTop() &&
+            this->getTop() + verticalMov < element->getBottom() &&
+            this->getLeft() + horizontalMov < element->getRight() &&
+            this->getRight() + horizontalMov > element->getLeft()) {
+        onCollision(element);
+        return true;
     }
     return false;
 }
 
 void Unit::moveUnit()
 {
-    this->setPos(this->x() + horizontalMov, this->y() + verticalMov);
+    int newPosX = this->x() + horizontalMov;
+    int newPosY = this->y() + verticalMov;
+
+    healthBar->setPos(newPosX, newPosY);
+    this->setPos(newPosX, newPosY);
 }
 
 void Unit::setVerticalMov(float vMov)
@@ -66,4 +74,19 @@ void Unit::setHorizontalMov(float hMov)
 float Unit::getHorizontalMov() const
 {
     return horizontalMov;
+}
+
+HealthBar * Unit::getHealthBar() const
+{
+    return healthBar;
+}
+
+int Unit::getHealth() const
+{
+    return health;
+}
+
+void Unit::setHealth(int value)
+{
+    health = value;
 }

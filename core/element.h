@@ -71,6 +71,8 @@ public:
     int getCollider() const;
 
     void setCollider(int value);
+
+    bool isInScene(int width, int height);
 };
 
 #endif // ELEMENT_H

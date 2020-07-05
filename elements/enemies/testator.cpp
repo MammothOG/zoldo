@@ -10,7 +10,8 @@ Testator::Testator()
 
     // setup enemy stats
     movementSpeed = 2;
-    health = 100;
+
+    setHealth(100);
 
     // setup graphics
     setHeight(50);
