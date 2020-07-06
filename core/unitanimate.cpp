@@ -3,12 +3,14 @@
 #include <math.h>
 
 #include "projectile.h"
+#include "tools/elementfactory.h"
+#include "elements/projectile/testprojectile.h"
 
 
 UnitAnimate::UnitAnimate()
 {
 
-    type = UNIT_ANIMATE;
+    setType(UNIT_ANIMATE);
 
     // angle de rotation of the image
     rotAngle = 0;
@@ -30,9 +32,7 @@ UnitAnimate::UnitAnimate()
     projectileList = new QList<Projectile*>();
 
     // projectile shooted
-    projectile = new Projectile();
-    projectile->projectileTest();
-
+    projectileName = TEST_PROJECTILE;
 }
 
 void UnitAnimate::lockTarget(const Unit * const target)
@@ -61,7 +61,8 @@ void UnitAnimate::shoot()
 
 void UnitAnimate::fire()
 {
-    Projectile * proj = new Projectile(projectile);
+    Projectile * proj = dynamic_cast<Projectile*>(ElementFactory::create(projectileName));
+    proj->setOwner(this);
 
     proj->setPos(this->x(), this->y());
 

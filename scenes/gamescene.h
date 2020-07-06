@@ -23,6 +23,8 @@ class PauseMenu;
 
 class UnitAnimate;
 
+class Projectile;
+
 class GameScene : public QGraphicsScene
 {
      Q_OBJECT

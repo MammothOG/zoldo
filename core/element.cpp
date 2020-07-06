@@ -1,9 +1,19 @@
 #include "element.h"
 
 
+void Element::setElementName(int value)
+{
+    elementName = value;
+}
+
+void Element::setType(int value)
+{
+    type = value;
+}
+
 Element::Element()
 {
-    type = ELEMENT;
+    setType(ELEMENT);
 
     collider = false;
 
@@ -15,6 +25,20 @@ Element::Element(int height, int width)
 {
     this->height = height;
     this->width = width;
+}
+
+bool Element::isColliding(Element *element)
+{
+    if (this->getBottom() > element->getTop() &&
+            this->getTop() < element->getBottom() &&
+            this->getLeft() < element->getRight() &&
+            this->getRight() > element->getLeft()) {
+        onCollision(element);
+        return true;
+    }
+    else {
+        return false;
+    }
 }
 
 int Element::getTop() const

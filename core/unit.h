@@ -18,23 +18,17 @@ private:
     HealthBar * healthBar;
 
     //health of the unit
-    int health;
-
-protected:
+    float health;
 
     // speed movement of the unit
     float movementSpeed;
 
-    virtual void onCollision(Element * element){};
-
 public:
     Unit();
 
-    bool isUnitColliding(Element * element);
+    void stoneUnit();
 
     void moveUnit();
-
-    bool isColliding(Element * element);
 
     void setVerticalMov(float vMov);
 
@@ -48,7 +42,15 @@ public:
 
     int getHealth() const;
 
-    void setHealth(int value);
+    void setHealth(float value);
+
+    void fitHealthBar();
+
+    void giveDamage(float damage);
+
+    float getMovementSpeed() const;
+
+    void setMovementSpeed(float value);
 };
 
 #endif // UNIT_H

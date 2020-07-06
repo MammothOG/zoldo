@@ -8,11 +8,11 @@
 Unit::Unit()
 {
     //referencial point for Unit are center
-    type = UNIT;
+    setType(UNIT);
 
     health = 0;
 
-    healthBar = new HealthBar(this);
+    healthBar = new HealthBar();
 
     movementSpeed = 0;
 
@@ -20,31 +20,14 @@ Unit::Unit()
     verticalMov = 0.;
 }
 
-bool Unit::isUnitColliding(Element *element)
+#include <QDebug>
+void Unit::stoneUnit()
 {
-    if (element->getCollider()) {
-        if (this->isColliding(element))
-        {
-            this->setX(this->x() - horizontalMov);
-            this->setY(this->y() - verticalMov);
+    this->setX(this->x() - horizontalMov);
+    this->setY(this->y() - verticalMov);
 
-            return true;
-        }
-    }
-    return false;
-
-}
-
-bool Unit::isColliding(Element *element)
-{
-    if (this->getBottom() + verticalMov > element->getTop() &&
-            this->getTop() + verticalMov < element->getBottom() &&
-            this->getLeft() + horizontalMov < element->getRight() &&
-            this->getRight() + horizontalMov > element->getLeft()) {
-        onCollision(element);
-        return true;
-    }
-    return false;
+    healthBar->setX(healthBar->x() - horizontalMov);
+    healthBar->setY(healthBar->y() - verticalMov);
 }
 
 void Unit::moveUnit()
@@ -76,6 +59,12 @@ float Unit::getHorizontalMov() const
     return horizontalMov;
 }
 
+void Unit::giveDamage(float damage)
+{
+    this->health -= damage;
+    healthBar->setHealth(this->health);
+}
+
 HealthBar * Unit::getHealthBar() const
 {
     return healthBar;
@@ -86,7 +75,20 @@ int Unit::getHealth() const
     return health;
 }
 
-void Unit::setHealth(int value)
+void Unit::setHealth(float value)
 {
     health = value;
+    healthBar->setTotalHealth(value);
+    healthBar->setOffsetHeight(-getHeight()/2);
+    qDebug() << healthBar->getTotalHealth();
+}
+
+float Unit::getMovementSpeed() const
+{
+    return movementSpeed;
+}
+
+void Unit::setMovementSpeed(float value)
+{
+    movementSpeed = value;
 }

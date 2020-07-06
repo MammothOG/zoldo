@@ -6,7 +6,7 @@
 Enemy::Enemy()
 {
 
-    type = ENEMY;
+    setType(ENEMY);
 
     moveRate = 1000;
 

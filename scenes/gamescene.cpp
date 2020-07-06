@@ -97,9 +97,9 @@ void GameScene::updateUnitState()
     for(Unit * unit: *currentLevel->getUnitList()){
         Enemy * enemy = dynamic_cast<Enemy*>(unit);
 
-        checkCollision(enemy);
-
         enemy->moveUnit();
+
+        checkCollision(enemy);
 
         enemy->lockTarget(player);
 
@@ -118,13 +118,10 @@ void GameScene::updatePlayer()
     if (enemyTargeted != nullptr)
         player->lockTarget(enemyTargeted);
 
-    for(Element * el: *currentLevel->getElementList()){
-        player->isUnitColliding(el);
-    }
-
-    checkCollision(player);
 
     player->moveUnit();
+
+    checkCollision(player);
 
     updateProjectile(player);
 
@@ -133,28 +130,51 @@ void GameScene::updatePlayer()
 void GameScene::checkCollision(Unit * unit)
 {
     for(Element * el: *currentLevel->getElementList()){
-        unit->isUnitColliding(el);
+        if (unit->isColliding(el) && el->getCollider())
+        {
+            unit->stoneUnit();
+        }
     }
 }
 
 void GameScene::updateProjectile(UnitAnimate * unit)
 {
     for(Projectile * projectile: *unit->getProjectileList()){
+        bool isRemovable = false;
         // adding the projectile to the scene
         if (projectile->group()== nullptr)
         {
             sceneProjectiles->addToGroup(projectile);
         }
 
+        //checking if projectile is in the scene
+        if(projectile->isInScene(sceneHorizontalSize, sceneVerticalSize))
+        {
+            //checking projectile collision
+            switch (unit->getType()) {
+            case PLAYER:
+                for (Unit * enemy: * currentLevel->getUnitList()){
+                isRemovable = projectile->isColliding(enemy);
+            }
+            break;
+            case ENEMY:
+                isRemovable = projectile->isColliding(player);
+                break;
+            }
+
+            projectile->moveUnit();
+        }
+        else {
+            isRemovable = true;
+        }
+
         // remove projectile if projectile is not in the scene or hit target
-        if (!projectile->isInScene(sceneHorizontalSize, sceneVerticalSize))
+        if (isRemovable)
         {
             removeItem(projectile);
-            unit->getProjectileList()->removeOne(projectile);
             delete projectile;
         }
 
-        projectile->moveUnit();
     }
 }
 

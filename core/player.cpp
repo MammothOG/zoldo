@@ -4,7 +4,7 @@
 
 Player::Player()
 {
-    type = PLAYER;
+    setType(PLAYER);
 }
 
 void Player::shoot()

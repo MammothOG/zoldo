@@ -23,12 +23,13 @@ enum ElementName {
     TEST_BACKGROUND,
     TESTATOR,
     PLAYER_TEST,
+    TEST_PROJECTILE,
 };
 
 
 class Element :  public QObject, public QGraphicsPixmapItem
 {
-protected:
+private:
     int type;
 
     int elementName;
@@ -39,10 +40,19 @@ protected:
 
     int collider;
 
+protected:
+    void setElementName(int value);
+
+    void setType(int value);
+
 public:
     Element();
 
     Element(int height,int width);
+
+    bool isColliding(Element * element);
+
+    virtual void onCollision(Element * element){};
 
     int getTop() const;
 

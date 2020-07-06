@@ -4,9 +4,9 @@
 
 Block::Block()
 {
-    type = BLOCK;
+    setType(BLOCK);
 
-    collider = true;
+    setCollider(true);
 
     setHeight(BLOCK_SIZE);
     setWidth(BLOCK_SIZE);

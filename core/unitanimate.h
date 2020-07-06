@@ -23,7 +23,7 @@ private:
 
     QTimer * shootTimer;
 
-    Projectile * projectile;
+    int projectileName;
 
 public slots:
 

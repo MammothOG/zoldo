@@ -2,7 +2,7 @@
 
 Water::Water()
 {
-    elementName = WATER;
+    setElementName(WATER);
 
     setSprite(":/ressources/images/test/water_test.png");
 }

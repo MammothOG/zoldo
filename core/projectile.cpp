@@ -1,38 +1,17 @@
 #include "projectile.h"
 
+#include "unitanimate.h"
+
 
 Projectile::Projectile()
 {
-    type = PROJECTILE;
+    this->owner = nullptr;
 
-    movementSpeed = 0;
+    setType(PROJECTILE);
+
+    setMovementSpeed(0);
 
     damage = 0;
-}
-
-Projectile::Projectile(Projectile * projectile)
-{
-    this->movementSpeed = projectile->movementSpeed;
-
-    this->damage = projectile->damage;
-
-    this->setPixmap(projectile->pixmap());
-
-    setCenterAsReferencial();
-}
-
-void Projectile::projectileTest()
-{
-    setHeight(25);
-    setWidth(25);
-
-    setSprite(":/ressources/images/shurikenb1moch.png");
-
-    damage = 10;
-
-    movementSpeed = 3;
-
-    setCenterAsReferencial();
 }
 
 int Projectile::getDamage() const
@@ -43,4 +22,23 @@ int Projectile::getDamage() const
 void Projectile::setDamage(int value)
 {
     damage = value;
+}
+
+#include <QDebug>
+void Projectile::onCollision(Element *element)
+{
+    if (element->getType() != owner->getType())
+    {
+        qDebug() << owner->getType();
+    }
+}
+
+UnitAnimate *Projectile::getOwner() const
+{
+    return owner;
+}
+
+void Projectile::setOwner(UnitAnimate *value)
+{
+    owner = value;
 }

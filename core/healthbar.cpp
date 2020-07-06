@@ -7,42 +7,41 @@
 
 
 #include <QDebug>
-HealthBar::HealthBar(Unit * unit)
+HealthBar::HealthBar()
 {
-    totalHealth = unit->getHealth();
+    totalHealth = 0;
 
-    height = 10;
+    height = 4;
     width = 60;
 
     offsetWidth = -width/2;
-    offsetHeight = -height;
+    offsetHeight = -height/2;
 
     QRectF healthNewShape(offsetWidth, offsetHeight, width, height);
     QRectF healthOldShape(offsetWidth, offsetHeight, width, height);
 
-    QBrush healthNewBrush(Qt::blue);
     QBrush healthOldBrush(Qt::red);
+    QBrush healthNewBrush(Qt::green);
 
-    healthNew = new QGraphicsRectItem();
     healthOld = new QGraphicsRectItem();
+    healthNew = new QGraphicsRectItem();
 
-    healthNew->setBrush(healthNewBrush);
     healthOld->setBrush(healthOldBrush);
+    healthNew->setBrush(healthNewBrush);
 
-    healthNew->setRect(healthNewShape);
     healthOld->setRect(healthOldShape);
+    healthNew->setRect(healthNewShape);
 
-    addToGroup(healthNew);
     addToGroup(healthOld);
+    addToGroup(healthNew);
 }
 
 bool HealthBar::setHealth(float health)
 {
     if (health > 0)
     {
-        healthOld->setRect(offsetWidth, offsetHeight, width, height);
-
-        width = health / totalHealth * width;
+        width = width * health / totalHealth;
+        qDebug() << width << totalHealth << health;
         healthNew->setRect(offsetWidth, offsetHeight, width, height);
 
         return true;
@@ -51,4 +50,33 @@ bool HealthBar::setHealth(float health)
     {
         return false;
     }
+}
+
+int HealthBar::getOffsetHeight() const
+{
+    return offsetHeight;
+}
+
+void HealthBar::setOffsetHeight(int value)
+{
+    offsetHeight = value;
+}
+
+int HealthBar::getOffsetWidth() const
+{
+    return offsetWidth;
+}
+
+void HealthBar::setOffsetWidth(int value)
+{
+    offsetWidth = value;
+}
+
+int HealthBar::getTotalHealth() const {
+    return totalHealth;
+}
+
+void HealthBar::setTotalHealth(int value)
+{
+    totalHealth = value;
 }

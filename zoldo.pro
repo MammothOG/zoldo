@@ -42,6 +42,7 @@ SOURCES += \
     elements/visual/menutitle.cpp \
     elements/enemies/testator.cpp \
     elements/blocks/wall.cpp \
+    elements/projectile/testprojectile.cpp \
     elements/buttons/pausebutton.cpp \
     elements/buttons/restartbutton.cpp \
     scenes/gamescene.cpp \
@@ -78,6 +79,7 @@ HEADERS += \
     elements/enemies/testator.h \
     elements/blocks/wall.h \
     elements/visual/menutitle.h \
+    elements/projectile/testprojectile.h \
     scenes/gamescene.h \
     scenes/levelcreatorscene.h \
     scenes/menuscene.h \

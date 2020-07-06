@@ -3,10 +3,13 @@
 
 #include "unit.h"
 
+class UnitAnimate;
 
 class Projectile : public Unit
 {
 private:
+    UnitAnimate * owner;
+
     int damage;
 
 public:
@@ -19,6 +22,12 @@ public:
     int getDamage() const;
 
     void setDamage(int value);
+
+    void onCollision(Element * element) override;
+
+    UnitAnimate *getOwner() const;
+
+    void setOwner(UnitAnimate *value);
 };
 
 #endif // PROJECTILE_H

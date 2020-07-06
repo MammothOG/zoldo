@@ -4,7 +4,7 @@
 
 CustomButton::CustomButton()
 {
-    type = CUSTOM_BUTTON;
+    setType(CUSTOM_BUTTON);
 
     holdPressed = false;
 

@@ -18,14 +18,28 @@ private:
     int offsetWidth;
 
     int totalHealth;
+
+    Unit * unit;
 public:
-    HealthBar(Unit * unit);
+    HealthBar();
 
     bool setHealth(float health);
 
     QGraphicsRectItem * healthNew;
 
     QGraphicsRectItem * healthOld;
+
+    int getOffsetHeight() const;
+
+    void setOffsetHeight(int value);
+
+    int getOffsetWidth() const;
+
+    void setOffsetWidth(int value);
+
+    int getTotalHealth() const;
+
+    void setTotalHealth(int value);
 };
 
 #endif // HEALTHBAR_H
