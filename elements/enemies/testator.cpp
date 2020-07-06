@@ -8,6 +8,8 @@ Testator::Testator()
     //movement parameters
     setMoveRate(10);
 
+    setShootRate(5);
+
     // setup enemy stats
     setMovementSpeed(5);
 

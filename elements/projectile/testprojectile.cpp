@@ -12,7 +12,7 @@ TestProjectile::TestProjectile()
 
     setDamage(10);
 
-    setMovementSpeed(3);
+    setMovementSpeed(2);
 
     setCenterAsReferencial();
 }

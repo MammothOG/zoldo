@@ -41,7 +41,6 @@ bool HealthBar::setHealth(float health)
     if (health > 0)
     {
         width = width * health / totalHealth;
-        qDebug() << width << totalHealth << health;
         healthNew->setRect(offsetWidth, offsetHeight, width, height);
 
         return true;
@@ -60,6 +59,8 @@ int HealthBar::getOffsetHeight() const
 void HealthBar::setOffsetHeight(int value)
 {
     offsetHeight = value;
+    healthNew->setRect(offsetWidth, offsetHeight, width, height);
+    healthOld->setRect(offsetWidth, offsetHeight, width, height);
 }
 
 int HealthBar::getOffsetWidth() const
@@ -70,6 +71,8 @@ int HealthBar::getOffsetWidth() const
 void HealthBar::setOffsetWidth(int value)
 {
     offsetWidth = value;
+    healthNew->setRect(offsetWidth, offsetHeight, width, height);
+    healthOld->setRect(offsetWidth, offsetHeight, width, height);
 }
 
 int HealthBar::getTotalHealth() const {

@@ -56,7 +56,10 @@ void GameScene::loadAdventure()
 
     player = adventure->getPlayer();
     sceneElements->addToGroup(player);
-    sceneElements->addToGroup(player->getHealthBar());
+
+    HealthBar * playerHealthBar = new HealthBar();
+    player->addHealthBar(playerHealthBar);
+    sceneElements->addToGroup(playerHealthBar);
 
     Level * currentLevel = adventure->getCurrentLevel();
     player->setPos(currentLevel->getSpawnX(), currentLevel->getSpawnY());
@@ -80,7 +83,10 @@ void GameScene::drawLevel()
     }
 
     for(Unit * unit : *currentLevel->getUnitList()){
+        HealthBar * unitHealthBar = new HealthBar();
+        unit->addHealthBar(unitHealthBar);
         sceneElements->addToGroup(unit);
+        sceneElements->addToGroup(unitHealthBar);
     }
 }
 
@@ -172,6 +178,7 @@ void GameScene::updateProjectile(UnitAnimate * unit)
         if (isRemovable)
         {
             removeItem(projectile);
+            unit->getProjectileList()->removeOne(projectile);
             delete projectile;
         }
 

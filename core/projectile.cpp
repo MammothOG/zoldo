@@ -27,9 +27,13 @@ void Projectile::setDamage(int value)
 #include <QDebug>
 void Projectile::onCollision(Element *element)
 {
-    if (element->getType() != owner->getType())
-    {
-        qDebug() << owner->getType();
+    if (element->getType() != owner->getType()) {
+        if (element->getType() == PLAYER ||
+                element->getType() == ENEMY)
+        {
+            Unit * unit = dynamic_cast<Unit*>(element);
+            unit->giveDamage(damage);
+        }
     }
 }
 

@@ -10,6 +10,7 @@ PlayerTest::PlayerTest()
     setSprite(":/ressources/images/test/player_test.png");
 
     setMovementSpeed(5);
+    setShootRate(10);
 
     crit=0.3;
     critdmg = 0.4;

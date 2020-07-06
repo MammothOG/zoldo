@@ -2,8 +2,8 @@
 
 #include <math.h>
 
-#include "projectile.h"
 #include "tools/elementfactory.h"
+#include "core/projectile.h"
 #include "elements/projectile/testprojectile.h"
 
 

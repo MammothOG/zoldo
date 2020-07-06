@@ -51,6 +51,8 @@ public:
     float getMovementSpeed() const;
 
     void setMovementSpeed(float value);
+
+    void addHealthBar(HealthBar * healthBar);
 };
 
 #endif // UNIT_H

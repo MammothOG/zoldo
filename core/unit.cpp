@@ -12,7 +12,7 @@ Unit::Unit()
 
     health = 0;
 
-    healthBar = new HealthBar();
+    healthBar = nullptr;
 
     movementSpeed = 0;
 
@@ -20,14 +20,28 @@ Unit::Unit()
     verticalMov = 0.;
 }
 
+void Unit::addHealthBar(HealthBar * healthBar)
+{
+    this->healthBar = healthBar;
+
+    this->healthBar->setTotalHealth(health);
+    this->healthBar->setOffsetHeight(-getHeight()/2);
+}
+
 #include <QDebug>
 void Unit::stoneUnit()
 {
-    this->setX(this->x() - horizontalMov);
-    this->setY(this->y() - verticalMov);
+    int stonePosX =this->x() - horizontalMov;
+    int stonePosY =this->y() - verticalMov;
 
-    healthBar->setX(healthBar->x() - horizontalMov);
-    healthBar->setY(healthBar->y() - verticalMov);
+    this->setX(stonePosX);
+    this->setY(stonePosY);
+
+    if (healthBar != nullptr)
+    {
+        healthBar->setX(stonePosX);
+        healthBar->setY(stonePosY);
+    }
 }
 
 void Unit::moveUnit()
@@ -35,7 +49,9 @@ void Unit::moveUnit()
     int newPosX = this->x() + horizontalMov;
     int newPosY = this->y() + verticalMov;
 
-    healthBar->setPos(newPosX, newPosY);
+    if (healthBar != nullptr)
+        healthBar->setPos(newPosX, newPosY);
+
     this->setPos(newPosX, newPosY);
 }
 
@@ -62,7 +78,9 @@ float Unit::getHorizontalMov() const
 void Unit::giveDamage(float damage)
 {
     this->health -= damage;
-    healthBar->setHealth(this->health);
+
+    if (healthBar != nullptr)
+        healthBar->setHealth(this->health);
 }
 
 HealthBar * Unit::getHealthBar() const
@@ -78,9 +96,6 @@ int Unit::getHealth() const
 void Unit::setHealth(float value)
 {
     health = value;
-    healthBar->setTotalHealth(value);
-    healthBar->setOffsetHeight(-getHeight()/2);
-    qDebug() << healthBar->getTotalHealth();
 }
 
 float Unit::getMovementSpeed() const
