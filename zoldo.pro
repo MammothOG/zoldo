@@ -48,7 +48,8 @@ SOURCES += \
     scenes/gamescene.cpp \
     scenes/levelcreatorscene.cpp \
     scenes/menuscene.cpp \
-    scenes/pausemenu.cpp
+    scenes/pausemenu.cpp \
+    tools/setupdialog.cpp
 
 HEADERS += \
     core/healthbar.h \
@@ -83,7 +84,8 @@ HEADERS += \
     scenes/gamescene.h \
     scenes/levelcreatorscene.h \
     scenes/menuscene.h \
-    scenes/pausemenu.h
+    scenes/pausemenu.h \
+    tools/setupdialog.h
 
 FORMS += \
 

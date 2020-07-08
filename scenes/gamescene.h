@@ -29,9 +29,9 @@ class GameScene : public QGraphicsScene
 {
      Q_OBJECT
 private:
-    int sceneVerticalSize;
+    int sceneHeight;
 
-    int sceneHorizontalSize;
+    int sceneWidth;
 
     PauseButton * pauseButton;
 

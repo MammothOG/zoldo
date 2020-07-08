@@ -6,8 +6,8 @@ Background::Background()
 {
     setType(BACKGROUND);
 
-    setHeight(BLOCK_SIZE * VERTICAL_BLOCK);
-    setWidth(BLOCK_SIZE * HORIZONTAL_BLOCK);
+    setHeight(BLOCKSIZE * VERTICAL_BLOCK);
+    setWidth(BLOCKSIZE * HORIZONTAL_BLOCK);
 
 
     setZValue(-1);

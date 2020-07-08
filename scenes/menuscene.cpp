@@ -9,23 +9,23 @@
 
 MenuScene::MenuScene()
 {
-    setSceneRect(0, 0, WIN_WIDTH, WIN_HEIGHT);
+    setSceneRect(0, 0, WINSIZE.rwidth(), WINSIZE.rheight());
     setBackgroundBrush(Qt::white);
 
     playButton = new PlayButton();
-    playButton->setPos(WIN_WIDTH/2, WIN_HEIGHT/2);
+    playButton->setPos(WINSIZE.rwidth()/2, WINSIZE.rheight()/2);
     addItem(playButton);
 
     quitButton = new QuitButton();
-    quitButton->setPos(WIN_WIDTH - 45, WIN_HEIGHT - 45);
+    quitButton->setPos(WINSIZE.rwidth() - 45, WINSIZE.rheight() - 45);
     addItem(quitButton);
 
     settingButton = new SettingButton();
-    settingButton->setPos(WIN_WIDTH - 75, 20);
+    settingButton->setPos(WINSIZE.rwidth() - 75, 20);
     addItem(settingButton);
 
     title = new MenuTitle();
-    title->setPos(WIN_WIDTH/2, 200);
+    title->setPos(WINSIZE.rwidth()/2, 200);
     addItem(title);
 
 }

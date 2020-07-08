@@ -15,11 +15,8 @@ GameEngine::GameEngine(QMainWindow * parent)
     setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
-    windowWidth = WIN_WIDTH;
-    windowHeight = WIN_HEIGHT;
-
     setWindowTitle(TITLE);
-    resize(windowWidth, windowHeight);
+    parent->resize(WINSIZE);
 
     MenuScene * menuScene = new MenuScene();
     setScene(menuScene);

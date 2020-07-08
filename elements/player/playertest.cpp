@@ -4,9 +4,6 @@ PlayerTest::PlayerTest()
 {
     setElementName(PLAYER_TEST);
 
-    setHeight(75);
-    setWidth(75);
-
     setSprite(":/ressources/images/test/player_test.png");
 
     setMovementSpeed(5);

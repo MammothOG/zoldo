@@ -26,6 +26,10 @@ class LevelCreatorScene : public QGraphicsScene
 {
     Q_OBJECT
 private:
+    int sceneHeight;
+
+    int sceneWidth;
+
     int posX;
 
     int posY;

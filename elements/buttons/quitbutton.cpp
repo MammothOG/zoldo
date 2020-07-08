@@ -6,8 +6,8 @@
 
 QuitButton::QuitButton()
 {
-    setHeight(BLOCK_SIZE);
-    setWidth(BLOCK_SIZE);
+    setHeight(BLOCKSIZE);
+    setWidth(BLOCKSIZE);
 
     setIdleImage(":/ressources/images/buttons/quit-frame-0.png");
     setClickImage(":/ressources/images/buttons/quit-frame-1.png");

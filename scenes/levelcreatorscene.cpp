@@ -22,7 +22,10 @@
 #include <QDebug>
 LevelCreatorScene::LevelCreatorScene(QMainWindow * parent)
 {
-    setSceneRect(0, 0, WIN_WIDTH, WIN_HEIGHT);
+    sceneHeight = VERTICAL_BLOCK * BLOCKSIZE;
+    sceneWidth = HORIZONTAL_BLOCK * BLOCKSIZE;
+
+    setSceneRect(0, 0, sceneWidth, sceneHeight);
     setBackgroundBrush(Qt::black);
 
     itemGroupSelected = new QGraphicsItemGroup();
@@ -97,8 +100,8 @@ void LevelCreatorScene::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
     {
         switch (elementSelected->getType()) {
         case BLOCK:
-            posX -= (posX % BLOCK_SIZE);
-            posY -= (posY % BLOCK_SIZE);
+            posX -= (posX % BLOCKSIZE);
+            posY -= (posY % BLOCKSIZE);
             break;
 
         case BACKGROUND:

@@ -5,12 +5,11 @@
 
 MenuButton::MenuButton()
 {
-    setHeight(BLOCK_SIZE);
-    setWidth(BLOCK_SIZE);
+    setHeight(BLOCKSIZE);
+    setWidth(BLOCKSIZE);
 
     setIdleImage(":/ressources/images/buttons/menu-frame-0.png");
     setClickImage(":/ressources/images/buttons/menu-frame-1.png");
 
     setCenterAsReferencial();
-
 }

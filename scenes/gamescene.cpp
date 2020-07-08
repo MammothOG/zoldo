@@ -18,11 +18,11 @@
 #include <QDebug>
 GameScene::GameScene()
 {
-    setSceneRect(0, 0, WIN_WIDTH, WIN_HEIGHT);
-    setBackgroundBrush(Qt::black);
+    sceneHeight = VERTICAL_BLOCK * BLOCKSIZE;
+    sceneWidth = HORIZONTAL_BLOCK * BLOCKSIZE;
 
-    sceneVerticalSize = BLOCK_SIZE*HORIZONTAL_BLOCK;
-    sceneHorizontalSize = BLOCK_SIZE*VERTICAL_BLOCK;
+    setSceneRect(0, 0, sceneWidth, sceneHeight);
+    setBackgroundBrush(Qt::black);
 
     sceneElements = new QGraphicsItemGroup();
     addItem(sceneElements);
@@ -32,15 +32,15 @@ GameScene::GameScene()
 
     loadAdventure();
 
-    pauseButton = new PauseButton();
-    connect(pauseButton, SIGNAL(onPressClick()), this, SLOT(onPause()));
-    pauseButton->setPos(BLOCK_SIZE*(HORIZONTAL_BLOCK-1), 0);
-    addItem(pauseButton);
-
-    pauseMenu = new PauseMenu();
-    pauseMenu->setPos(WIN_WIDTH/2, WIN_HEIGHT/2);
-    connect(pauseMenu->getResumeButton(), SIGNAL(onReleaseClick()), this, SLOT(onResume()));
-    connect(pauseMenu->getRestartButton(), SIGNAL(onPressClick()), this, SLOT(onRestart()));
+//    pauseButton = new PauseButton();
+//    connect(pauseButton, SIGNAL(onPressClick()), this, SLOT(onPause()));
+//    pauseButton->setPos(BLOCKSIZE*(HORIZONTAL_BLOCK-1), 0);
+//    addItem(pauseButton);
+//
+//    pauseMenu = new PauseMenu();
+//    pauseMenu->setPos(WIN_WIDTH/2, WIN_HEIGHT/2);
+//    connect(pauseMenu->getResumeButton(), SIGNAL(onReleaseClick()), this, SLOT(onResume()));
+//    connect(pauseMenu->getRestartButton(), SIGNAL(onPressClick()), this, SLOT(onRestart()));
 
     clock  = new QTimer(this);
     connect(clock, SIGNAL(timeout()), this, SLOT(updateState()));
@@ -98,7 +98,7 @@ void GameScene::updateState()
 
 void GameScene::updateUnitState()
 {
-    float minPlayerDistance = 2 * WIN_HEIGHT;
+    float minPlayerDistance = 2 * sceneHeight;
 
     for(Unit * unit: *currentLevel->getUnitList()){
         Enemy * enemy = dynamic_cast<Enemy*>(unit);
@@ -135,9 +135,8 @@ void GameScene::updatePlayer()
 
 void GameScene::checkCollision(Unit * unit)
 {
-    for(Element * el: *currentLevel->getElementList()){
-        if (unit->isColliding(el) && el->getCollider())
-        {
+    for(Element * el: *currentLevel->getElementList()) {
+        if (unit->isColliding(el) && el->getCollider()) {
             unit->stoneUnit();
         }
     }
@@ -145,21 +144,20 @@ void GameScene::checkCollision(Unit * unit)
 
 void GameScene::updateProjectile(UnitAnimate * unit)
 {
-    for(Projectile * projectile: *unit->getProjectileList()){
+    for(Projectile * projectile: *unit->getProjectileList()) {
         bool isRemovable = false;
         // adding the projectile to the scene
-        if (projectile->group()== nullptr)
-        {
+        if (projectile->group()== nullptr) {
             sceneProjectiles->addToGroup(projectile);
         }
 
         //checking if projectile is in the scene
-        if(projectile->isInScene(sceneHorizontalSize, sceneVerticalSize))
+        if(projectile->isInScene(sceneHeight, sceneHeight))
         {
             //checking projectile collision
             switch (unit->getType()) {
             case PLAYER:
-                for (Unit * enemy: * currentLevel->getUnitList()){
+                for (Unit * enemy: * currentLevel->getUnitList()) {
                 isRemovable = projectile->isColliding(enemy);
             }
             break;
@@ -175,8 +173,7 @@ void GameScene::updateProjectile(UnitAnimate * unit)
         }
 
         // remove projectile if projectile is not in the scene or hit target
-        if (isRemovable)
-        {
+        if (isRemovable) {
             removeItem(projectile);
             unit->getProjectileList()->removeOne(projectile);
             delete projectile;

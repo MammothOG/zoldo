@@ -1,16 +1,20 @@
 #ifndef CONFIG_H
 #define CONFIG_H
 
+#include <QSize>
+
 #define TITLE "zoldo"
 
-#define WIN_HEIGHT 800
-#define WIN_WIDTH 600
+extern QSize WINSIZE;
 
-#define BLOCK_SIZE 50
+extern int BLOCKSIZE;
 
 #define VERTICAL_BLOCK 16
 #define HORIZONTAL_BLOCK 12
 
 #define FPS 100
+
+#define TOPSPACE 20
+#define BOTSPACE 20
 
 #endif // CONFIG_H

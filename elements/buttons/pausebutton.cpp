@@ -7,8 +7,8 @@ PauseButton::PauseButton()
 {
     setHoldPressed(true);
 
-    setHeight(BLOCK_SIZE);
-    setWidth(BLOCK_SIZE);
+    setHeight(BLOCKSIZE);
+    setWidth(BLOCKSIZE);
 
     setIdleImage(":/ressources/images/buttons/pause-frame-0.png");
     setClickImage(":/ressources/images/buttons/pause-frame-1.png");
