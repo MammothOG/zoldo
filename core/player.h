@@ -12,6 +12,8 @@ class Player : public UnitAnimate
 {
 
 protected:
+    bool won;
+
     //chance of crit
     float crit;
 
@@ -23,6 +25,11 @@ public:
 
     void shoot() override;
 
+    void onCollision(Element * element) override;
+
+    bool hasWon() const;
+
+    void setWon(bool value);
 };
 
 #endif // PLAYER_H

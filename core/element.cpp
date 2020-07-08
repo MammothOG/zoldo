@@ -1,5 +1,7 @@
 #include "element.h"
 
+#include "config.h"
+
 
 void Element::setElementName(int value)
 {
@@ -116,13 +118,14 @@ void Element::setCollider(int value)
     collider = value;
 }
 
-bool Element::isInScene(int width, int height)
+bool Element::isOutside()
 {
     if (this->x() > 0 &&
             this->y() > 0 &&
-            this->x() < width &&
-            this->y() < height)
+            this->x() < BLOCKSIZE * HORIZONTAL_BLOCK &&
+            this->y() < BLOCKSIZE * VERTICAL_BLOCK)
     {
+        onOutside();
         return true;
     }
     else {

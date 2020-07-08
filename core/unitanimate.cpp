@@ -35,6 +35,11 @@ UnitAnimate::UnitAnimate()
     projectileName = TEST_PROJECTILE;
 }
 
+UnitAnimate::~UnitAnimate()
+{
+    delete projectileList;
+}
+
 void UnitAnimate::lockTarget(const Unit * const target)
 {
     int newDirX = target->x() - this->x();

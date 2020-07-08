@@ -2,6 +2,7 @@
 #include "level.h"
 
 #include "elements/player/playertest.h"
+#include "elements/player/link.h"
 
 
 Adventure::Adventure()
@@ -9,7 +10,7 @@ Adventure::Adventure()
     levelList = new QList<Level*>();
     currentLevel = 0;
 
-    player = new PlayerTest();
+    player = new Link();
     player->setCenterAsReferencial();
     player->setFlag(QGraphicsItem::ItemIsFocusable);
     player->setFocus();

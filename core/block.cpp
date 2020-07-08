@@ -6,7 +6,6 @@ Block::Block()
 {
     setType(BLOCK);
 
-    setCollider(true);
 
     setHeight(BLOCKSIZE);
     setWidth(BLOCKSIZE);

@@ -24,6 +24,7 @@ enum ElementName {
     TESTATOR,
     PLAYER_TEST,
     TEST_PROJECTILE,
+    DOOR,
 };
 
 
@@ -82,7 +83,9 @@ public:
 
     void setCollider(int value);
 
-    bool isInScene(int width, int height);
+    bool isOutside();
+
+    virtual void onOutside() {};
 };
 
 #endif // ELEMENT_H

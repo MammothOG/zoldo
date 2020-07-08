@@ -13,6 +13,7 @@
 #include "elements/enemies/testator.h"
 #include "elements/blocks/wall.h"
 #include "tools/elementfactory.h"
+#include "elements/blocks/door.h"
 
 
 Level::Level()
@@ -42,6 +43,11 @@ void Level::generateTestLevel()
 
     spawnX = 300;
     spawnY = 300;
+
+
+    Door * door = new Door();
+    door->setPos(350,350);
+    elementList->append(door);
 
     // set block wall around the level
     for (int w = 0; w < HORIZONTAL_BLOCK; w++){

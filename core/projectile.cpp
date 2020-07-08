@@ -33,6 +33,8 @@ void Projectile::onCollision(Element *element)
         {
             Unit * unit = dynamic_cast<Unit*>(element);
             unit->giveDamage(damage);
+
+            setDead(true);
         }
     }
 }
@@ -45,4 +47,9 @@ UnitAnimate *Projectile::getOwner() const
 void Projectile::setOwner(UnitAnimate *value)
 {
     owner = value;
+}
+
+void Projectile::onOutside()
+{
+    setDead(true);
 }

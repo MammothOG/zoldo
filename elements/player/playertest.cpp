@@ -1,8 +1,13 @@
 #include "playertest.h"
 
+#include "config.h"
+
 PlayerTest::PlayerTest()
 {
     setElementName(PLAYER_TEST);
+
+    setHeight(BLOCKSIZE * 1.5);
+    setWidth(BLOCKSIZE * 1.5);
 
     setSprite(":/ressources/images/test/player_test.png");
 

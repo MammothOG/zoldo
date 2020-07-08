@@ -17,6 +17,8 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     core/healthbar.cpp \
+    elements/blocks/door.cpp \
+    elements/player/link.cpp \
     elements/player/playertest.cpp \
     tools/elementfactory.cpp \
     main.cpp \
@@ -53,6 +55,8 @@ SOURCES += \
 
 HEADERS += \
     core/healthbar.h \
+    elements/blocks/door.h \
+    elements/player/link.h \
     elements/player/playertest.h \
     tools/elementfactory.h \
     config.h \

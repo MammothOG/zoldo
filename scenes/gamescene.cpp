@@ -93,29 +93,9 @@ void GameScene::drawLevel()
 void GameScene::updateState()
 {
     updatePlayer();
-    updateUnitState();
-}
+    updateUnit();
 
-void GameScene::updateUnitState()
-{
-    float minPlayerDistance = 2 * sceneHeight;
-
-    for(Unit * unit: *currentLevel->getUnitList()){
-        Enemy * enemy = dynamic_cast<Enemy*>(unit);
-
-        enemy->moveUnit();
-
-        checkCollision(enemy);
-
-        enemy->lockTarget(player);
-
-        if (minPlayerDistance > enemy->getTargetDistance())
-        {
-            enemyTargeted = enemy;
-        }
-
-        updateProjectile(enemy);
-    }
+    updateGame();
 }
 
 void GameScene::updatePlayer()
@@ -130,55 +110,116 @@ void GameScene::updatePlayer()
     checkCollision(player);
 
     updateProjectile(player);
-
 }
 
-void GameScene::checkCollision(Unit * unit)
+void GameScene::updateUnit()
 {
-    for(Element * el: *currentLevel->getElementList()) {
-        if (unit->isColliding(el) && el->getCollider()) {
-            unit->stoneUnit();
+    float minPlayerDistance = 2 * sceneHeight;
+
+    for(Unit * unit: *currentLevel->getUnitList()){
+        Enemy * enemy = dynamic_cast<Enemy*>(unit);
+        if (!enemy->isDead()){
+
+            enemy->moveUnit();
+
+            checkCollision(enemy);
+
+            enemy->lockTarget(player);
+
+            if (minPlayerDistance > enemy->getTargetDistance())
+            {
+                enemyTargeted = enemy;
+            }
         }
+        else {
+            removeEnemy(enemy);
+        }
+
     }
 }
 
 void GameScene::updateProjectile(UnitAnimate * unit)
 {
-    for(Projectile * projectile: *unit->getProjectileList()) {
-        bool isRemovable = false;
-        // adding the projectile to the scene
-        if (projectile->group()== nullptr) {
-            sceneProjectiles->addToGroup(projectile);
-        }
+    if (!unit->isDead()) {
+        for(Projectile * projectile: *unit->getProjectileList()) {
+            // adding the projectile to the scene
+            if (projectile->group()== nullptr) {
+                sceneProjectiles->addToGroup(projectile);
+            }
 
-        //checking if projectile is in the scene
-        if(projectile->isInScene(sceneHeight, sceneHeight))
+            // remove projectile if projectile is not in the scene or hit target
+            if (projectile->isDead()) {
+
+                removeItem(projectile);
+                unit->getProjectileList()->removeOne(projectile);
+
+                delete projectile;
+            }
+            else {
+                projectile->moveUnit();
+            }
+        }
+    }
+}
+
+//void GameScene::(Projectile * projectile)
+//{
+//    // adding the projectile to the scene
+//    if (projectile->group()== nullptr) {
+//        sceneProjectiles->addToGroup(projectile);
+//    }
+//
+//    //checking if projectile is in the scene
+//    if(!projectile->isOutside())
+//    {
+//        //checking projectile collision
+//        switch (projectile->getType()) {
+//        case PLAYER:
+//            for (Unit * enemy: * currentLevel->getUnitList()) {
+//                projectile->isColliding(enemy);
+//            }
+//            break;
+//        case ENEMY:
+//            isRemovable = projectile->isColliding(player);
+//            break;
+//        }
+//
+//        projectile->moveUnit();
+//    }
+//    else {
+//        isRemovable = true;
+//    }
+//}
+
+void GameScene::removeEnemy(UnitAnimate * unit)
+{
+    currentLevel->getUnitList()->removeOne(unit);
+    removeItem(unit);
+    removeItem(unit->getHealthBar());
+
+    delete unit;
+}
+
+void GameScene::removeProjectile(Projectile * projectile)
+{
+}
+
+void GameScene::checkCollision(Unit * unit)
+{
+    for(Element * el: *currentLevel->getElementList()) {
+        if (unit->isColliding(el))
         {
-            //checking projectile collision
-            switch (unit->getType()) {
-            case PLAYER:
-                for (Unit * enemy: * currentLevel->getUnitList()) {
-                isRemovable = projectile->isColliding(enemy);
+            if (el->getCollider()) {
+                unit->stoneUnit();
             }
-            break;
-            case ENEMY:
-                isRemovable = projectile->isColliding(player);
-                break;
-            }
-
-            projectile->moveUnit();
         }
-        else {
-            isRemovable = true;
-        }
+    }
+}
 
-        // remove projectile if projectile is not in the scene or hit target
-        if (isRemovable) {
-            removeItem(projectile);
-            unit->getProjectileList()->removeOne(projectile);
-            delete projectile;
-        }
-
+void GameScene::updateGame()
+{
+    if (currentLevel->getUnitList()->length() == 0) {
+        player->setWon(true);
     }
 }
 

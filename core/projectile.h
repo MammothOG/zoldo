@@ -28,6 +28,8 @@ public:
     UnitAnimate *getOwner() const;
 
     void setOwner(UnitAnimate *value);
+
+    void onOutside() override;
 };
 
 #endif // PROJECTILE_H

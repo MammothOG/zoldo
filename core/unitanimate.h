@@ -32,6 +32,8 @@ public slots:
 public:
     UnitAnimate();
 
+    ~UnitAnimate();
+
     void lockTarget(const Unit * const target);
 
     float getTargetDistance() const;

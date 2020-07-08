@@ -23,8 +23,12 @@ private:
     // speed movement of the unit
     float movementSpeed;
 
+    bool dead;
+
 public:
     Unit();
+
+    ~Unit();
 
     void stoneUnit();
 
@@ -53,6 +57,11 @@ public:
     void setMovementSpeed(float value);
 
     void addHealthBar(HealthBar * healthBar);
+
+    bool isDead() const;
+
+    void setDead(bool value);
+
 };
 
 #endif // UNIT_H

@@ -2,13 +2,16 @@
 
 #include "projectile.h"
 #include "config.h"
+#include "elements/blocks/door.h"
+
 
 Player::Player()
 {
+    won = false;
+
     setType(PLAYER);
 
-    setHeight(BLOCKSIZE * 1.5);
-    setWidth(BLOCKSIZE * 1.5);
+    setZValue(1);
 }
 
 void Player::shoot()
@@ -17,4 +20,27 @@ void Player::shoot()
     {
         fire();
     }
+}
+
+#include <QDebug>
+void Player::onCollision(Element *element)
+{
+    switch (element->getElementName()) {
+    case DOOR:
+        if (hasWon()){
+            Door * door = dynamic_cast<Door*>(element);
+            door->openDoor();
+        }
+        break;
+    }
+}
+
+bool Player::hasWon() const
+{
+    return won;
+}
+
+void Player::setWon(bool value)
+{
+    won = value;
 }
