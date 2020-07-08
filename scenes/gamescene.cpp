@@ -135,6 +135,8 @@ void GameScene::updateUnit()
             removeEnemy(enemy);
         }
 
+        updateProjectile(enemy);
+
     }
 }
 
@@ -145,6 +147,12 @@ void GameScene::updateProjectile(UnitAnimate * unit)
             // adding the projectile to the scene
             if (projectile->group()== nullptr) {
                 sceneProjectiles->addToGroup(projectile);
+            }
+
+            projectile->isColliding(player);
+
+            for (Unit * enemy: * currentLevel->getUnitList()) {
+                projectile->isColliding(enemy);
             }
 
             // remove projectile if projectile is not in the scene or hit target
