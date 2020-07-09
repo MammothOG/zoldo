@@ -23,6 +23,8 @@ private:
 public:
     HealthBar();
 
+    ~HealthBar();
+
     bool setHealth(float health);
 
     QGraphicsRectItem * healthNew;

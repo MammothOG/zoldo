@@ -24,7 +24,10 @@ Unit::Unit()
 
 Unit::~Unit()
 {
-
+    if (healthBar != nullptr)
+    {
+        delete healthBar;
+    }
 }
 
 void Unit::addHealthBar(HealthBar * healthBar)

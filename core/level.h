@@ -35,6 +35,8 @@ private:
 public:
     Level();
 
+    ~Level();
+
     void generateTestLevel();
 
     void clearLevel();

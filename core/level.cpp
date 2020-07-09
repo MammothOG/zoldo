@@ -35,6 +35,13 @@ Level::Level()
     spawnY = 0;
 }
 
+Level::~Level()
+{
+    delete unitList;
+    delete elementList;
+    delete background;
+}
+
 void Level::generateTestLevel()
 {
     name = "Test level";

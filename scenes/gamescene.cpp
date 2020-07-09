@@ -132,7 +132,7 @@ void GameScene::updateUnit()
             }
         }
         else {
-            removeEnemy(enemy);
+            removeElement(enemy);
         }
 
         updateProjectile(enemy);
@@ -149,19 +149,18 @@ void GameScene::updateProjectile(UnitAnimate * unit)
                 sceneProjectiles->addToGroup(projectile);
             }
 
-            projectile->isColliding(player);
-
-            for (Unit * enemy: * currentLevel->getUnitList()) {
-                projectile->isColliding(enemy);
+            if (projectile->isColliding(player)) {}
+            else if (!projectile->isInside()) {}
+            else {
+                for (Unit * enemy: * currentLevel->getUnitList()) {
+                    projectile->isColliding(enemy);
+                }
             }
+
 
             // remove projectile if projectile is not in the scene or hit target
             if (projectile->isDead()) {
-
-                removeItem(projectile);
-                unit->getProjectileList()->removeOne(projectile);
-
-                delete projectile;
+                removeElement(projectile);
             }
             else {
                 projectile->moveUnit();
@@ -170,46 +169,26 @@ void GameScene::updateProjectile(UnitAnimate * unit)
     }
 }
 
-//void GameScene::(Projectile * projectile)
-//{
-//    // adding the projectile to the scene
-//    if (projectile->group()== nullptr) {
-//        sceneProjectiles->addToGroup(projectile);
-//    }
-//
-//    //checking if projectile is in the scene
-//    if(!projectile->isOutside())
-//    {
-//        //checking projectile collision
-//        switch (projectile->getType()) {
-//        case PLAYER:
-//            for (Unit * enemy: * currentLevel->getUnitList()) {
-//                projectile->isColliding(enemy);
-//            }
-//            break;
-//        case ENEMY:
-//            isRemovable = projectile->isColliding(player);
-//            break;
-//        }
-//
-//        projectile->moveUnit();
-//    }
-//    else {
-//        isRemovable = true;
-//    }
-//}
-
-void GameScene::removeEnemy(UnitAnimate * unit)
+void GameScene::removeElement(Element *element)
 {
-    currentLevel->getUnitList()->removeOne(unit);
-    removeItem(unit);
-    removeItem(unit->getHealthBar());
+    if (element->getType() == ENEMY) {
+        Unit * unit = dynamic_cast<Unit*>(element);
 
-    delete unit;
-}
+        switch (element->getType()) {
+        case ENEMY:
+            currentLevel->getUnitList()->removeOne(unit);
+            break;
+        }
 
-void GameScene::removeProjectile(Projectile * projectile)
-{
+        removeItem(unit->getHealthBar());
+    } else if(element->getType() == PROJECTILE) {
+
+    }
+
+
+    removeItem(element);
+
+    delete element;
 }
 
 void GameScene::checkCollision(Unit * unit)

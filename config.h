@@ -2,6 +2,7 @@
 #define CONFIG_H
 
 #include <QSize>
+#include <QDebug>
 
 #define TITLE "zoldo"
 

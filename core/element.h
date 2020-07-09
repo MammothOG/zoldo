@@ -41,6 +41,8 @@ private:
 
     int collider;
 
+    bool centralReferential;
+
 protected:
     void setElementName(int value);
 
@@ -83,7 +85,7 @@ public:
 
     void setCollider(int value);
 
-    bool isOutside();
+    bool isInside();
 
     virtual void onOutside() {};
 };

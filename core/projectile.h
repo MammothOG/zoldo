@@ -15,6 +15,8 @@ private:
 public:
     Projectile();
 
+    ~Projectile();
+
     Projectile(Projectile * projectile);
 
     void projectileTest();

@@ -12,8 +12,8 @@ QSize WINSIZE;
 int BLOCKSIZE;
 SetupDialog::SetupDialog()
 {
-    addResolution(1920, 1080);
     addResolution(1600, 900);
+    addResolution(1920, 1080);
 
     setLayout(new QHBoxLayout());
 

@@ -36,6 +36,12 @@ HealthBar::HealthBar()
     addToGroup(healthNew);
 }
 
+HealthBar::~HealthBar()
+{
+    delete healthNew;
+    delete healthOld;
+}
+
 bool HealthBar::setHealth(float health)
 {
     if (health > 0)

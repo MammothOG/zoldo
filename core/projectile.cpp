@@ -14,6 +14,14 @@ Projectile::Projectile()
     damage = 0;
 }
 
+Projectile::~Projectile()
+{
+    if (owner != nullptr)
+    {
+        owner->getProjectileList()->removeOne(this);
+    }
+}
+
 int Projectile::getDamage() const
 {
     return damage;
@@ -28,14 +36,10 @@ void Projectile::setDamage(int value)
 void Projectile::onCollision(Element *element)
 {
     if (element->getType() != owner->getType()) {
-        if (element->getType() == PLAYER ||
-                element->getType() == ENEMY)
-        {
-            Unit * unit = dynamic_cast<Unit*>(element);
-            unit->giveDamage(damage);
+        Unit * unit = dynamic_cast<Unit*>(element);
+        unit->giveDamage(damage);
 
-            setDead(true);
-        }
+        setDead(true);
     }
 }
 

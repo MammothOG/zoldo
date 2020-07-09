@@ -25,6 +25,8 @@ class UnitAnimate;
 
 class Projectile;
 
+class Element;
+
 class GameScene : public QGraphicsScene
 {
      Q_OBJECT
@@ -80,7 +82,7 @@ public:
 
     void removeEnemy(UnitAnimate * unit);
 
-    void removeProjectile(Projectile * projectile);
+    void removeElement(Element * Element);
 
     void updateGame();
 

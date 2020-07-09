@@ -3,16 +3,6 @@
 #include "config.h"
 
 
-void Element::setElementName(int value)
-{
-    elementName = value;
-}
-
-void Element::setType(int value)
-{
-    type = value;
-}
-
 Element::Element()
 {
     setType(ELEMENT);
@@ -21,6 +11,8 @@ Element::Element()
 
     height = 0;
     width = 0;
+
+    centralReferential = false;
 }
 
 Element::Element(int height, int width)
@@ -96,6 +88,7 @@ void Element::setHeight(int value)
 void Element::setCenterAsReferencial()
 {
     setOffset(-width/2, -height/2);
+    centralReferential = true;
 }
 
 int Element::getType() const
@@ -118,18 +111,34 @@ void Element::setCollider(int value)
     collider = value;
 }
 
-bool Element::isOutside()
+bool Element::isInside()
 {
-    if (this->x() > 0 &&
-            this->y() > 0 &&
-            this->x() < BLOCKSIZE * HORIZONTAL_BLOCK &&
-            this->y() < BLOCKSIZE * VERTICAL_BLOCK)
+    int leftBorder = -offset().rx();
+    int topBorder = -offset().ry();
+    int rightBorder = BLOCKSIZE * HORIZONTAL_BLOCK - width - offset().rx();
+    int bottomBorder = BLOCKSIZE * VERTICAL_BLOCK - height - offset().ry();
+    qDebug() << offset().rx() << offset().ry();
+
+    if (this->x() > leftBorder &&
+            this->y() > topBorder &&
+            this->x() < rightBorder &&
+            this->y() < bottomBorder)
     {
-        onOutside();
         return true;
     }
     else {
+        onOutside();
         return false;
     }
 
+}
+
+void Element::setElementName(int value)
+{
+    elementName = value;
+}
+
+void Element::setType(int value)
+{
+    type = value;
 }
