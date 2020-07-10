@@ -5,7 +5,7 @@ Wall::Wall()
 {
     setCollider(true);
 
-    setElementName(WALL);
+    setType(WALL);
 
     setSprite(":/ressources/images/test/wall_test.png");
 

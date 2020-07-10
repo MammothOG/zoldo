@@ -4,7 +4,7 @@
 
 Link::Link()
 {
-    setElementName(PLAYER_TEST);
+    setType(PLAYER_TEST);
 
     setHeight(BLOCKSIZE * 1);
     setWidth(BLOCKSIZE * 1.2);
@@ -12,7 +12,7 @@ Link::Link()
     setSprite(":/ressources/images/zelda1.png");
 
     setMovementSpeed(5);
-    setShootRate(10);
+    setShootRate(20);
 
     setHealth(100);
 

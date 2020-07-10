@@ -91,14 +91,14 @@ void Element::setCenterAsReferencial()
     centralReferential = true;
 }
 
-int Element::getType() const
+QList<int> Element::types() const
 {
     return type;
 }
 
-int Element::getElementName() const
+bool Element::isType(int value) const
 {
-    return elementName;
+    return type.contains(value);
 }
 
 int Element::getCollider() const
@@ -117,7 +117,6 @@ bool Element::isInside()
     int topBorder = -offset().ry();
     int rightBorder = BLOCKSIZE * HORIZONTAL_BLOCK - width - offset().rx();
     int bottomBorder = BLOCKSIZE * VERTICAL_BLOCK - height - offset().ry();
-    qDebug() << offset().rx() << offset().ry();
 
     if (this->x() > leftBorder &&
             this->y() > topBorder &&
@@ -133,12 +132,7 @@ bool Element::isInside()
 
 }
 
-void Element::setElementName(int value)
-{
-    elementName = value;
-}
-
 void Element::setType(int value)
 {
-    type = value;
+    type.append(value);
 }

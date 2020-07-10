@@ -42,20 +42,22 @@ UnitAnimate::~UnitAnimate()
 
 void UnitAnimate::lockTarget(const Unit * const target)
 {
-    int newDirX = target->x() - this->x();
-    int newDirY = target->y() - this->y();
+    if (!target->isDead()) {
+        int newDirX = target->x() - this->x();
+        int newDirY = target->y() - this->y();
 
-    targetDistance = sqrt(newDirX * newDirX + newDirY * newDirY);
+        targetDistance = sqrt(newDirX * newDirX + newDirY * newDirY);
 
-    directionVector[0] = newDirX / targetDistance;
-    directionVector[1] = newDirY / targetDistance;
+        directionVector[0] = newDirX / targetDistance;
+        directionVector[1] = newDirY / targetDistance;
 
-    rotAngle = acos( -newDirY /  targetDistance) * 180/3.14;
+        rotAngle = acos( -newDirY /  targetDistance) * 180/3.14;
 
-    if(newDirX < 0)
-        rotAngle *= -1;
+        if(newDirX < 0)
+            rotAngle *= -1;
 
-    setRotation(rotAngle);
+        setRotation(rotAngle);
+    }
 }
 
 void UnitAnimate::shoot()

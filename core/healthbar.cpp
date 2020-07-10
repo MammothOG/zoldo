@@ -6,7 +6,6 @@
 #include "unit.h"
 
 
-#include <QDebug>
 HealthBar::HealthBar()
 {
     totalHealth = 0;

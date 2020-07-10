@@ -3,7 +3,7 @@
 
 TestProjectile::TestProjectile()
 {
-    setElementName(TEST_PROJECTILE);
+    setType(TEST_PROJECTILE);
 
     setHeight(25);
     setWidth(25);

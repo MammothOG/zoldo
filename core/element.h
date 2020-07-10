@@ -15,9 +15,6 @@ enum ElementType {
     UNIT_ANIMATE,
     PROJECTILE,
     CUSTOM_BUTTON,
-};
-
-enum ElementName {
     WALL,
     WATER,
     TEST_BACKGROUND,
@@ -27,11 +24,10 @@ enum ElementName {
     DOOR,
 };
 
-
 class Element :  public QObject, public QGraphicsPixmapItem
 {
 private:
-    int type;
+    QList<int> type;
 
     int elementName;
 
@@ -44,8 +40,6 @@ private:
     bool centralReferential;
 
 protected:
-    void setElementName(int value);
-
     void setType(int value);
 
 public:
@@ -77,9 +71,9 @@ public:
 
     void setCenterAsReferencial();
 
-    int getType() const;
+    QList<int> types() const;
 
-    int getElementName() const;
+    bool isType(int value) const;
 
     int getCollider() const;
 

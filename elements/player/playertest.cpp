@@ -4,7 +4,7 @@
 
 PlayerTest::PlayerTest()
 {
-    setElementName(PLAYER_TEST);
+    setType(PLAYER_TEST);
 
     setHeight(BLOCKSIZE * 1.5);
     setWidth(BLOCKSIZE * 1.5);
@@ -12,7 +12,7 @@ PlayerTest::PlayerTest()
     setSprite(":/ressources/images/test/player_test.png");
 
     setMovementSpeed(5);
-    setShootRate(10);
+    setShootRate(20);
 
     crit=0.3;
     critdmg = 0.4;

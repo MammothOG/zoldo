@@ -15,7 +15,6 @@
 #include "scenes/pausemenu.h"
 
 
-#include <QDebug>
 GameScene::GameScene()
 {
     sceneHeight = VERTICAL_BLOCK * BLOCKSIZE;
@@ -32,15 +31,15 @@ GameScene::GameScene()
 
     loadAdventure();
 
-//    pauseButton = new PauseButton();
-//    connect(pauseButton, SIGNAL(onPressClick()), this, SLOT(onPause()));
-//    pauseButton->setPos(BLOCKSIZE*(HORIZONTAL_BLOCK-1), 0);
-//    addItem(pauseButton);
-//
-//    pauseMenu = new PauseMenu();
-//    pauseMenu->setPos(WIN_WIDTH/2, WIN_HEIGHT/2);
-//    connect(pauseMenu->getResumeButton(), SIGNAL(onReleaseClick()), this, SLOT(onResume()));
-//    connect(pauseMenu->getRestartButton(), SIGNAL(onPressClick()), this, SLOT(onRestart()));
+    //    pauseButton = new PauseButton();
+    //    connect(pauseButton, SIGNAL(onPressClick()), this, SLOT(onPause()));
+    //    pauseButton->setPos(BLOCKSIZE*(HORIZONTAL_BLOCK-1), 0);
+    //    addItem(pauseButton);
+    //
+    //    pauseMenu = new PauseMenu();
+    //    pauseMenu->setPos(WIN_WIDTH/2, WIN_HEIGHT/2);
+    //    connect(pauseMenu->getResumeButton(), SIGNAL(onReleaseClick()), this, SLOT(onResume()));
+    //    connect(pauseMenu->getRestartButton(), SIGNAL(onPressClick()), this, SLOT(onRestart()));
 
     clock  = new QTimer(this);
     connect(clock, SIGNAL(timeout()), this, SLOT(updateState()));
@@ -92,104 +91,112 @@ void GameScene::drawLevel()
 
 void GameScene::updateState()
 {
-    updatePlayer();
-    updateUnit();
+    updateUnit(player);
+
+    for(Unit * unit: *currentLevel->getUnitList()){
+        updateUnit(unit);
+    }
+
+    removeDeadUnit();
 
     updateGame();
 }
 
-void GameScene::updatePlayer()
+void GameScene::updateUnit(Unit * unit)
 {
-    // TODO sometime crash (reopen fast)
-    if (enemyTargeted != nullptr)
-        player->lockTarget(enemyTargeted);
+    unit->moveUnit();
 
+    checkCollision(unit);
 
-    player->moveUnit();
-
-    checkCollision(player);
-
-    updateProjectile(player);
+    if (unit->isType(UNIT_ANIMATE)) {
+        updateUnitAnimate(dynamic_cast<UnitAnimate*>(unit));
+    }
 }
 
-void GameScene::updateUnit()
+void GameScene::updateUnitAnimate(UnitAnimate * unitAnimate)
 {
-    float minPlayerDistance = 2 * sceneHeight;
+    if (unitAnimate->isType(PLAYER)) {
+        unitAnimate->lockTarget(enemyTargeted);
 
-    for(Unit * unit: *currentLevel->getUnitList()){
-        Enemy * enemy = dynamic_cast<Enemy*>(unit);
-        if (!enemy->isDead()){
+    } else if (unitAnimate->isType(ENEMY)) {
+        // move to class
+        float minPlayerDistance = 2 * sceneHeight;
+        // end
 
-            enemy->moveUnit();
+        unitAnimate->lockTarget(player);
 
-            checkCollision(enemy);
-
-            enemy->lockTarget(player);
-
-            if (minPlayerDistance > enemy->getTargetDistance())
-            {
-                enemyTargeted = enemy;
-            }
+        if (minPlayerDistance > unitAnimate->getTargetDistance()) {
+            enemyTargeted = unitAnimate;
         }
-        else {
-            removeElement(enemy);
-        }
-
-        updateProjectile(enemy);
 
     }
+
+    updateProjectile(unitAnimate);
 }
 
 void GameScene::updateProjectile(UnitAnimate * unit)
 {
-    if (!unit->isDead()) {
-        for(Projectile * projectile: *unit->getProjectileList()) {
-            // adding the projectile to the scene
-            if (projectile->group()== nullptr) {
-                sceneProjectiles->addToGroup(projectile);
-            }
-
-            if (projectile->isColliding(player)) {}
-            else if (!projectile->isInside()) {}
-            else {
-                for (Unit * enemy: * currentLevel->getUnitList()) {
-                    projectile->isColliding(enemy);
-                }
-            }
-
-
-            // remove projectile if projectile is not in the scene or hit target
-            if (projectile->isDead()) {
-                removeElement(projectile);
-            }
-            else {
-                projectile->moveUnit();
-            }
+    for(Projectile * projectile: *unit->getProjectileList()) {
+        // adding the projectile to the scene
+        if (projectile->group()== nullptr) {
+            sceneProjectiles->addToGroup(projectile);
         }
+
+        // check if projectile hit player
+        projectile->isColliding(player);
+
+        // check if projectil is inside the scene
+        projectile->isInside();
+
+        for (Unit * enemy: * currentLevel->getUnitList()) {
+            projectile->isColliding(enemy);
+        }
+
+        // move the projectile
+        if (!projectile->isDead())
+            projectile->moveUnit();
     }
 }
 
-void GameScene::removeElement(Element *element)
+void GameScene::removeDeadProjectile(UnitAnimate * unit)
 {
-    if (element->getType() == ENEMY) {
-        Unit * unit = dynamic_cast<Unit*>(element);
+    for(Projectile * projectile: *unit->getProjectileList()) {
+        if (projectile->isDead()) {
+            removeItem(projectile);
 
-        switch (element->getType()) {
-        case ENEMY:
-            currentLevel->getUnitList()->removeOne(unit);
-            break;
+            delete projectile;
         }
+    }
+}
 
-        removeItem(unit->getHealthBar());
-    } else if(element->getType() == PROJECTILE) {
+void GameScene::removeDeadUnit()
+{
+    for(Unit * unit: *currentLevel->getUnitList()) {
+        if (unit->isDead()) {
+            // if player die dont do this
+            currentLevel->getUnitList()->removeOne(unit);
 
+            removeItem(unit);
+            delete unit;
+        }
+        else {
+            if (unit->isType(UNIT_ANIMATE)) {
+                removeDeadProjectile(dynamic_cast<UnitAnimate*>(unit));
+            }
+        }
     }
 
+    if (player->isDead()) {
+        removeItem(player);
 
-    removeItem(element);
-
-    delete element;
+        delete player;
+    }
+    else {
+        removeDeadProjectile(dynamic_cast<UnitAnimate*>(player));
+    }
 }
+
+
 
 void GameScene::checkCollision(Unit * unit)
 {
@@ -207,6 +214,9 @@ void GameScene::updateGame()
 {
     if (currentLevel->getUnitList()->length() == 0) {
         player->setWon(true);
+    }
+    else if (player->isDead()) {
+        clock->stop();
     }
 }
 

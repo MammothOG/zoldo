@@ -84,12 +84,14 @@ float Unit::getHorizontalMov() const
     return horizontalMov;
 }
 
+#include <QDebug>
 void Unit::giveDamage(float damage)
 {
     this->health -= damage;
 
-    if (this->health < 0)
+    if (this->health <= 0) {
         setDead(true);
+    }
 
     if (healthBar != nullptr)
         healthBar->setHealth(this->health);

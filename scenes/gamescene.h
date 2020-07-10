@@ -74,17 +74,17 @@ public:
 
     void drawLevel();
 
-    void updateUnit();
+    void updateUnit(Unit * unit);
 
-    void updatePlayer();
+    void updateUnitAnimate(UnitAnimate * unitAnimate);
 
     void updateProjectile(UnitAnimate * unit);
 
-    void removeEnemy(UnitAnimate * unit);
-
-    void removeElement(Element * Element);
-
     void updateGame();
+
+    void removeDeadUnit();
+
+    void removeDeadProjectile(UnitAnimate * unit);
 
     void checkCollision(Unit * unit);
 

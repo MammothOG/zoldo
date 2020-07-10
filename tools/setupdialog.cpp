@@ -46,7 +46,6 @@ void SetupDialog::addResolution(int width, int height)
     resolutions.insert(label, size);
 }
 
-#include <QDebug>
 void SetupDialog::setupConst()
 {
         WINSIZE = resolutions[resBox->currentText()];

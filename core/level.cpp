@@ -135,13 +135,12 @@ bool Level::save()
 void Level::saveElement(QFile * levelFile, Element * element)
 {
     QString line = QString("%1 %2 %3\n")
-            .arg(element->getElementName())
+            .arg(element->types().last())
             .arg(element->x()/WINSIZE.rwidth())
             .arg(element->y()/WINSIZE.rheight());
     levelFile->write(line.toLocal8Bit());
 }
 
-#include <QDebug>
 bool Level::load(QString levelName)
 {
     QFile levelFile("levels/" + levelName + ".lvl");
@@ -189,23 +188,18 @@ bool Level::load(QString levelName)
 
 void Level::appendLevelElement(Element * element)
 {
-    switch (element->getType()) {
-    case BLOCK:
+    if (element->isType(BLOCK)) {
         elementList->append(element);
-        break;
-
-    case BACKGROUND:
+    }
+    if (element->isType(BACKGROUND)) {
         background = dynamic_cast<Background*>(element);
-        break;
-
-    case ENEMY:
+    }
+    if (element->isType(ENEMY)) {
         unitList->append(dynamic_cast<Unit*>(element));
-        break;
-
-    case PLAYER:
+    }
+    if (element->isType(PLAYER)) {
         spawnX = element->x();
         spawnY = element->y();
-        break;
     }
 }
 

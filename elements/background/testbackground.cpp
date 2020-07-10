@@ -5,7 +5,7 @@
 
 TestBackground::TestBackground()
 {
-    setElementName(TEST_BACKGROUND);
+    setType(TEST_BACKGROUND);
 
     setSprite(":/ressources/images/test/level_bg_test.png");
 }

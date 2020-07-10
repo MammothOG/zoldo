@@ -22,16 +22,11 @@ void Player::shoot()
     }
 }
 
-#include <QDebug>
 void Player::onCollision(Element *element)
 {
-    switch (element->getElementName()) {
-    case DOOR:
-        if (hasWon()){
-            Door * door = dynamic_cast<Door*>(element);
-            door->openDoor();
-        }
-        break;
+    if (element->isType(DOOR) && hasWon()) {
+        Door * door = dynamic_cast<Door*>(element);
+        door->openDoor();
     }
 }
 

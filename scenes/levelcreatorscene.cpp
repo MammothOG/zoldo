@@ -19,7 +19,6 @@
 #include "elements/enemies/testator.h"
 
 
-#include <QDebug>
 LevelCreatorScene::LevelCreatorScene(QMainWindow * parent)
 {
     sceneHeight = VERTICAL_BLOCK * BLOCKSIZE;
@@ -98,13 +97,13 @@ void LevelCreatorScene::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 
     if(posX > 0 && posY > 0)
     {
-        switch (elementSelected->getType()) {
-        case BLOCK:
+        if (elementSelected->isType(BLOCK))
+        {
             posX -= (posX % BLOCKSIZE);
             posY -= (posY % BLOCKSIZE);
-            break;
-
-        case BACKGROUND:
+        }
+        else if (elementSelected->isType(BACKGROUND))
+        {
             posX = 0;
             posY = 0;
         }
@@ -121,7 +120,7 @@ void LevelCreatorScene::keyPressEvent(QKeyEvent *keyEvent)
         break;
 
     case Qt::Key_Space:
-        Element * instance = ElementFactory::create(elementSelected->getElementName());
+        Element * instance = ElementFactory::create(elementSelected->types().last());
         itemGroupSelected->addToGroup(instance);
         instance->setPos(posX, posY);
         level->appendLevelElement(instance);

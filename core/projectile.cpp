@@ -32,17 +32,6 @@ void Projectile::setDamage(int value)
     damage = value;
 }
 
-#include <QDebug>
-void Projectile::onCollision(Element *element)
-{
-    if (element->getType() != owner->getType()) {
-        Unit * unit = dynamic_cast<Unit*>(element);
-        unit->giveDamage(damage);
-
-        setDead(true);
-    }
-}
-
 UnitAnimate *Projectile::getOwner() const
 {
     return owner;
@@ -51,6 +40,16 @@ UnitAnimate *Projectile::getOwner() const
 void Projectile::setOwner(UnitAnimate *value)
 {
     owner = value;
+}
+
+void Projectile::onCollision(Element *element)
+{
+    if (element->types().last() != owner->types().last()) {
+        Unit * unit = dynamic_cast<Unit*>(element);
+        unit->giveDamage(damage);
+
+        setDead(true);
+    }
 }
 
 void Projectile::onOutside()

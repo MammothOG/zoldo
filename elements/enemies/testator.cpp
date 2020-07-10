@@ -3,12 +3,12 @@
 
 Testator::Testator()
 {
-    setElementName(TESTATOR);
+    setType(TESTATOR);
 
     //movement parameters
     setMoveRate(10);
 
-    setShootRate(5);
+    setShootRate(1);
 
     // setup enemy stats
     setMovementSpeed(5);

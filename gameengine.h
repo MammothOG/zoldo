@@ -9,7 +9,6 @@
 #include <QKeyEvent>
 
 
-#include <QDebug>
 class MenuScene;
 
 class LevelCreatorScene;

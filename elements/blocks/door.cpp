@@ -4,7 +4,7 @@
 
 Door::Door()
 {
-    setElementName(DOOR);
+    setType(DOOR);
 
     setSprite(":/ressources/images/test/door_test.png");
 }
