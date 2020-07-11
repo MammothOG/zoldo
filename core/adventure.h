@@ -20,6 +20,10 @@ private:
 public:
     Adventure();
 
+    bool nextLevel();
+
+    bool load(QString name);
+
     void generateTestAdventure();
 
     Level * getCurrentLevel() const;

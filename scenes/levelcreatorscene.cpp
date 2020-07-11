@@ -130,7 +130,7 @@ void LevelCreatorScene::keyPressEvent(QKeyEvent *keyEvent)
 
 bool LevelCreatorScene::createLevel()
 {
-    level->setName("test2");
+    level->setName("test1");
     level->save();
 
     return true;

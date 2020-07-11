@@ -143,6 +143,7 @@ void Level::saveElement(QFile * levelFile, Element * element)
 
 bool Level::load(QString levelName)
 {
+    name = levelName;
     QFile levelFile("levels/" + levelName + ".lvl");
     if(!levelFile.exists())
     {
@@ -162,8 +163,8 @@ bool Level::load(QString levelName)
     QString line = reader.readLine();
     QStringList spawnCoordinates = line.split(" ");
 
-    spawnX = spawnCoordinates.at(0).toInt() * WINSIZE.rwidth();
-    spawnY = spawnCoordinates.at(1).toInt() * WINSIZE.rheight();
+    spawnX = spawnCoordinates.at(0).toFloat() * WINSIZE.rwidth();
+    spawnY = spawnCoordinates.at(1).toFloat() * WINSIZE.rheight();
 
     Element * newElement;
     while(!reader.atEnd())
@@ -172,8 +173,8 @@ bool Level::load(QString levelName)
 
         QStringList elementData = line.split(" ");
         int elementName = elementData.at(0).toInt();
-        int newX = elementData.at(1).toInt() * WINSIZE.rwidth();
-        int newY = elementData.at(2).toInt() * WINSIZE.rheight();
+        int newX = elementData.at(1).toFloat() * WINSIZE.rwidth();
+        int newY = elementData.at(2).toFloat() * WINSIZE.rheight();
 
         newElement = ElementFactory::create(elementName);
         newElement->setPos(newX, newY);

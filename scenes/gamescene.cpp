@@ -29,6 +29,9 @@ GameScene::GameScene()
     sceneProjectiles = new QGraphicsItemGroup();
     addItem(sceneProjectiles);
 
+    adventure = new Adventure();
+    adventure->load("testadventure");
+    //adventure->generateTestAdventure();
     loadAdventure();
 
     //    pauseButton = new PauseButton();
@@ -49,10 +52,6 @@ GameScene::GameScene()
 
 void GameScene::loadAdventure()
 {
-    adventure = new Adventure();
-    // init TEST adventure
-    adventure->generateTestAdventure();
-
     player = adventure->getPlayer();
     sceneElements->addToGroup(player);
 
