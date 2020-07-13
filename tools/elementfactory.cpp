@@ -8,6 +8,7 @@
 #include "elements/enemies/testator.h"
 #include "elements/player/playertest.h"
 #include "elements/projectile/testprojectile.h"
+#include "elements/blocks/door.h"
 
 Element * ElementFactory::create(int elementFlag)
 {
@@ -31,6 +32,9 @@ Element * ElementFactory::create(int elementFlag)
         break;
     case TEST_PROJECTILE:
         instance = new TestProjectile;
+        break;
+    case DOOR:
+        instance = new Door;
         break;
     default:
         instance = nullptr;

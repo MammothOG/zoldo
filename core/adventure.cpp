@@ -7,10 +7,11 @@
 #include "elements/player/link.h"
 
 
+#include <QDebug>
 Adventure::Adventure()
 {
     levelList = new QList<Level*>();
-    currentLevel = 1;
+    currentLevel = 0;
 
     player = new Link();
     player->setCenterAsReferencial();
@@ -31,7 +32,6 @@ bool Adventure::nextLevel()
 
 }
 
-#include <QDebug>
 bool Adventure::load(QString name)
 {
     QFile adventureFile("adventures/" + name + ".adv");
@@ -73,15 +73,15 @@ bool Adventure::load(QString name)
 void Adventure::generateTestAdventure()
 {
     Level * level = new Level();
-    //level->generateTestLevel();
-    level->load("test1");
+    level->generateTestLevel();
+    //level->load("test1");
 
     levelList->append(level);
 }
 
 Level * Adventure::getCurrentLevel() const
 {
-    return levelList->at(currentLevel);
+    return levelList->at(levelList->length() - currentLevel - 1);
 }
 
 Player * Adventure::getPlayer() const

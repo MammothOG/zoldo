@@ -6,10 +6,12 @@ Door::Door()
 {
     setType(DOOR);
 
+    setExit(true);
+
     setSprite(":/ressources/images/test/door_test.png");
 }
 
-void Door::openDoor()
+void Door::onActivate()
 {
     setSprite(":/ressources/images/test/door_open_test.png");
 }

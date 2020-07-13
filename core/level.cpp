@@ -5,6 +5,7 @@
 
 #include <QDir>
 #include <QTextStream>
+#include <math.h>
 
 #include "core/background.h"
 #include "core/unit.h"
@@ -81,19 +82,6 @@ void Level::generateTestLevel()
     unitList->append(testEnemy);
 }
 
-void Level::clearLevel()
-{
-    for(Element * elem : *elementList){
-        delete elem;
-    }
-    elementList->clear();
-
-    for(Unit * unit: *unitList){
-        delete unit;
-    }
-    unitList->clear();
-}
-
 bool Level::save()
 {
     QDir levelDir("levels");
@@ -116,8 +104,8 @@ bool Level::save()
 
     // saving all scene element
     levelFile.write(QString("%1 %2\n")
-                    .arg(spawnX/WINSIZE.rwidth())
-                    .arg(spawnY/WINSIZE.rheight())
+                    .arg((float)spawnX/width)
+                    .arg((float)spawnY/height)
                     .toLocal8Bit());
 
     saveElement(&levelFile, background);
@@ -136,8 +124,8 @@ void Level::saveElement(QFile * levelFile, Element * element)
 {
     QString line = QString("%1 %2 %3\n")
             .arg(element->types().last())
-            .arg(element->x()/WINSIZE.rwidth())
-            .arg(element->y()/WINSIZE.rheight());
+            .arg(element->x()/width)
+            .arg(element->y()/height);
     levelFile->write(line.toLocal8Bit());
 }
 
@@ -163,8 +151,8 @@ bool Level::load(QString levelName)
     QString line = reader.readLine();
     QStringList spawnCoordinates = line.split(" ");
 
-    spawnX = spawnCoordinates.at(0).toFloat() * WINSIZE.rwidth();
-    spawnY = spawnCoordinates.at(1).toFloat() * WINSIZE.rheight();
+    spawnX = round(spawnCoordinates.at(0).toFloat() * width);
+    spawnY = round(spawnCoordinates.at(1).toFloat() * height);
 
     Element * newElement;
     while(!reader.atEnd())
@@ -173,8 +161,9 @@ bool Level::load(QString levelName)
 
         QStringList elementData = line.split(" ");
         int elementName = elementData.at(0).toInt();
-        int newX = elementData.at(1).toFloat() * WINSIZE.rwidth();
-        int newY = elementData.at(2).toFloat() * WINSIZE.rheight();
+        int newX = round(elementData.at(1).toFloat() * width);
+        int newY = round(elementData.at(2).toFloat() * height);
+
 
         newElement = ElementFactory::create(elementName);
         newElement->setPos(newX, newY);

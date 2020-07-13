@@ -132,6 +132,32 @@ bool Element::isInside()
 
 }
 
+void Element::activate()
+{
+    activated = true;
+    onActivate();
+}
+
+bool Element::isExit() const
+{
+    return exit;
+}
+
+void Element::setExit(bool value)
+{
+    exit = value;
+}
+
+bool Element::isActivated() const
+{
+    return activated;
+}
+
+void Element::setActivated(bool value)
+{
+    activated = value;
+}
+
 void Element::setType(int value)
 {
     type.append(value);

@@ -4,7 +4,7 @@
 
 Link::Link()
 {
-    setType(PLAYER_TEST);
+    setType(LINK);
 
     setHeight(BLOCKSIZE * 1);
     setWidth(BLOCKSIZE * 1.2);
@@ -14,6 +14,6 @@ Link::Link()
     setMovementSpeed(5);
     setShootRate(20);
 
-    setHealth(100);
+    setHealth(1000);
 
 }

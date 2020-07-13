@@ -1,14 +1,16 @@
 #include "unit.h"
 
-#include <math.h>
 
 #include "healthbar.h"
 
 
+#include <QDebug>
 Unit::Unit()
 {
     //referencial point for Unit are center
     setType(UNIT);
+
+    setCenterAsReferencial();
 
     health = 0;
 
@@ -40,17 +42,18 @@ void Unit::addHealthBar(HealthBar * healthBar)
 
 void Unit::stoneUnit()
 {
-    int stonePosX =this->x() - horizontalMov;
-    int stonePosY =this->y() - verticalMov;
+    int stonePosX = this->x() - horizontalMov;
+    int stonePosY = this->y() - verticalMov;
+    qDebug() << stonePosX << stonePosY;
 
-    this->setX(stonePosX);
-    this->setY(stonePosY);
+    //this->setX(stonePosX);
+    //this->setY(stonePosY);
 
-    if (healthBar != nullptr)
-    {
-        healthBar->setX(stonePosX);
-        healthBar->setY(stonePosY);
-    }
+    //if (healthBar != nullptr)
+    //{
+    //    healthBar->setX(stonePosX);
+    //    healthBar->setY(stonePosY);
+    //}
 }
 
 void Unit::moveUnit()

@@ -15,12 +15,16 @@
 #include "elements/player/playertest.h"
 #include "elements/blocks/wall.h"
 #include "elements/blocks/water.h"
+#include "elements/blocks/door.h"
 #include "elements/background/testbackground.h"
 #include "elements/enemies/testator.h"
 
 
 LevelCreatorScene::LevelCreatorScene(QMainWindow * parent)
 {
+    posX = 0;
+    posY = 0;
+
     sceneHeight = VERTICAL_BLOCK * BLOCKSIZE;
     sceneWidth = HORIZONTAL_BLOCK * BLOCKSIZE;
 
@@ -73,6 +77,7 @@ void LevelCreatorScene::createAction()
 
     blockMenu->addAction(addNewElement("wall", new Wall()));
     blockMenu->addAction(addNewElement("water", new Water()));
+    blockMenu->addAction(addNewElement("door", new Door()));
 
     backgroundMenu->addAction(addNewElement("test background", new TestBackground()));
 
@@ -130,10 +135,20 @@ void LevelCreatorScene::keyPressEvent(QKeyEvent *keyEvent)
 
 bool LevelCreatorScene::createLevel()
 {
-    level->setName("test1");
-    level->save();
+    bool ok;
+    QString name = QInputDialog::getText(0, tr("Choose name :"),
+                     tr("Level name:"), QLineEdit::Normal,
+                     QDir::home().dirName(), &ok);
 
-    return true;
+    if (ok && !name.isEmpty()) {
+        level->setName(name);
+        level->save();
+        return true;
+    }
+    else {
+        return false;
+    }
+
 }
 
 

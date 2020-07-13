@@ -59,7 +59,7 @@ void GameScene::loadAdventure()
     player->addHealthBar(playerHealthBar);
     sceneElements->addToGroup(playerHealthBar);
 
-    Level * currentLevel = adventure->getCurrentLevel();
+    currentLevel = adventure->getCurrentLevel();
     player->setPos(currentLevel->getSpawnX(), currentLevel->getSpawnY());
 
     drawLevel();
@@ -67,6 +67,7 @@ void GameScene::loadAdventure()
 
 void GameScene::drawLevel()
 {
+
     currentLevel = adventure->getCurrentLevel();
 
     addItem(currentLevel->getBackground());
@@ -157,6 +158,29 @@ void GameScene::updateProjectile(UnitAnimate * unit)
     }
 }
 
+void GameScene::updateGame()
+{
+    if (!player->isLeavingLevel()) {
+        if (currentLevel->getUnitList()->length() == 0) {
+            // if no more ennemies activate all exit
+            for (Element * el: * currentLevel->getElementList()) {
+                if (el->isExit()) {
+                    el->activate();
+                }
+            }
+        }
+        else if (player->isDead()) {
+            clock->stop();
+        }
+    }
+    else {
+        adventure->nextLevel();
+        clear();
+        drawLevel();
+    }
+
+}
+
 void GameScene::removeDeadProjectile(UnitAnimate * unit)
 {
     for(Projectile * projectile: *unit->getProjectileList()) {
@@ -188,14 +212,12 @@ void GameScene::removeDeadUnit()
     if (player->isDead()) {
         removeItem(player);
 
-        delete player;
+        //delete player;
     }
     else {
         removeDeadProjectile(dynamic_cast<UnitAnimate*>(player));
     }
 }
-
-
 
 void GameScene::checkCollision(Unit * unit)
 {
@@ -204,18 +226,9 @@ void GameScene::checkCollision(Unit * unit)
         {
             if (el->getCollider()) {
                 unit->stoneUnit();
+                qDebug() << el->types().last();
             }
         }
-    }
-}
-
-void GameScene::updateGame()
-{
-    if (currentLevel->getUnitList()->length() == 0) {
-        player->setWon(true);
-    }
-    else if (player->isDead()) {
-        clock->stop();
     }
 }
 
@@ -252,7 +265,6 @@ void GameScene::keyPressEvent(QKeyEvent *event)
         player->setVerticalMov(1);
     }
 }
-
 
 void GameScene::keyReleaseEvent(QKeyEvent *event)
 {

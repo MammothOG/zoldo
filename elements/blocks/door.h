@@ -8,7 +8,7 @@ class Door : public Block
 public:
     Door();
 
-    void openDoor();
+    void onActivate() override;
 };
 
 #endif // DOOR_H

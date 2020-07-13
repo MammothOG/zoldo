@@ -22,6 +22,7 @@ enum ElementType {
     PLAYER_TEST,
     TEST_PROJECTILE,
     DOOR,
+    LINK,
 };
 
 class Element :  public QObject, public QGraphicsPixmapItem
@@ -38,6 +39,10 @@ private:
     int collider;
 
     bool centralReferential;
+
+    bool exit;
+
+    bool activated;
 
 protected:
     void setType(int value);
@@ -82,6 +87,18 @@ public:
     bool isInside();
 
     virtual void onOutside() {};
+
+    void activate();
+
+    virtual void onActivate() {};
+
+    bool isExit() const;
+
+    void setExit(bool value);
+
+    bool isActivated() const;
+
+    void setActivated(bool value);
 };
 
 #endif // ELEMENT_H

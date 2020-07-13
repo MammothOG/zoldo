@@ -26,9 +26,9 @@ private:
 
     Background * background;
 
-    int spawnX;
+    float spawnX;
 
-    int spawnY;
+    float spawnY;
 
     void saveElement(QFile * levelFile, Element * elemen);
 
