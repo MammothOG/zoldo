@@ -84,6 +84,7 @@ void GameScene::drawLevel()
     for(Unit * unit : *currentLevel->getUnitList()){
         HealthBar * unitHealthBar = new HealthBar();
         unit->addHealthBar(unitHealthBar);
+        unit->setCenterAsReferencial();
         sceneElements->addToGroup(unit);
         sceneElements->addToGroup(unitHealthBar);
     }
@@ -142,15 +143,15 @@ void GameScene::updateProjectile(UnitAnimate * unit)
             sceneProjectiles->addToGroup(projectile);
         }
 
-        // check if projectile hit player
+        // check if projectile hit unit
         projectile->isColliding(player);
-
-        // check if projectil is inside the scene
-        projectile->isInside();
 
         for (Unit * enemy: * currentLevel->getUnitList()) {
             projectile->isColliding(enemy);
         }
+
+        // check if projectil is inside the scene
+        projectile->isInside();
 
         // move the projectile
         if (!projectile->isDead())
@@ -160,23 +161,16 @@ void GameScene::updateProjectile(UnitAnimate * unit)
 
 void GameScene::updateGame()
 {
-    if (!player->isLeavingLevel()) {
-        if (currentLevel->getUnitList()->length() == 0) {
-            // if no more ennemies activate all exit
-            for (Element * el: * currentLevel->getElementList()) {
-                if (el->isExit()) {
-                    el->activate();
-                }
+    if (currentLevel->getUnitList()->length() == 0) {
+        // if no more ennemies activate all exit
+        for (Element * el: * currentLevel->getElementList()) {
+            if (el->isExit()) {
+                el->activate();
             }
         }
-        else if (player->isDead()) {
-            clock->stop();
-        }
     }
-    else {
-        adventure->nextLevel();
-        clear();
-        drawLevel();
+    else if (player->isDead()) {
+        clock->stop();
     }
 
 }
@@ -226,7 +220,7 @@ void GameScene::checkCollision(Unit * unit)
         {
             if (el->getCollider()) {
                 unit->stoneUnit();
-                qDebug() << el->types().last();
+                qDebug() << "stone unit";
             }
         }
     }

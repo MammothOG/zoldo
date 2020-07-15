@@ -10,8 +10,6 @@ Unit::Unit()
     //referencial point for Unit are center
     setType(UNIT);
 
-    setCenterAsReferencial();
-
     health = 0;
 
     dead = false;
@@ -44,16 +42,15 @@ void Unit::stoneUnit()
 {
     int stonePosX = this->x() - horizontalMov;
     int stonePosY = this->y() - verticalMov;
-    qDebug() << stonePosX << stonePosY;
 
-    //this->setX(stonePosX);
-    //this->setY(stonePosY);
+    this->setX(stonePosX);
+    this->setY(stonePosY);
 
-    //if (healthBar != nullptr)
-    //{
-    //    healthBar->setX(stonePosX);
-    //    healthBar->setY(stonePosY);
-    //}
+    if (healthBar != nullptr)
+    {
+        healthBar->setX(stonePosX);
+        healthBar->setY(stonePosY);
+    }
 }
 
 void Unit::moveUnit()

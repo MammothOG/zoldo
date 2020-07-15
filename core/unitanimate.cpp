@@ -19,6 +19,8 @@ UnitAnimate::UnitAnimate()
     directionVector[0] = 0;
     directionVector[1] = -1;
 
+    setCenterAsReferencial();
+
     // distance
     targetDistance = 0;
 
