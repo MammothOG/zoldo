@@ -1,5 +1,7 @@
 #include "element.h"
 
+#include <math.h>
+
 #include "config.h"
 
 
@@ -15,6 +17,8 @@ Element::Element()
     centralReferential = false;
 
     exit = false;
+
+    defaultRotation = 0;
 }
 
 Element::Element(int height, int width)
@@ -158,6 +162,17 @@ bool Element::isActivated() const
 void Element::setActivated(bool value)
 {
     activated = value;
+}
+
+float Element::getDefaultRotation() const
+{
+    return defaultRotation;
+}
+
+void Element::setDefaultRotation(float value)
+{
+    defaultRotation = value;
+    setRotation(defaultRotation);
 }
 
 void Element::setType(int value)

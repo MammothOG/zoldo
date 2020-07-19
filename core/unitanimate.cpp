@@ -13,7 +13,7 @@ UnitAnimate::UnitAnimate()
     setType(UNIT_ANIMATE);
 
     // angle de rotation of the image
-    rotAngle = 0;
+    currentRotation = 0;
 
     // direction where the unit look
     directionVector[0] = 0;
@@ -49,17 +49,21 @@ void UnitAnimate::lockTarget(const Unit * const target)
         int newDirY = target->y() - this->y();
 
         targetDistance = sqrt(newDirX * newDirX + newDirY * newDirY);
+        currentRotation = acos( -newDirY /  targetDistance) * 180/3.14;
+
+        if(newDirX < 0)
+            currentRotation *= -1;
+
+        setRotation(currentRotation + getDefaultRotation());
 
         directionVector[0] = newDirX / targetDistance;
         directionVector[1] = newDirY / targetDistance;
-
-        rotAngle = acos( -newDirY /  targetDistance) * 180/3.14;
-
-        if(newDirX < 0)
-            rotAngle *= -1;
-
-        setRotation(rotAngle);
     }
+}
+
+int UnitAnimate::getCurrentRotation() const
+{
+    return currentRotation;
 }
 
 void UnitAnimate::shoot()
@@ -77,6 +81,8 @@ void UnitAnimate::fire()
 
     proj->setHorizontalMov(directionVector[0]);
     proj->setVerticalMov(directionVector[1]);
+
+    proj->setDefaultRotation(currentRotation);
 
     projectileList->append(proj);
 }

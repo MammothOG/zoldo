@@ -11,7 +11,7 @@ class UnitAnimate : public Unit
 {
     Q_OBJECT
 private:
-    int rotAngle;
+    int currentRotation;
 
     float directionVector [2];
 
@@ -47,6 +47,8 @@ public:
     int getShootRate() const;
 
     void setShootRate(int value);
+
+    int getCurrentRotation() const;
 };
 
 #endif // UNITANIMATE_H

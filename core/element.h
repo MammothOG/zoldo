@@ -44,6 +44,8 @@ private:
 
     bool activated;
 
+    float defaultRotation;
+
 protected:
     void setType(int value);
 
@@ -99,6 +101,12 @@ public:
     bool isActivated() const;
 
     void setActivated(bool value);
+
+    void setOrientation(int dirX, int dirY);
+
+    float getDefaultRotation() const;
+
+    void setDefaultRotation(float value);
 };
 
 #endif // ELEMENT_H
