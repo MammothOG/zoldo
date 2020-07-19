@@ -13,6 +13,8 @@ Element::Element()
     width = 0;
 
     centralReferential = false;
+
+    exit = false;
 }
 
 Element::Element(int height, int width)

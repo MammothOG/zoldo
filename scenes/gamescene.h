@@ -39,9 +39,7 @@ private:
 
     PauseMenu * pauseMenu;
 
-    QGraphicsItemGroup * sceneElements;
-
-    QGraphicsItemGroup * sceneProjectiles;
+    QGraphicsItemGroup * levelElements;
 
     QGraphicsItemGroup * uiView;
 

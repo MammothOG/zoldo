@@ -27,6 +27,7 @@ void Player::shoot()
 void Player::onCollision(Element *element)
 {
     if (element->isExit() && element->isActivated()) {
+        qDebug() << "player changing level";
         leavingLevel = true;
     }
 }

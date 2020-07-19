@@ -23,11 +23,6 @@ GameScene::GameScene()
     setSceneRect(0, 0, sceneWidth, sceneHeight);
     setBackgroundBrush(Qt::black);
 
-    sceneElements = new QGraphicsItemGroup();
-    addItem(sceneElements);
-
-    sceneProjectiles = new QGraphicsItemGroup();
-    addItem(sceneProjectiles);
 
     adventure = new Adventure();
     adventure->load("testadventure");
@@ -53,24 +48,27 @@ GameScene::GameScene()
 void GameScene::loadAdventure()
 {
     player = adventure->getPlayer();
-    sceneElements->addToGroup(player);
+    addItem(player);
 
     HealthBar * playerHealthBar = new HealthBar();
     player->addHealthBar(playerHealthBar);
-    sceneElements->addToGroup(playerHealthBar);
+    addItem(playerHealthBar);
 
     currentLevel = adventure->getCurrentLevel();
-    player->setPos(currentLevel->getSpawnX(), currentLevel->getSpawnY());
 
     drawLevel();
 }
 
 void GameScene::drawLevel()
 {
+    levelElements = new QGraphicsItemGroup();
+    addItem(levelElements);
+
+    player->setPos(currentLevel->getSpawnX(), currentLevel->getSpawnY());
 
     currentLevel = adventure->getCurrentLevel();
 
-    addItem(currentLevel->getBackground());
+    levelElements->addToGroup(currentLevel->getBackground());
 
     if (currentLevel->getUnitList()->length() > 0)
         enemyTargeted = currentLevel->getUnitList()->at(0);
@@ -78,15 +76,16 @@ void GameScene::drawLevel()
         enemyTargeted = nullptr;
 
     for(Element * element : *currentLevel->getElementList()){
-        sceneElements->addToGroup(element);
+        levelElements->addToGroup(element);
     }
 
     for(Unit * unit : *currentLevel->getUnitList()){
         HealthBar * unitHealthBar = new HealthBar();
         unit->addHealthBar(unitHealthBar);
+        levelElements->addToGroup(unitHealthBar);
+
         unit->setCenterAsReferencial();
-        sceneElements->addToGroup(unit);
-        sceneElements->addToGroup(unitHealthBar);
+        levelElements->addToGroup(unit);
     }
 }
 
@@ -109,7 +108,7 @@ void GameScene::updateUnit(Unit * unit)
 
     checkCollision(unit);
 
-    if (unit->isType(UNIT_ANIMATE)) {
+    if (unit->isType(UNIT_ANIMATE) && enemyTargeted != nullptr) {
         updateUnitAnimate(dynamic_cast<UnitAnimate*>(unit));
     }
 }
@@ -140,7 +139,7 @@ void GameScene::updateProjectile(UnitAnimate * unit)
     for(Projectile * projectile: *unit->getProjectileList()) {
         // adding the projectile to the scene
         if (projectile->group()== nullptr) {
-            sceneProjectiles->addToGroup(projectile);
+            levelElements->addToGroup(projectile);
         }
 
         // check if projectile hit unit
@@ -161,16 +160,27 @@ void GameScene::updateProjectile(UnitAnimate * unit)
 
 void GameScene::updateGame()
 {
-    if (currentLevel->getUnitList()->length() == 0) {
+    if (!player->isLeavingLevel()) {
+        if (currentLevel->getUnitList()->length() == 0) {
         // if no more ennemies activate all exit
         for (Element * el: * currentLevel->getElementList()) {
             if (el->isExit()) {
-                el->activate();
+            el->activate();
             }
         }
+        }
+        else if (player->isDead()) {
+            clock->stop();
+        }
     }
-    else if (player->isDead()) {
-        clock->stop();
+    else {
+        qDebug() << "leave level";
+        player->setLeavingLevel(false);
+        removeItem(levelElements);
+        adventure->nextLevel();
+        currentLevel = adventure->getCurrentLevel();
+
+        drawLevel();
     }
 
 }
