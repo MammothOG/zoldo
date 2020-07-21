@@ -41,12 +41,13 @@ HealthBar::~HealthBar()
     delete healthOld;
 }
 
+#include <QDebug>
 bool HealthBar::setHealth(float health)
 {
     if (health > 0)
     {
-        width = width * health / totalHealth;
-        healthNew->setRect(offsetWidth, offsetHeight, width, height);
+        int newWidth = width * health / totalHealth;
+        healthNew->setRect(offsetWidth, offsetHeight, newWidth, height);
 
         return true;
     }

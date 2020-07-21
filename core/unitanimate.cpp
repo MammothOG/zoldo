@@ -82,7 +82,7 @@ void UnitAnimate::fire()
     proj->setHorizontalMov(directionVector[0]);
     proj->setVerticalMov(directionVector[1]);
 
-    proj->setDefaultRotation(currentRotation);
+    proj->setDefaultRotation(currentRotation + proj->getDefaultRotation());
 
     projectileList->append(proj);
 }

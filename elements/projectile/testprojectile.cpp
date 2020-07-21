@@ -8,7 +8,7 @@ TestProjectile::TestProjectile()
     setHeight(25);
     setWidth(25);
 
-    setSprite(":/ressources/images/shurikenb1moch.png");
+    setSprite(":/ressources/images/test/shurikenb1moch.png");
 
     setDamage(10);
 

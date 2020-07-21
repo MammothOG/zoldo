@@ -95,6 +95,7 @@ void GameScene::updateState()
 
     for(Unit * unit: *currentLevel->getUnitList()){
         updateUnit(unit);
+        //qDebug() << unit->getHealth();
     }
 
     removeDeadUnit();
@@ -225,12 +226,15 @@ void GameScene::removeDeadUnit()
 
 void GameScene::checkCollision(Unit * unit)
 {
-    for(Element * el: *currentLevel->getElementList()) {
-        if (unit->isColliding(el))
-        {
+    if (!unit->isInside()) {
+        unit->stoneUnit();
+    }
+    else {
+        for(Element * el: *currentLevel->getElementList()) {
             if (el->getCollider()) {
-                unit->stoneUnit();
-                qDebug() << "stone unit";
+                if (unit->isColliding(el)) {
+                    unit->stoneUnit();
+                }
             }
         }
     }

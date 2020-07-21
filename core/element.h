@@ -107,6 +107,10 @@ public:
     float getDefaultRotation() const;
 
     void setDefaultRotation(float value);
+
+    void mirroringY();
+
+    void mirroringX();
 };
 
 #endif // ELEMENT_H

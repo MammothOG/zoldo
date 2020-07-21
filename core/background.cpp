@@ -11,4 +11,6 @@ Background::Background()
 
 
     setZValue(-1);
+
+    //mirroringX();
 }

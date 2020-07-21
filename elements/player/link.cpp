@@ -9,11 +9,12 @@ Link::Link()
     setHeight(BLOCKSIZE * 1);
     setWidth(BLOCKSIZE * 1.2);
 
-    setSprite(":/ressources/images/zelda1.png");
+    setSprite(":/ressources/images/players/zelda1.png");
 
     setMovementSpeed(5);
     setShootRate(20);
 
     setHealth(1000);
 
+    setDefaultRotation(180);
 }
