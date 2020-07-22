@@ -2,6 +2,7 @@
 
 #include <math.h>
 #include <QTransform>
+#include <QDir>
 
 #include "config.h"
 
@@ -20,6 +21,8 @@ Element::Element()
     exit = false;
 
     defaultRotation = 0;
+
+    styleDir = "";
 }
 
 Element::Element(int height, int width)
@@ -174,6 +177,48 @@ void Element::setDefaultRotation(float value)
 {
     defaultRotation = value;
     setRotation(defaultRotation);
+}
+
+bool Element::setStyle(QString styleName)
+{
+    this->imageName = styleName;
+
+    QDir styleDirectory(":/ressources/images/" + styleDir);
+    if(!styleDirectory.exists())
+        QDir().mkdir(QString(styleDir));
+
+    QString path = QString(":/ressources/images/%1/%2.png").arg(styleDir).arg(styleName);
+
+    QFile styleFile(path);
+    if(!styleFile.exists())
+    {
+        qDebug() << "File does't exist :" << path;
+        return false;
+    }
+
+    setSprite(path);
+
+    return true;
+}
+
+QString Element::getStyleDir() const
+{
+    return styleDir;
+}
+
+void Element::setStyleDir(const QString &value)
+{
+    styleDir = value;
+}
+
+QString Element::getImageName() const
+{
+    return imageName;
+}
+
+void Element::setImageName(const QString &value)
+{
+    imageName = value;
 }
 
 void Element::setType(int value)

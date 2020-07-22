@@ -10,7 +10,6 @@ Background::Background()
     setWidth(BLOCKSIZE * HORIZONTAL_BLOCK);
 
 
+    setStyleDir("backgrounds");
     setZValue(-1);
-
-    //mirroringX();
 }

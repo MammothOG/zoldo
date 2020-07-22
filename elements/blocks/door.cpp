@@ -8,6 +8,8 @@ Door::Door()
 
     setExit(true);
 
+    setStyleDir("exits");
+
     setSprite(":/ressources/images/test/door_test.png");
 }
 

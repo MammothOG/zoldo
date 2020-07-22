@@ -7,6 +7,9 @@ Wall::Wall()
 
     setType(WALL);
 
-    setSprite(":/ressources/images/test/wall_test.png");
+    //setSprite(":/ressources/images/walls/wall_blue_1.png");
+    setStyleDir("walls");
+
+    setStyle("wall_blue_1");
 
 }

@@ -34,6 +34,8 @@ private:
 
     int posY;
 
+    int indexStyle;
+
     Element * elementSelected;
 
     QGraphicsItemGroup * itemGroupSelected;
@@ -54,10 +56,16 @@ private:
 
     void createAction();
 
+    QStringList styleList;
+
+    void grabStyleElement(Element * element);
+
 public slots:
     void mouseMoveEvent(QGraphicsSceneMouseEvent *event) override;
 
     void keyPressEvent(QKeyEvent * keyEvent) override;
+
+    void wheelEvent(QGraphicsSceneWheelEvent *event) override;
 
     bool createLevel();
 

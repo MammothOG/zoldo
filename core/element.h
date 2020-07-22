@@ -46,8 +46,14 @@ private:
 
     float defaultRotation;
 
+    QString styleDir;
+
+    QString imageName;
+
 protected:
     void setType(int value);
+
+    void setStyleDir(const QString &value);
 
 public:
     Element();
@@ -108,9 +114,17 @@ public:
 
     void setDefaultRotation(float value);
 
+    bool setStyle(QString imageName);
+
     void mirroringY();
 
     void mirroringX();
+
+    QString getStyleDir() const;
+
+    QString getImageName() const;
+
+    void setImageName(const QString &value);
 };
 
 #endif // ELEMENT_H

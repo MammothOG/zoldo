@@ -89,10 +89,28 @@ QAction * LevelCreatorScene::addNewElement(QString name, Element *newElement)
     QAction * newAction = new QAction(name);
     connect(newAction, &QAction::triggered, [=](){
         removeItem(elementSelected);
-        elementSelected = newElement;
         addItem(newElement);
+
+        // save element
+        elementSelected = newElement;
+
+        grabStyleElement(newElement);
     });
     return newAction;
+}
+
+void LevelCreatorScene::grabStyleElement(Element * element)
+{
+    styleList.clear();
+    indexStyle = 0;
+
+    if(!element->getStyleDir().isEmpty()) {
+        QDir styleDir(":/ressources/images/" + elementSelected->getStyleDir());
+        styleList = styleDir.entryList(QStringList() << "*.png", QDir::Files);
+        styleList.replaceInStrings(".png", "");
+    }
+
+    qDebug() << styleList;
 }
 
 void LevelCreatorScene::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
@@ -128,10 +146,29 @@ void LevelCreatorScene::keyPressEvent(QKeyEvent *keyEvent)
         Element * instance = ElementFactory::create(elementSelected->types().last());
         itemGroupSelected->addToGroup(instance);
         instance->setPos(posX, posY);
+        instance->setStyle(styleList.at(indexStyle));
         level->appendLevelElement(instance);
         break;
     }
 }
+
+void LevelCreatorScene::wheelEvent(QGraphicsSceneWheelEvent *event)
+{
+    if (styleList.length() > 0) {
+        if(event->delta() > 0) {
+            indexStyle = (indexStyle + 1) % styleList.length();
+        }
+        else {
+            indexStyle = (indexStyle - 1) % styleList.length();
+            if(indexStyle < 0)
+                indexStyle += styleList.length();
+
+        }
+        elementSelected->setStyle(styleList.at(indexStyle));
+    }
+}
+
+
 
 bool LevelCreatorScene::createLevel()
 {

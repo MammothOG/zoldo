@@ -121,10 +121,12 @@ bool Level::save()
 
 void Level::saveElement(QFile * levelFile, Element * element)
 {
-    QString line = QString("%1 %2 %3\n")
+    QString line = QString("%1 %2 %3 %4\n")
             .arg(element->types().last())
             .arg(element->x()/width)
-            .arg(element->y()/height);
+            .arg(element->y()/height)
+            .arg(element->getImageName());
+
     levelFile->write(line.toLocal8Bit());
 }
 
@@ -162,9 +164,12 @@ bool Level::load(QString levelName)
         int elementName = elementData.at(0).toInt();
         int newX = round(elementData.at(1).toFloat() * width);
         int newY = round(elementData.at(2).toFloat() * height);
+        QString imageName = elementData.at(3);
 
 
         newElement = ElementFactory::create(elementName);
+
+        newElement->setStyle(imageName);
         newElement->setPos(newX, newY);
 
         appendLevelElement(newElement);
