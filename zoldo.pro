@@ -18,8 +18,12 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
     core/healthbar.cpp \
     elements/blocks/door.cpp \
+    elements/healthbar/basichealthbar.cpp \
+    elements/healthbar/zeldahealthbar.cpp \
     elements/player/link.cpp \
     elements/player/playertest.cpp \
+    elements/projectile/fireball.cpp \
+    elements/projectile/stone.cpp \
     tools/elementfactory.cpp \
     main.cpp \
     gameengine.cpp \
@@ -56,8 +60,12 @@ SOURCES += \
 HEADERS += \
     core/healthbar.h \
     elements/blocks/door.h \
+    elements/healthbar/basichealthbar.h \
+    elements/healthbar/zeldahealthbar.h \
     elements/player/link.h \
     elements/player/playertest.h \
+    elements/projectile/fireball.h \
+    elements/projectile/stone.h \
     tools/elementfactory.h \
     config.h \
     gameengine.h \

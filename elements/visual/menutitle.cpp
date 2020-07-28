@@ -3,8 +3,8 @@
 MenuTitle::MenuTitle()
 {
 
-    setWidth(500);
-    setHeight(225);
+    setWidth(5);
+    setHeight(5);
 
     setSprite(":/ressources/images/visuals/zelda_title.png");
 

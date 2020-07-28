@@ -11,18 +11,20 @@ Element::Element()
 {
     setType(ELEMENT);
 
-    collider = false;
 
     height = 0;
     width = 0;
 
-    centralReferential = false;
+    collider = false;
 
+    centralReferential = false;
+    activated = false;
     exit = false;
 
     defaultRotation = 0;
 
     styleDir = "";
+
 }
 
 Element::Element(int height, int width)
@@ -80,9 +82,9 @@ int Element::getWidth() const
     return width;
 }
 
-void Element::setWidth(int value)
+void Element::setWidth(float value)
 {
-    width = value;
+    width = value * BLOCKSIZE;
 }
 
 int Element::getHeight() const
@@ -90,9 +92,9 @@ int Element::getHeight() const
     return height;
 }
 
-void Element::setHeight(int value)
+void Element::setHeight(float value)
 {
-    height = value;
+    height = value * BLOCKSIZE;
 }
 
 void Element::setCenterAsReferencial()
@@ -144,8 +146,10 @@ bool Element::isInside()
 
 void Element::activate()
 {
-    activated = true;
-    onActivate();
+    if(!activated) {
+        activated = true;
+        onActivate();
+    }
 }
 
 bool Element::isExit() const
@@ -176,6 +180,11 @@ float Element::getDefaultRotation() const
 void Element::setDefaultRotation(float value)
 {
     defaultRotation = value;
+    resetRotation();
+}
+
+void Element::resetRotation()
+{
     setRotation(defaultRotation);
 }
 

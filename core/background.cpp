@@ -6,8 +6,8 @@ Background::Background()
 {
     setType(BACKGROUND);
 
-    setHeight(BLOCKSIZE * VERTICAL_BLOCK);
-    setWidth(BLOCKSIZE * HORIZONTAL_BLOCK);
+    setHeight(VERTICAL_BLOCK);
+    setWidth(HORIZONTAL_BLOCK);
 
 
     setStyleDir("backgrounds");

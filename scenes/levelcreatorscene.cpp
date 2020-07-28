@@ -118,18 +118,18 @@ void LevelCreatorScene::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
     posX = event->scenePos().x();
     posY = event->scenePos().y();
 
-    if(posX > 0 && posY > 0)
+    if (elementSelected->isType(BLOCK))
     {
-        if (elementSelected->isType(BLOCK))
+        if(posX > 0 && posY > 0)
         {
             posX -= (posX % BLOCKSIZE);
             posY -= (posY % BLOCKSIZE);
         }
-        else if (elementSelected->isType(BACKGROUND))
-        {
-            posX = 0;
-            posY = 0;
-        }
+    }
+    else if (elementSelected->isType(BACKGROUND))
+    {
+        posX = 0;
+        posY = 0;
     }
 
     elementSelected->setPos(posX, posY);
@@ -146,7 +146,10 @@ void LevelCreatorScene::keyPressEvent(QKeyEvent *keyEvent)
         Element * instance = ElementFactory::create(elementSelected->types().last());
         itemGroupSelected->addToGroup(instance);
         instance->setPos(posX, posY);
-        instance->setStyle(styleList.at(indexStyle));
+
+        if (styleList.length() > 0)
+            instance->setStyle(styleList.at(indexStyle));
+
         level->appendLevelElement(instance);
         break;
     }

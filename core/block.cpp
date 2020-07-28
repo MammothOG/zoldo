@@ -7,6 +7,6 @@ Block::Block()
     setType(BLOCK);
 
 
-    setHeight(BLOCKSIZE);
-    setWidth(BLOCKSIZE);
+    setHeight(1);
+    setWidth(1);
 }

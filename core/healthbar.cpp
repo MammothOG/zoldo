@@ -1,53 +1,30 @@
 #include "healthbar.h"
 
 #include <QGraphicsRectItem>
-#include <QBrush>
 
 #include "unit.h"
 
 
 HealthBar::HealthBar()
 {
+    height = 0;
+    width = 0;
+
     totalHealth = 0;
 
-    height = 4;
-    width = 60;
+    setZValue(2);
 
-    offsetWidth = -width/2;
-    offsetHeight = -height/2;
+    setPos(0, 0);
 
-    QRectF healthNewShape(offsetWidth, offsetHeight, width, height);
-    QRectF healthOldShape(offsetWidth, offsetHeight, width, height);
+    followingUnit = false;
 
-    QBrush healthOldBrush(Qt::red);
-    QBrush healthNewBrush(Qt::green);
-
-    healthOld = new QGraphicsRectItem();
-    healthNew = new QGraphicsRectItem();
-
-    healthOld->setBrush(healthOldBrush);
-    healthNew->setBrush(healthNewBrush);
-
-    healthOld->setRect(healthOldShape);
-    healthNew->setRect(healthNewShape);
-
-    addToGroup(healthOld);
-    addToGroup(healthNew);
 }
 
-HealthBar::~HealthBar()
-{
-    delete healthNew;
-    delete healthOld;
-}
-
-#include <QDebug>
 bool HealthBar::setHealth(float health)
 {
     if (health > 0)
     {
-        int newWidth = width * health / totalHealth;
-        healthNew->setRect(offsetWidth, offsetHeight, newWidth, height);
+        onNewHealth(health);
 
         return true;
     }
@@ -57,30 +34,6 @@ bool HealthBar::setHealth(float health)
     }
 }
 
-int HealthBar::getOffsetHeight() const
-{
-    return offsetHeight;
-}
-
-void HealthBar::setOffsetHeight(int value)
-{
-    offsetHeight = value;
-    healthNew->setRect(offsetWidth, offsetHeight, width, height);
-    healthOld->setRect(offsetWidth, offsetHeight, width, height);
-}
-
-int HealthBar::getOffsetWidth() const
-{
-    return offsetWidth;
-}
-
-void HealthBar::setOffsetWidth(int value)
-{
-    offsetWidth = value;
-    healthNew->setRect(offsetWidth, offsetHeight, width, height);
-    healthOld->setRect(offsetWidth, offsetHeight, width, height);
-}
-
 int HealthBar::getTotalHealth() const {
     return totalHealth;
 }
@@ -88,4 +41,14 @@ int HealthBar::getTotalHealth() const {
 void HealthBar::setTotalHealth(int value)
 {
     totalHealth = value;
+}
+
+bool HealthBar::isFollowingUnit() const
+{
+    return followingUnit;
+}
+
+void HealthBar::setFollowingUnit(bool value)
+{
+    followingUnit = value;
 }

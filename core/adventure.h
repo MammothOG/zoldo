@@ -17,6 +17,8 @@ private:
 
     int currentLevel;
 
+    bool win;
+
 public:
     Adventure();
 
@@ -29,6 +31,10 @@ public:
     Level * getCurrentLevel() const;
 
     Player * getPlayer() const;
+
+    bool isWin() const;
+
+    void setWin(bool value);
 };
 
 #endif // MAP_H

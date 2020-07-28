@@ -8,7 +8,8 @@
 #include "core/unit.h"
 #include "core/projectile.h"
 #include "core/background.h"
-#include "core/healthbar.h"
+#include "elements/healthbar/zeldahealthbar.h"
+#include "elements/healthbar/basichealthbar.h"
 #include "elements/buttons/pausebutton.h"
 #include "elements/buttons/restartbutton.h"
 #include "elements/buttons/resumebutton.h"
@@ -23,10 +24,8 @@ GameScene::GameScene()
     setSceneRect(0, 0, sceneWidth, sceneHeight);
     setBackgroundBrush(Qt::black);
 
-
     adventure = new Adventure();
     adventure->load("testadventure");
-    //adventure->generateTestAdventure();
     loadAdventure();
 
     //    pauseButton = new PauseButton();
@@ -50,7 +49,7 @@ void GameScene::loadAdventure()
     player = adventure->getPlayer();
     addItem(player);
 
-    HealthBar * playerHealthBar = new HealthBar();
+    HealthBar * playerHealthBar = new ZeldaHealthBar(3);
     player->addHealthBar(playerHealthBar);
     addItem(playerHealthBar);
 
@@ -80,7 +79,7 @@ void GameScene::drawLevel()
     }
 
     for(Unit * unit : *currentLevel->getUnitList()){
-        HealthBar * unitHealthBar = new HealthBar();
+        HealthBar * unitHealthBar = new BasicHealthBar();
         unit->addHealthBar(unitHealthBar);
         levelElements->addToGroup(unitHealthBar);
 
@@ -95,12 +94,24 @@ void GameScene::updateState()
 
     for(Unit * unit: *currentLevel->getUnitList()){
         updateUnit(unit);
-        //qDebug() << unit->getHealth();
     }
 
     removeDeadUnit();
 
     updateGame();
+}
+
+void GameScene::removeDeadUnit()
+{
+    for(Unit * unit: *currentLevel->getUnitList()) {
+        if (unit->isDead()) {
+            // if player die dont do this
+            currentLevel->getUnitList()->removeOne(unit);
+
+            removeItem(unit);
+            delete unit;
+        }
+    }
 }
 
 void GameScene::updateUnit(Unit * unit)
@@ -114,12 +125,29 @@ void GameScene::updateUnit(Unit * unit)
     }
 }
 
+void GameScene::checkCollision(Unit * unit)
+{
+    if (!unit->isInside()) {
+        unit->stoneUnit();
+    }
+    else {
+        for(Element * el: *currentLevel->getElementList()) {
+            if (el->getCollider()) {
+                if (unit->isColliding(el)) {
+                    unit->stoneUnit();
+                }
+            }
+        }
+    }
+}
+
 void GameScene::updateUnitAnimate(UnitAnimate * unitAnimate)
 {
-    if (unitAnimate->isType(PLAYER)) {
+    if (unitAnimate->isType(PLAYER) &&
+            currentLevel->getUnitList()->length() > 0) {
         unitAnimate->lockTarget(enemyTargeted);
-
-    } else if (unitAnimate->isType(ENEMY)) {
+    }
+    else if (unitAnimate->isType(ENEMY)) {
         // move to class
         float minPlayerDistance = 2 * sceneHeight;
         // end
@@ -143,100 +171,76 @@ void GameScene::updateProjectile(UnitAnimate * unit)
             levelElements->addToGroup(projectile);
         }
 
-        // check if projectile hit unit
+        // check if projectile hit player
         projectile->isColliding(player);
-
+        // and all units
         for (Unit * enemy: * currentLevel->getUnitList()) {
             projectile->isColliding(enemy);
         }
 
-        // check if projectil is inside the scene
+        // check if projectile is inside the scene
         projectile->isInside();
 
         // move the projectile
-        if (!projectile->isDead())
+        if (projectile->isDead() || unit->isDead()) {
+            removeItem(projectile);
+            delete projectile;
+        }
+        else {
             projectile->moveUnit();
+        }
     }
 }
 
-void GameScene::updateGame()
+bool GameScene::updateGame()
 {
-    if (!player->isLeavingLevel()) {
-        if (currentLevel->getUnitList()->length() == 0) {
+    if (currentLevel->isLevelDone()) {
         // if no more ennemies activate all exit
         for (Element * el: * currentLevel->getElementList()) {
             if (el->isExit()) {
-            el->activate();
-            }
-        }
-        }
-        else if (player->isDead()) {
-            clock->stop();
-        }
-    }
-    else {
-        qDebug() << "leave level";
-        player->setLeavingLevel(false);
-        removeItem(levelElements);
-        adventure->nextLevel();
-        currentLevel = adventure->getCurrentLevel();
+                if(!el->isActivated())
+                    el->activate();
 
-        drawLevel();
-    }
+                if(el->isColliding(player))
+                    changeLevel();
 
-}
-
-void GameScene::removeDeadProjectile(UnitAnimate * unit)
-{
-    for(Projectile * projectile: *unit->getProjectileList()) {
-        if (projectile->isDead()) {
-            removeItem(projectile);
-
-            delete projectile;
-        }
-    }
-}
-
-void GameScene::removeDeadUnit()
-{
-    for(Unit * unit: *currentLevel->getUnitList()) {
-        if (unit->isDead()) {
-            // if player die dont do this
-            currentLevel->getUnitList()->removeOne(unit);
-
-            removeItem(unit);
-            delete unit;
-        }
-        else {
-            if (unit->isType(UNIT_ANIMATE)) {
-                removeDeadProjectile(dynamic_cast<UnitAnimate*>(unit));
             }
         }
     }
 
     if (player->isDead()) {
-        removeItem(player);
+        clock->stop();
+        qDebug() << "loose";
+        return false;
 
-        //delete player;
     }
-    else {
-        removeDeadProjectile(dynamic_cast<UnitAnimate*>(player));
+    else if (adventure->isWin()) {
+        clock->stop();
+        qDebug() << "win";
+        return false;
+
     }
+    else if (currentLevel->getUnitList()->length() == 0) {
+        currentLevel->setLevelDone(true);
+        player->stopShooting();
+
+    }
+
+    return true;
 }
 
-void GameScene::checkCollision(Unit * unit)
+void GameScene::changeLevel()
 {
-    if (!unit->isInside()) {
-        unit->stoneUnit();
-    }
-    else {
-        for(Element * el: *currentLevel->getElementList()) {
-            if (el->getCollider()) {
-                if (unit->isColliding(el)) {
-                    unit->stoneUnit();
-                }
-            }
-        }
+    if(adventure->nextLevel()) {
+        qDebug() << "leaving";
+        removeItem(levelElements);
+        currentLevel = adventure->getCurrentLevel();
+
+        currentLevel->setLevelDone(false);
+
+        drawLevel();
+
+        player->startShooting();
     }
 }
 

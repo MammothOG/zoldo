@@ -9,39 +9,29 @@ class Unit;
 class HealthBar : public QGraphicsItemGroup
 {
 private:
+    bool followingUnit;
+
+protected:
     int height;
 
     int width;
 
-    int offsetHeight;
+    virtual void onNewHealth(float health) {}
 
-    int offsetWidth;
+    float totalHealth;
 
-    int totalHealth;
+    void setFollowingUnit(bool value);
 
-    Unit * unit;
 public:
     HealthBar();
 
-    ~HealthBar();
-
     bool setHealth(float health);
-
-    QGraphicsRectItem * healthNew;
-
-    QGraphicsRectItem * healthOld;
-
-    int getOffsetHeight() const;
-
-    void setOffsetHeight(int value);
-
-    int getOffsetWidth() const;
-
-    void setOffsetWidth(int value);
 
     int getTotalHealth() const;
 
     void setTotalHealth(int value);
+
+    bool isFollowingUnit() const;
 };
 
 #endif // HEALTHBAR_H

@@ -15,11 +15,9 @@ UnitAnimate::UnitAnimate()
     // angle de rotation of the image
     currentRotation = 0;
 
-    // direction where the unit look
-    directionVector[0] = 0;
-    directionVector[1] = -1;
-
     setCenterAsReferencial();
+
+    direction = QVector2D(0, -1);
 
     // distance
     targetDistance = 0;
@@ -34,7 +32,7 @@ UnitAnimate::UnitAnimate()
     projectileList = new QList<Projectile*>();
 
     // projectile shooted
-    projectileName = TEST_PROJECTILE;
+    projectile = TEST_PROJECTILE;
 }
 
 UnitAnimate::~UnitAnimate()
@@ -45,25 +43,43 @@ UnitAnimate::~UnitAnimate()
 void UnitAnimate::lockTarget(const Unit * const target)
 {
     if (!target->isDead()) {
-        int newDirX = target->x() - this->x();
-        int newDirY = target->y() - this->y();
 
-        targetDistance = sqrt(newDirX * newDirX + newDirY * newDirY);
-        currentRotation = acos( -newDirY /  targetDistance) * 180/3.14;
+        direction.setX(target->x() - this->x());
+        direction.setY(target->y() - this->y());
 
-        if(newDirX < 0)
+        currentRotation = acos( -direction.y() /  direction.length()) * 180/3.14;
+
+        if(direction.x() < 0)
             currentRotation *= -1;
 
         setRotation(currentRotation + getDefaultRotation());
-
-        directionVector[0] = newDirX / targetDistance;
-        directionVector[1] = newDirY / targetDistance;
     }
 }
 
 int UnitAnimate::getCurrentRotation() const
 {
     return currentRotation;
+}
+
+int UnitAnimate::getProjectile() const
+{
+    return projectile;
+}
+
+void UnitAnimate::startShooting()
+{
+    shootTimer->start();
+}
+
+void UnitAnimate::stopShooting()
+{
+    shootTimer->stop();
+    resetRotation();
+}
+
+void UnitAnimate::setProjectile(int value)
+{
+    projectile = value;
 }
 
 void UnitAnimate::shoot()
@@ -74,27 +90,29 @@ void UnitAnimate::shoot()
 
 void UnitAnimate::fire()
 {
-    Projectile * proj = dynamic_cast<Projectile*>(ElementFactory::create(projectileName));
-    proj->setOwner(this);
+    Element * el = ElementFactory::create(projectile);
 
-    proj->setPos(this->x(), this->y());
+    if(el->isType(PROJECTILE)) {
+        Projectile * proj = dynamic_cast<Projectile*>(el);
+        proj->setOwner(this);
 
-    proj->setHorizontalMov(directionVector[0]);
-    proj->setVerticalMov(directionVector[1]);
+        proj->setPos(this->x(), this->y());
 
-    proj->setDefaultRotation(currentRotation + proj->getDefaultRotation());
+        proj->setDefaultRotation(currentRotation + proj->getDefaultRotation());
 
-    projectileList->append(proj);
+        proj->setHorizontalMov(direction.normalized().x());
+        proj->setVerticalMov(direction.normalized().y());
+
+        projectileList->append(proj);
+    }
+    else {
+        qWarning("UnitAnimate projectile are not projectile type.");
+    }
 }
 
 float UnitAnimate::getTargetDistance() const
 {
     return targetDistance;
-}
-
-const float* UnitAnimate::getDirectionVector() const
-{
-    return directionVector;
 }
 
 QList<Projectile*> * UnitAnimate::getProjectileList() const

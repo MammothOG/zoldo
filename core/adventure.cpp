@@ -11,7 +11,10 @@
 Adventure::Adventure()
 {
     levelList = new QList<Level*>();
+
     currentLevel = 0;
+
+    win = false;
 
     player = new Link();
     player->setCenterAsReferencial();
@@ -26,6 +29,7 @@ bool Adventure::nextLevel()
         return true;
     }
     else {
+        win = true;
         return false;
     }
 
@@ -63,8 +67,11 @@ bool Adventure::load(QString name)
             level = new Level;
             if (level->load(line)) {
                 levelList->prepend(level);
+                qDebug() << "Load : " << level->getName();
             }
-            qDebug() << "Load : " << level->getName();
+            else {
+                qDebug() << "Cannot load : " << level->getName();
+            }
         }
     }
     return true;
@@ -89,3 +96,12 @@ Player * Adventure::getPlayer() const
     return player;
 }
 
+bool Adventure::isWin() const
+{
+    return win;
+}
+
+void Adventure::setWin(bool value)
+{
+    win = value;
+}

@@ -6,8 +6,8 @@ PlayerTest::PlayerTest()
 {
     setType(PLAYER_TEST);
 
-    setHeight(BLOCKSIZE * 1.5);
-    setWidth(BLOCKSIZE * 1.5);
+    setHeight(1.5);
+    setWidth(1.5);
 
     setSprite(":/ressources/images/test/player_test.png");
 

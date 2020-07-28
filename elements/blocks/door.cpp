@@ -8,12 +8,12 @@ Door::Door()
 
     setExit(true);
 
-    setStyleDir("exits");
+    setStyleDir("doors");
 
     setSprite(":/ressources/images/test/door_test.png");
 }
 
 void Door::onActivate()
 {
-    setSprite(":/ressources/images/test/door_open_test.png");
+    setStyle("activate/" + getImageName());
 }

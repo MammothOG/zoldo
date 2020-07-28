@@ -35,18 +35,18 @@ void Unit::addHealthBar(HealthBar * healthBar)
     this->healthBar = healthBar;
 
     this->healthBar->setTotalHealth(health);
-    this->healthBar->setOffsetHeight(-getHeight()/2);
+    //this->healthBar->setOffsetHeight(-getHeight()/2);
 }
 
 void Unit::stoneUnit()
 {
-    int stonePosX = this->x() - horizontalMov;
-    int stonePosY = this->y() - verticalMov;
+    float stonePosX = this->x() - horizontalMov * movementSpeed;
+    float stonePosY = this->y() - verticalMov * movementSpeed;
 
     this->setX(stonePosX);
     this->setY(stonePosY);
 
-    if (healthBar != nullptr)
+    if (healthBar != nullptr && healthBar->isFollowingUnit())
     {
         healthBar->setX(stonePosX);
         healthBar->setY(stonePosY);
@@ -55,10 +55,10 @@ void Unit::stoneUnit()
 
 void Unit::moveUnit()
 {
-    int newPosX = this->x() + horizontalMov;
-    int newPosY = this->y() + verticalMov;
+    float newPosX = this->x() + horizontalMov * movementSpeed;
+    float newPosY = this->y() + verticalMov * movementSpeed;
 
-    if (healthBar != nullptr)
+    if (healthBar != nullptr && healthBar->isFollowingUnit())
         healthBar->setPos(newPosX, newPosY);
 
     this->setPos(newPosX, newPosY);
@@ -66,7 +66,7 @@ void Unit::moveUnit()
 
 void Unit::setVerticalMov(float vMov)
 {
-    verticalMov = vMov * movementSpeed;
+    verticalMov = vMov;
 }
 
 float Unit::getVerticalMov() const
@@ -76,7 +76,7 @@ float Unit::getVerticalMov() const
 
 void Unit::setHorizontalMov(float hMov)
 {
-    horizontalMov = hMov * movementSpeed;
+    horizontalMov = hMov;
 }
 
 float Unit::getHorizontalMov() const
@@ -89,9 +89,8 @@ void Unit::giveDamage(float damage)
 {
     this->health -= damage;
 
-    if (this->health <= 0) {
+    if (this->health <= 0)
         setDead(true);
-    }
 
     if (healthBar != nullptr)
         healthBar->setHealth(this->health);

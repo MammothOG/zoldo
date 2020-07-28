@@ -26,6 +26,8 @@ private:
 
     Background * background;
 
+    bool levelDone;
+
     float spawnX;
 
     float spawnY;
@@ -68,6 +70,10 @@ public:
     QString getName() const;
 
     void setName(const QString &value);
+
+    bool isLevelDone() const;
+
+    void setLevelDone(bool value);
 };
 
 #endif // LEVEL_H

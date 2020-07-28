@@ -9,6 +9,9 @@
 #include "elements/player/playertest.h"
 #include "elements/projectile/testprojectile.h"
 #include "elements/blocks/door.h"
+#include "elements/projectile/stone.h"
+#include "elements/projectile/fireball.h"
+
 
 Element * ElementFactory::create(int elementFlag)
 {
@@ -36,7 +39,14 @@ Element * ElementFactory::create(int elementFlag)
     case DOOR:
         instance = new Door;
         break;
+    case STONE:
+        instance = new Stone;
+        break;
+    case FIREBALL:
+        instance = new FireBall;
+        break;
     default:
+        qWarning("Unknown instance by factory.");
         instance = nullptr;
         break;
     }

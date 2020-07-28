@@ -78,13 +78,13 @@ public:
 
     void updateProjectile(UnitAnimate * unit);
 
-    void updateGame();
+    bool updateGame();
 
     void removeDeadUnit();
 
-    void removeDeadProjectile(UnitAnimate * unit);
-
     void checkCollision(Unit * unit);
+
+    void changeLevel();
 
     void keyPressEvent(QKeyEvent *event);
 

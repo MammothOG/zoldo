@@ -2,6 +2,7 @@
 #define UNITANIMATE_H
 
 #include <QTimer>
+#include <QVector2D>
 
 #include "unit.h"
 
@@ -13,7 +14,7 @@ class UnitAnimate : public Unit
 private:
     int currentRotation;
 
-    float directionVector [2];
+    QVector2D direction;
 
     float targetDistance;
 
@@ -23,10 +24,12 @@ private:
 
     QTimer * shootTimer;
 
-    int projectileName;
+    int projectile;
+
+protected:
+    void setProjectile(int value);
 
 public slots:
-
     virtual void shoot();
 
 public:
@@ -38,8 +41,6 @@ public:
 
     float getTargetDistance() const;
 
-    const float* getDirectionVector() const;
-
     QList<Projectile*> * getProjectileList() const;
 
     void fire();
@@ -49,6 +50,13 @@ public:
     void setShootRate(int value);
 
     int getCurrentRotation() const;
+
+    int getProjectile() const;
+
+    void stopShooting();
+
+    void startShooting();
+
 };
 
 #endif // UNITANIMATE_H

@@ -12,10 +12,6 @@ class Player : public UnitAnimate
 {
 
 protected:
-    bool won;
-
-    bool leavingLevel;
-
     //chance of crit
     float crit;
 
@@ -29,13 +25,6 @@ public:
 
     void onCollision(Element * element) override;
 
-    bool hasWon() const;
-
-    void setWon(bool value);
-
-    bool isLeavingLevel() const;
-
-    void setLeavingLevel(bool value);
 };
 
 #endif // PLAYER_H

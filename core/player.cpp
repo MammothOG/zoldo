@@ -7,10 +7,6 @@
 
 Player::Player()
 {
-    won = false;
-
-    leavingLevel = false;
-
     setType(PLAYER);
 
     setZValue(1);
@@ -26,28 +22,7 @@ void Player::shoot()
 
 void Player::onCollision(Element *element)
 {
-    if (element->isExit() && element->isActivated()) {
-        qDebug() << "player changing level";
-        leavingLevel = true;
-    }
-}
-
-bool Player::hasWon() const
-{
-    return won;
-}
-
-void Player::setWon(bool value)
-{
-    won = value;
-}
-
-bool Player::isLeavingLevel() const
-{
-    return leavingLevel;
-}
-
-void Player::setLeavingLevel(bool value)
-{
-    leavingLevel = value;
+    //if (element->isExit() && element->isActivated()) {
+    //    qDebug() << "player changing level";
+    //}
 }

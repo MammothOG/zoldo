@@ -9,15 +9,16 @@ Testator::Testator()
     setMoveRate(10);
 
     setShootRate(1);
+    setProjectile(FIREBALL);
 
     // setup enemy stats
-    setMovementSpeed(5);
+    setMovementSpeed(0);
 
-    setHealth(100);
+    setHealth(1000);
 
     // setup graphics
-    setHeight(50);
-    setWidth(50);
+    setHeight(1);
+    setWidth(1);
     setSprite(":/ressources/images/test/enemy_test.png");
 }
 

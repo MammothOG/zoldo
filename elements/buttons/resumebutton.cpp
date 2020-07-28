@@ -4,8 +4,8 @@
 
 ResumeButton::ResumeButton()
 {
-    setHeight(BLOCKSIZE);
-    setWidth(BLOCKSIZE);
+    setHeight(1);
+    setWidth(1);
 
     setIdleImage(":/ressources/images/buttons/resume-frame-0.png");
     setClickImage(":/ressources/images/buttons/resume-frame-1.png");

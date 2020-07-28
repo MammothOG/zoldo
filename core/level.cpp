@@ -32,6 +32,8 @@ Level::Level()
     height = BLOCKSIZE * VERTICAL_BLOCK;
     width = BLOCKSIZE * HORIZONTAL_BLOCK;
 
+    levelDone = false;
+
     spawnX = 0;
     spawnY = 0;
 }
@@ -251,4 +253,14 @@ QString Level::getName() const
 void Level::setName(const QString &value)
 {
     name = value;
+}
+
+bool Level::isLevelDone() const
+{
+    return levelDone;
+}
+
+void Level::setLevelDone(bool value)
+{
+    levelDone = value;
 }

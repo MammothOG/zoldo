@@ -23,6 +23,8 @@ enum ElementType {
     TEST_PROJECTILE,
     DOOR,
     LINK,
+    STONE,
+    FIREBALL,
 };
 
 class Element :  public QObject, public QGraphicsPixmapItem
@@ -74,11 +76,11 @@ public:
 
     int getWidth() const;
 
-    void setWidth(int value);
+    void setWidth(float value);
 
     int getHeight() const;
 
-    void setHeight(int value);
+    void setHeight(float value);
 
     void setSprite(QString ressource);
 
@@ -113,6 +115,8 @@ public:
     float getDefaultRotation() const;
 
     void setDefaultRotation(float value);
+
+    void resetRotation();
 
     bool setStyle(QString imageName);
 
