@@ -38,6 +38,8 @@ private:
 
     bool gridEnabled;
 
+    bool elementCentered;
+
     Element * elementSelected;
 
     QGraphicsItemGroup * itemGroupSelected;
@@ -79,6 +81,8 @@ public slots:
 
     bool createLevel();
 
+    void reset();
+
 signals:
     void backToMenu();
 
@@ -86,7 +90,6 @@ public:
     LevelCreatorScene(QMainWindow * parent);
 
     QAction * addNewElement(QString name, Element * newElement);
-
 
 };
 

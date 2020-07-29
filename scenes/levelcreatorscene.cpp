@@ -4,7 +4,7 @@
 #include <QGraphicsSceneMouseEvent>
 #include <QKeyEvent>
 #include <QDir>
-#include <QInputDialog>
+#include <QFileDialog>
 
 #include "config.h"
 #include "tools/elementfactory.h"
@@ -32,6 +32,7 @@ LevelCreatorScene::LevelCreatorScene(QMainWindow * parent)
     setBackgroundBrush(Qt::black);
 
     gridEnabled = false;
+    elementCentered = false;
 
     itemGroupSelected = new QGraphicsItemGroup();
     addItem(itemGroupSelected);
@@ -70,6 +71,10 @@ LevelCreatorScene::LevelCreatorScene(QMainWindow * parent)
     QAction * backMenu = new QAction("Back menu");
     connect(backMenu, SIGNAL(triggered()), this, SLOT(createLevel()));
     fileMenu->addAction(saveLevel);
+
+    QAction * resetMenu = new QAction("Back menu");
+    connect(resetMenu, SIGNAL(triggered()), this, SLOT(reset()));
+    fileMenu->addAction(resetMenu);
 
     loadToolMenu(toolsMenu);
 
@@ -138,12 +143,15 @@ void LevelCreatorScene::loadToolMenu(QMenu *menu)
 
     QAction * itemCenterAction = new QAction("Center element");
     itemCenterAction->setCheckable(true);
+    itemCenterAction->setChecked(false);
     connect(itemCenterAction, &QAction::triggered, [=](){
         if (itemCenterAction->isChecked()) {
             elementSelected->setCenterAsReferencial();
+            elementCentered = true;
         }
         else {
             elementSelected->setOffset(0, 0);
+            elementCentered = false;
         }
     });
     menu->addAction(itemCenterAction);
@@ -192,6 +200,9 @@ void LevelCreatorScene::keyPressEvent(QKeyEvent *keyEvent)
             if (styleList.length() > 0)
                 instance->setStyle(styleList.at(indexStyle));
 
+            if (elementCentered)
+                instance->setCenterAsReferencial();
+
             level->appendLevelElement(instance);
             break;
         }
@@ -221,12 +232,10 @@ void LevelCreatorScene::wheelEvent(QGraphicsSceneWheelEvent *event)
 
 bool LevelCreatorScene::createLevel()
 {
-    bool ok;
-    QString name = QInputDialog::getText(0, tr("Choose name :"),
-                     tr("Level name:"), QLineEdit::Normal,
-                     QDir::home().dirName(), &ok);
+    QString name = QFileDialog::getSaveFileName(0, tr("Save Level"), "",
+                                                tr("Level (*.lvl)"));
 
-    if (ok && !name.isEmpty()) {
+    if (!name.isEmpty()) {
         level->setName(name);
         level->save();
         return true;
@@ -237,4 +246,12 @@ bool LevelCreatorScene::createLevel()
 
 }
 
+void LevelCreatorScene::reset()
+{
+    delete elementSelected;
+    delete level;
 
+    level = new Level();
+
+    clear();
+}
