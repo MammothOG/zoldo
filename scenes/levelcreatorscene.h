@@ -36,6 +36,8 @@ private:
 
     int indexStyle;
 
+    bool gridEnabled;
+
     Element * elementSelected;
 
     QGraphicsItemGroup * itemGroupSelected;
@@ -44,7 +46,7 @@ private:
 
     QMenuBar * menuBar;
 
-    QMenu * optionMenu;
+    QMenu * fileMenu;
 
     QMenu * backgroundMenu;
 
@@ -54,11 +56,19 @@ private:
 
     QMenu * unitMenu;
 
+    QMenu * toolsMenu;
+
+    QAction * gridAction;
+
+    QAction * itemCenterAction;
+
     void createAction();
 
     QStringList styleList;
 
     void grabStyleElement(Element * element);
+
+    void loadToolMenu(QMenu * menu);
 
 public slots:
     void mouseMoveEvent(QGraphicsSceneMouseEvent *event) override;

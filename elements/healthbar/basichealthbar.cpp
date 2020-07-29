@@ -2,18 +2,20 @@
 
 #include <QBrush>
 
+#include "config.h"
 
-BasicHealthBar::BasicHealthBar()
+
+BasicHealthBar::BasicHealthBar(int offWidth, int offHeight)
 {
     setFollowingUnit(true);
 
-    height = 4;
-    width = 60;
+    height = 0.1 * BLOCKSIZE;
+    width = 1 * BLOCKSIZE;
 
     newWidth = width;
 
-    offsetWidth = -width/2;
-    offsetHeight = -height/2;
+    offsetWidth = offWidth-width/2;
+    offsetHeight = -offHeight-height/2;
 
     QRectF healthNewShape(offsetWidth, offsetHeight, width, height);
     QRectF healthOldShape(offsetWidth, offsetHeight, width, height);

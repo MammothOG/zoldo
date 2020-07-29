@@ -31,6 +31,8 @@ LevelCreatorScene::LevelCreatorScene(QMainWindow * parent)
     setSceneRect(0, 0, sceneWidth, sceneHeight);
     setBackgroundBrush(Qt::black);
 
+    gridEnabled = false;
+
     itemGroupSelected = new QGraphicsItemGroup();
     addItem(itemGroupSelected);
 
@@ -45,13 +47,16 @@ LevelCreatorScene::LevelCreatorScene(QMainWindow * parent)
     parent->setMenuBar(menuBar);
 
     // create menu with all category of element
-    optionMenu = new QMenu("Menu");
+    fileMenu = new QMenu("File");
+    toolsMenu = new QMenu("Tools");
+
     playerMenu = new QMenu("Player");
     blockMenu = new QMenu("Block");
     unitMenu = new QMenu("Unit");
     backgroundMenu = new QMenu("Background");
 
-    menuBar->addMenu(optionMenu);
+    menuBar->addMenu(fileMenu);
+    menuBar->addMenu(toolsMenu);
     menuBar->addMenu(backgroundMenu);
     menuBar->addMenu(blockMenu);
     menuBar->addMenu(unitMenu);
@@ -60,11 +65,13 @@ LevelCreatorScene::LevelCreatorScene(QMainWindow * parent)
     // Action for saving level
     QAction * saveLevel = new QAction("Save level");
     connect(saveLevel, SIGNAL(triggered()), this, SLOT(createLevel()));
-    optionMenu->addAction(saveLevel);
+    fileMenu->addAction(saveLevel);
 
     QAction * backMenu = new QAction("Back menu");
     connect(backMenu, SIGNAL(triggered()), this, SLOT(createLevel()));
-    optionMenu->addAction(saveLevel);
+    fileMenu->addAction(saveLevel);
+
+    loadToolMenu(toolsMenu);
 
     createAction();
 
@@ -95,6 +102,9 @@ QAction * LevelCreatorScene::addNewElement(QString name, Element *newElement)
         elementSelected = newElement;
 
         grabStyleElement(newElement);
+
+        posX = 0;
+        posY = 0;
     });
     return newAction;
 }
@@ -113,25 +123,56 @@ void LevelCreatorScene::grabStyleElement(Element * element)
     qDebug() << styleList;
 }
 
+void LevelCreatorScene::loadToolMenu(QMenu *menu)
+{
+    QAction * gridAction = new QAction("Grid");
+    gridAction->setCheckable(true);
+    gridAction->setChecked(false);
+    connect(gridAction, &QAction::triggered, [=](){
+        if (gridAction->isChecked())
+            gridEnabled = true;
+        else
+            gridEnabled = false;
+    });
+    menu->addAction(gridAction);
+
+    QAction * itemCenterAction = new QAction("Center element");
+    itemCenterAction->setCheckable(true);
+    connect(itemCenterAction, &QAction::triggered, [=](){
+        if (itemCenterAction->isChecked()) {
+            elementSelected->setCenterAsReferencial();
+        }
+        else {
+            elementSelected->setOffset(0, 0);
+        }
+    });
+    menu->addAction(itemCenterAction);
+}
+
 void LevelCreatorScene::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 {
     posX = event->scenePos().x();
     posY = event->scenePos().y();
 
-    if (elementSelected->isType(BLOCK))
-    {
-        if(posX > 0 && posY > 0)
+    if (elementSelected->isInside()) {
+        if (gridEnabled)
         {
-            posX -= (posX % BLOCKSIZE);
-            posY -= (posY % BLOCKSIZE);
+            if(posX > 0 && posY > 0)
+            {
+                posX -= (posX % BLOCKSIZE);
+                posY -= (posY % BLOCKSIZE);
+            }
+        }
+        if (elementSelected->isType(BACKGROUND))
+        {
+            posX = 0;
+            posY = 0;
         }
     }
-    else if (elementSelected->isType(BACKGROUND))
-    {
-        posX = 0;
-        posY = 0;
+    else {
+        posX = -elementSelected->offset().rx();
+        posY = -elementSelected->offset().ry();
     }
-
     elementSelected->setPos(posX, posY);
 }
 
@@ -143,15 +184,20 @@ void LevelCreatorScene::keyPressEvent(QKeyEvent *keyEvent)
         break;
 
     case Qt::Key_Space:
-        Element * instance = ElementFactory::create(elementSelected->types().last());
-        itemGroupSelected->addToGroup(instance);
-        instance->setPos(posX, posY);
+        if (elementSelected->isInside()) {
+            Element * instance = ElementFactory::create(elementSelected->types().last());
+            itemGroupSelected->addToGroup(instance);
+            instance->setPos(posX, posY);
 
-        if (styleList.length() > 0)
-            instance->setStyle(styleList.at(indexStyle));
+            if (styleList.length() > 0)
+                instance->setStyle(styleList.at(indexStyle));
 
-        level->appendLevelElement(instance);
-        break;
+            level->appendLevelElement(instance);
+            break;
+        }
+        else {
+            qDebug() << "Cannot add item outside the scene !";
+        }
     }
 }
 

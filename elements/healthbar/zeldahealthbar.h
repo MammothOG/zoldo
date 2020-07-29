@@ -10,6 +10,8 @@
 class ZeldaHealthBar : public HealthBar
 {
 private:
+    int spaceSize;
+
     float firstHealthLimit;
 
     float secondHealtLimit;

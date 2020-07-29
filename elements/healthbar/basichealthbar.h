@@ -14,7 +14,7 @@ private:
     int newWidth;
 
 public:
-    BasicHealthBar();
+    BasicHealthBar(int offWidth, int offHeight);
 
     ~BasicHealthBar();
 

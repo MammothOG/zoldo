@@ -79,7 +79,7 @@ void GameScene::drawLevel()
     }
 
     for(Unit * unit : *currentLevel->getUnitList()){
-        HealthBar * unitHealthBar = new BasicHealthBar();
+        HealthBar * unitHealthBar = new BasicHealthBar(0, unit->getHeight()/2);
         unit->addHealthBar(unitHealthBar);
         levelElements->addToGroup(unitHealthBar);
 

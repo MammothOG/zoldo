@@ -16,7 +16,7 @@ Link::Link()
     setShootRate(20);
     setProjectile(STONE);
 
-    setHealth(100);
+    setHealth(200);
 
     //setDefaultRotation(180);
 }

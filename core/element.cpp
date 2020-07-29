@@ -130,10 +130,10 @@ bool Element::isInside()
     int rightBorder = BLOCKSIZE * HORIZONTAL_BLOCK - width - offset().rx();
     int bottomBorder = BLOCKSIZE * VERTICAL_BLOCK - height - offset().ry();
 
-    if (this->x() > leftBorder &&
-            this->y() > topBorder &&
-            this->x() < rightBorder &&
-            this->y() < bottomBorder)
+    if (this->x() >= leftBorder &&
+            this->y() >= topBorder &&
+            this->x() <= rightBorder &&
+            this->y() <= bottomBorder)
     {
         return true;
     }
