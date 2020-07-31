@@ -4,9 +4,10 @@
 #include <QGraphicsSceneMouseEvent>
 #include <QKeyEvent>
 #include <QDir>
-#include <QFileDialog>
+#include <QInputDialog>
 
 #include "config.h"
+#include "scenemanager.h"
 #include "tools/elementfactory.h"
 #include "core/element.h"
 #include "core/player.h"
@@ -18,9 +19,12 @@
 #include "elements/blocks/door.h"
 #include "elements/background/testbackground.h"
 #include "elements/enemies/testator.h"
+#include "elements/enemies/bat.h"
+#include "elements/enemies/garbage.h"
+#include "elements/enemies/ghost.h"
 
 
-LevelCreatorScene::LevelCreatorScene(QMainWindow * parent)
+LevelCreatorScene::LevelCreatorScene(QMainWindow * parent, QGraphicsView * sceneManager)
 {
     posX = 0;
     posY = 0;
@@ -68,17 +72,21 @@ LevelCreatorScene::LevelCreatorScene(QMainWindow * parent)
     connect(saveLevel, SIGNAL(triggered()), this, SLOT(createLevel()));
     fileMenu->addAction(saveLevel);
 
-    QAction * backMenu = new QAction("Back menu");
-    connect(backMenu, SIGNAL(triggered()), this, SLOT(createLevel()));
-    fileMenu->addAction(saveLevel);
-
-    QAction * resetMenu = new QAction("Back menu");
+    QAction * resetMenu = new QAction("Reset");
     connect(resetMenu, SIGNAL(triggered()), this, SLOT(reset()));
     fileMenu->addAction(resetMenu);
+
+    QAction * backMenu = new QAction("Menu");
+    connect(backMenu, SIGNAL(triggered()), sceneManager, SLOT(setMenuScene()));
+    fileMenu->addAction(backMenu);
 
     loadToolMenu(toolsMenu);
 
     createAction();
+}
+
+LevelCreatorScene::~LevelCreatorScene()
+{
 
 }
 
@@ -94,6 +102,9 @@ void LevelCreatorScene::createAction()
     backgroundMenu->addAction(addNewElement("test background", new TestBackground()));
 
     unitMenu->addAction(addNewElement("testator", new Testator()));
+    unitMenu->addAction(addNewElement("bat", new Bat()));
+    unitMenu->addAction(addNewElement("ghost", new Ghost()));
+    unitMenu->addAction(addNewElement("garbage", new Garbage()));
 }
 
 QAction * LevelCreatorScene::addNewElement(QString name, Element *newElement)
@@ -124,8 +135,6 @@ void LevelCreatorScene::grabStyleElement(Element * element)
         styleList = styleDir.entryList(QStringList() << "*.png", QDir::Files);
         styleList.replaceInStrings(".png", "");
     }
-
-    qDebug() << styleList;
 }
 
 void LevelCreatorScene::loadToolMenu(QMenu *menu)
@@ -232,10 +241,13 @@ void LevelCreatorScene::wheelEvent(QGraphicsSceneWheelEvent *event)
 
 bool LevelCreatorScene::createLevel()
 {
-    QString name = QFileDialog::getSaveFileName(0, tr("Save Level"), "",
-                                                tr("Level (*.lvl)"));
+    bool ok;
+    QString name = QInputDialog::getText(0, tr("Choose name :"),
+                     tr("Level name:"), QLineEdit::Normal,
+                     QDir::home().dirName(), &ok);
 
-    if (!name.isEmpty()) {
+
+    if (ok && !name.isEmpty()) {
         level->setName(name);
         level->save();
         return true;

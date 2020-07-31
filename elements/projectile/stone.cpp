@@ -4,8 +4,8 @@ Stone::Stone()
 {
     setType(STONE);
 
-    setHeight(0.5);
-    setWidth(0.5);
+    setHeight(0.3);
+    setWidth(0.3);
 
     setSprite(":/ressources/images/projectiles/slingshot_stone.png");
 

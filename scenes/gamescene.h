@@ -49,10 +49,11 @@ private:
 
     Player * player;
 
-    Unit * enemyTargeted;
+    UnitAnimate * enemyTargeted;
 
     Level * currentLevel;
 
+    float distancePlayerTarget;
 signals:
     void signalQuitScene();
 
@@ -66,7 +67,9 @@ public slots:
     void onResume();
 
 public:
-    GameScene();
+    GameScene(QGraphicsView * sceneManger);
+
+    ~GameScene();
 
     void loadAdventure();
 

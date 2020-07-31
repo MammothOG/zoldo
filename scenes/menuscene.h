@@ -24,12 +24,14 @@ private:
 
     SettingButton * settingButton;
 
+    QGraphicsView * sceneManager;
+
 public:
-    MenuScene();
+    MenuScene(QGraphicsView * sceneManager);
 
-    PlayButton *getPlayButton() const;
+    ~MenuScene();
 
-    SettingButton *getSettingButton() const;
+    void keyPressEvent(QKeyEvent *keyEvent) override;
 };
 
 #endif // MENUSCENE_H

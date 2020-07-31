@@ -6,11 +6,17 @@
 #include "elements/blocks/water.h"
 #include "elements/background/testbackground.h"
 #include "elements/enemies/testator.h"
+#include "elements/enemies/bat.h"
+#include "elements/enemies/ghost.h"
+#include "elements/enemies/garbage.h"
 #include "elements/player/playertest.h"
 #include "elements/projectile/testprojectile.h"
 #include "elements/blocks/door.h"
 #include "elements/projectile/stone.h"
 #include "elements/projectile/fireball.h"
+#include "elements/projectile/arrow.h"
+#include "elements/projectile/dirtyball.h"
+#include "elements/projectile/airgust.h"
 
 
 Element * ElementFactory::create(int elementFlag)
@@ -44,6 +50,24 @@ Element * ElementFactory::create(int elementFlag)
         break;
     case FIREBALL:
         instance = new FireBall;
+        break;
+    case GARBAGE_ENEMY:
+        instance = new Garbage;
+        break;
+    case BAT_ENEMY:
+        instance = new Bat;
+        break;
+    case GHOST_ENEMY:
+        instance = new Ghost;
+        break;
+    case DIRTY_BALL:
+        instance = new DirtyBall;
+        break;
+    case ARROW:
+        instance = new Arrow;
+        break;
+    case AIR_GUST:
+        instance = new AirGust;
         break;
     default:
         qWarning("Unknown instance by factory.");

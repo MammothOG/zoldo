@@ -1,4 +1,4 @@
-#include "gameengine.h"
+#include "scenemanager.h"
 
 #include <QApplication>
 #include <QMainWindow>
@@ -9,7 +9,7 @@
 void lauchGame() {
 
     QMainWindow * mainWindow = new QMainWindow();
-    GameEngine * game = new GameEngine(mainWindow);
+    SceneManager * game = new SceneManager(mainWindow);
 
     mainWindow->setCentralWidget(game);
     mainWindow->show();

@@ -18,15 +18,21 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
     core/healthbar.cpp \
     elements/blocks/door.cpp \
+    elements/projectile/airgust.cpp \
+    elements/enemies/bat.cpp \
+    elements/enemies/garbage.cpp \
+    elements/enemies/ghost.cpp \
     elements/healthbar/basichealthbar.cpp \
     elements/healthbar/zeldahealthbar.cpp \
     elements/player/link.cpp \
     elements/player/playertest.cpp \
+    elements/projectile/arrow.cpp \
+    elements/projectile/dirtyball.cpp \
     elements/projectile/fireball.cpp \
     elements/projectile/stone.cpp \
+    scenemanager.cpp \
     tools/elementfactory.cpp \
     main.cpp \
-    gameengine.cpp \
     core/adventure.cpp \
     core/block.cpp \
     core/element.cpp \
@@ -60,15 +66,21 @@ SOURCES += \
 HEADERS += \
     core/healthbar.h \
     elements/blocks/door.h \
+    elements/projectile/airgust.h \
+    elements/enemies/bat.h \
+    elements/enemies/garbage.h \
+    elements/enemies/ghost.h \
     elements/healthbar/basichealthbar.h \
     elements/healthbar/zeldahealthbar.h \
     elements/player/link.h \
     elements/player/playertest.h \
+    elements/projectile/arrow.h \
+    elements/projectile/dirtyball.h \
     elements/projectile/fireball.h \
     elements/projectile/stone.h \
+    scenemanager.h \
     tools/elementfactory.h \
     config.h \
-    gameengine.h \
     core/adventure.h \
     core/block.h \
     core/custombutton.h \

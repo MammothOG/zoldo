@@ -52,7 +52,8 @@ void UnitAnimate::lockTarget(const Unit * const target)
         if(direction.x() < 0)
             currentRotation *= -1;
 
-        setRotation(currentRotation + getDefaultRotation());
+        targetDistance = direction.length();
+        //setRotation(currentRotation + getDefaultRotation());
     }
 }
 

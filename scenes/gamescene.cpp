@@ -16,10 +16,12 @@
 #include "scenes/pausemenu.h"
 
 
-GameScene::GameScene()
+GameScene::GameScene(QGraphicsView * sceneManger)
 {
     sceneHeight = VERTICAL_BLOCK * BLOCKSIZE;
     sceneWidth = HORIZONTAL_BLOCK * BLOCKSIZE;
+
+    distancePlayerTarget = 0;
 
     setSceneRect(0, 0, sceneWidth, sceneHeight);
     setBackgroundBrush(Qt::black);
@@ -42,6 +44,11 @@ GameScene::GameScene()
     connect(clock, SIGNAL(timeout()), this, SLOT(updateState()));
     clock->start(1000/FPS);
     setBackgroundBrush(Qt::black);
+}
+
+GameScene::~GameScene()
+{
+
 }
 
 void GameScene::loadAdventure()
@@ -69,10 +76,7 @@ void GameScene::drawLevel()
 
     levelElements->addToGroup(currentLevel->getBackground());
 
-    if (currentLevel->getUnitList()->length() > 0)
-        enemyTargeted = currentLevel->getUnitList()->at(0);
-    else
-        enemyTargeted = nullptr;
+    enemyTargeted = nullptr;
 
     for(Element * element : *currentLevel->getElementList()){
         levelElements->addToGroup(element);
@@ -90,6 +94,8 @@ void GameScene::drawLevel()
 
 void GameScene::updateState()
 {
+    distancePlayerTarget = 2 * sceneHeight;
+
     updateUnit(player);
 
     for(Unit * unit: *currentLevel->getUnitList()){
@@ -120,7 +126,7 @@ void GameScene::updateUnit(Unit * unit)
 
     checkCollision(unit);
 
-    if (unit->isType(UNIT_ANIMATE) && enemyTargeted != nullptr) {
+    if (unit->isType(UNIT_ANIMATE)) {
         updateUnitAnimate(dynamic_cast<UnitAnimate*>(unit));
     }
 }
@@ -144,18 +150,18 @@ void GameScene::checkCollision(Unit * unit)
 void GameScene::updateUnitAnimate(UnitAnimate * unitAnimate)
 {
     if (unitAnimate->isType(PLAYER) &&
-            currentLevel->getUnitList()->length() > 0) {
+            currentLevel->getUnitList()->length() > 0 &&
+            enemyTargeted != nullptr) {
         unitAnimate->lockTarget(enemyTargeted);
+
     }
     else if (unitAnimate->isType(ENEMY)) {
-        // move to class
-        float minPlayerDistance = 2 * sceneHeight;
-        // end
 
         unitAnimate->lockTarget(player);
 
-        if (minPlayerDistance > unitAnimate->getTargetDistance()) {
+        if (distancePlayerTarget > unitAnimate->getTargetDistance()) {
             enemyTargeted = unitAnimate;
+            distancePlayerTarget = unitAnimate->getTargetDistance();
         }
 
     }

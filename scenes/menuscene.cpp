@@ -1,14 +1,19 @@
 #include "menuscene.h"
 
+#include <QMetaObject>
+
 #include "config.h"
 #include "elements/buttons/playbutton.h"
 #include "elements/buttons/settingbutton.h"
 #include "elements/buttons/quitbutton.h"
 #include "elements/visual/menutitle.h"
+#include "scenemanager.h"
 
 
-MenuScene::MenuScene()
+MenuScene::MenuScene(QGraphicsView * sceneManager)
 {
+    this->sceneManager = sceneManager;
+
     setSceneRect(0, 0, WINSIZE.rwidth(), WINSIZE.rheight());
     setBackgroundBrush(Qt::white);
 
@@ -28,14 +33,19 @@ MenuScene::MenuScene()
     title->setPos(WINSIZE.rwidth()/2, 200);
     addItem(title);
 
+    connect(playButton, SIGNAL(onReleaseClick()), sceneManager, SLOT(setGameScene()));
 }
 
-PlayButton *MenuScene::getPlayButton() const
+MenuScene::~MenuScene()
 {
-    return playButton;
+
 }
 
-SettingButton *MenuScene::getSettingButton() const
+void MenuScene::keyPressEvent(QKeyEvent *keyEvent)
 {
-    return settingButton;
+    switch (keyEvent->key()) {
+    case Qt::Key_F1:
+        QMetaObject::invokeMethod(sceneManager, "setLvlCreatorScene");
+        break;
+    }
 }

@@ -6,17 +6,17 @@ Link::Link()
 {
     setType(LINK);
 
-    setHeight(1);
-    setWidth(1.2);
+    setHeight(0.8);
+    setWidth(0.96);
 
     setSprite(":/ressources/images/players/zelda1.png");
 
     setMovementSpeed(5);
 
     setShootRate(20);
-    setProjectile(STONE);
+    setProjectile(ARROW);
 
-    setHealth(200);
+    setHealth(10000);
 
     //setDefaultRotation(180);
 }

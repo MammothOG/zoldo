@@ -87,7 +87,9 @@ signals:
     void backToMenu();
 
 public:
-    LevelCreatorScene(QMainWindow * parent);
+    LevelCreatorScene(QMainWindow * parent, QGraphicsView * sceneManager);
+
+    ~LevelCreatorScene();
 
     QAction * addNewElement(QString name, Element * newElement);
 

@@ -15,16 +15,27 @@ enum ElementType {
     UNIT_ANIMATE,
     PROJECTILE,
     CUSTOM_BUTTON,
+
     WALL,
-    WATER,
-    TEST_BACKGROUND,
-    TESTATOR,
-    PLAYER_TEST,
-    TEST_PROJECTILE,
     DOOR,
-    LINK,
+    WATER,
+
+    TEST_BACKGROUND,
+
+    TESTATOR,
+    BAT_ENEMY,
+    GARBAGE_ENEMY,
+    GHOST_ENEMY,
+
+    TEST_PROJECTILE,
+    DIRTY_BALL,
+    ARROW,
     STONE,
     FIREBALL,
+    AIR_GUST,
+
+    PLAYER_TEST,
+    LINK,
 };
 
 class Element :  public QObject, public QGraphicsPixmapItem

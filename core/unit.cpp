@@ -84,7 +84,6 @@ float Unit::getHorizontalMov() const
     return horizontalMov;
 }
 
-#include <QDebug>
 void Unit::giveDamage(float damage)
 {
     this->health -= damage;

@@ -9,11 +9,7 @@
 #include <QKeyEvent>
 
 
-class MenuScene;
-
-class LevelCreatorScene;
-
-class GameEngine: public QGraphicsView
+class SceneManager: public QGraphicsView
 {
     Q_OBJECT
 private:
@@ -23,21 +19,22 @@ private:
 
     QMainWindow * parent;
 
+    QGraphicsScene * scene;
+
 protected:
     void mousePressEvent(QMouseEvent *event);
 
     void mouseReleaseEvent(QMouseEvent *event);
 
 public slots:
-    void onPlay();
+    void setMenuScene();
 
-    void onSetting();
+    void setGameScene();
 
-    void onMenu();
+    void setLvlCreatorScene();
 
 public:
-    GameEngine(QMainWindow * parent);
-
+    SceneManager(QMainWindow * parent);
 };
 
 #endif // GAMEENGINE_H
