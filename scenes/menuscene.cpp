@@ -18,7 +18,7 @@ MenuScene::MenuScene(QGraphicsView * sceneManager)
     setBackgroundBrush(Qt::white);
 
     playButton = new PlayButton();
-    playButton->setPos(WINSIZE.rwidth()/2, WINSIZE.rheight()/2);
+    playButton->setPos(WINSIZE.rwidth()/2, WINSIZE.rheight()*3/4);
     addItem(playButton);
 
     quitButton = new QuitButton();

@@ -22,6 +22,7 @@
 #include "elements/enemies/bat.h"
 #include "elements/enemies/garbage.h"
 #include "elements/enemies/ghost.h"
+#include "elements/enemies/despicableboss.h"
 
 
 LevelCreatorScene::LevelCreatorScene(QMainWindow * parent, QGraphicsView * sceneManager)
@@ -105,6 +106,7 @@ void LevelCreatorScene::createAction()
     unitMenu->addAction(addNewElement("bat", new Bat()));
     unitMenu->addAction(addNewElement("ghost", new Ghost()));
     unitMenu->addAction(addNewElement("garbage", new Garbage()));
+    unitMenu->addAction(addNewElement("despicable (Boss)", new DespicableBoss()));
 }
 
 QAction * LevelCreatorScene::addNewElement(QString name, Element *newElement)

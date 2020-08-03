@@ -18,6 +18,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
     core/healthbar.cpp \
     elements/blocks/door.cpp \
+    elements/enemies/despicableboss.cpp \
     elements/projectile/airgust.cpp \
     elements/enemies/bat.cpp \
     elements/enemies/garbage.cpp \
@@ -66,6 +67,7 @@ SOURCES += \
 HEADERS += \
     core/healthbar.h \
     elements/blocks/door.h \
+    elements/enemies/despicableboss.h \
     elements/projectile/airgust.h \
     elements/enemies/bat.h \
     elements/enemies/garbage.h \

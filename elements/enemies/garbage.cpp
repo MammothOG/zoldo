@@ -6,7 +6,7 @@ Garbage::Garbage()
 
     setMoveRate(10);
 
-    setShootRate(1);
+    setShootRate(3000);
 
     setProjectile(STONE);
 

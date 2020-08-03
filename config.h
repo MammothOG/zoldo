@@ -13,7 +13,7 @@ extern int BLOCKSIZE;
 #define VERTICAL_BLOCK 16
 #define HORIZONTAL_BLOCK 12
 
-#define FPS 100
+#define FPS 60
 
 #define TOPSPACE 20
 #define BOTSPACE 20

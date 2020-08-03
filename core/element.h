@@ -26,6 +26,7 @@ enum ElementType {
     BAT_ENEMY,
     GARBAGE_ENEMY,
     GHOST_ENEMY,
+    DESPICABLE_BOSS,
 
     TEST_PROJECTILE,
     DIRTY_BALL,

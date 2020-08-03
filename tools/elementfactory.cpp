@@ -9,6 +9,7 @@
 #include "elements/enemies/bat.h"
 #include "elements/enemies/ghost.h"
 #include "elements/enemies/garbage.h"
+#include "elements/enemies/despicableboss.h"
 #include "elements/player/playertest.h"
 #include "elements/projectile/testprojectile.h"
 #include "elements/blocks/door.h"
@@ -68,6 +69,9 @@ Element * ElementFactory::create(int elementFlag)
         break;
     case AIR_GUST:
         instance = new AirGust;
+        break;
+    case DESPICABLE_BOSS:
+        instance = new DespicableBoss;
         break;
     default:
         qWarning("Unknown instance by factory.");

@@ -23,7 +23,7 @@ UnitAnimate::UnitAnimate()
     targetDistance = 0;
 
     // interval between each shoot
-    shootRate = 500;
+    shootRate = 1000;
     shootTimer = new QTimer(this);
     connect(shootTimer, SIGNAL(timeout()), this, SLOT(shoot()));
     shootTimer->start(shootRate);
@@ -38,6 +38,7 @@ UnitAnimate::UnitAnimate()
 UnitAnimate::~UnitAnimate()
 {
     delete projectileList;
+    stopShooting();
 }
 
 void UnitAnimate::lockTarget(const Unit * const target)
@@ -69,7 +70,7 @@ int UnitAnimate::getProjectile() const
 
 void UnitAnimate::startShooting()
 {
-    shootTimer->start();
+    shootTimer->start(shootRate);
 }
 
 void UnitAnimate::stopShooting()
@@ -87,6 +88,12 @@ void UnitAnimate::shoot()
 {
     // seting a default projectile
     fire();
+}
+
+void UnitAnimate::setShootRate(int value)
+{
+    shootRate = value;
+    shootTimer->setInterval(shootRate);
 }
 
 void UnitAnimate::fire()
@@ -124,9 +131,4 @@ QList<Projectile*> * UnitAnimate::getProjectileList() const
 int UnitAnimate::getShootRate() const
 {
     return shootRate;
-}
-
-void UnitAnimate::setShootRate(int value)
-{
-    shootRate = value;
 }

@@ -6,7 +6,7 @@ Bat::Bat()
 
     setMoveRate(10);
 
-    setShootRate(1);
+    setShootRate(1000);
 
     setProjectile(DIRTY_BALL);
 

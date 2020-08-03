@@ -11,12 +11,12 @@ Link::Link()
 
     setSprite(":/ressources/images/players/zelda1.png");
 
-    setMovementSpeed(5);
+    setMovementSpeed(8);
 
-    setShootRate(20);
+    setShootRate(700);
     setProjectile(ARROW);
 
-    setHealth(10000);
+    setHealth(90);
 
     //setDefaultRotation(180);
 }

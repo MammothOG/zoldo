@@ -20,7 +20,7 @@ private:
 
     QList<Projectile*> * projectileList;
 
-    int shootRate;
+    float shootRate;
 
     QTimer * shootTimer;
 
