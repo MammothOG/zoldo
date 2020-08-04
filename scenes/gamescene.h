@@ -27,6 +27,8 @@ class Projectile;
 
 class Element;
 
+class EndGameVisual;
+
 class GameScene : public QGraphicsScene
 {
      Q_OBJECT
@@ -42,6 +44,8 @@ private:
     QGraphicsItemGroup * levelElements;
 
     QGraphicsItemGroup * uiView;
+
+    EndGameVisual * endGameVisual;
 
     QTimer * clock;
 

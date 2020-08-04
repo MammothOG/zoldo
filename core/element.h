@@ -132,10 +132,6 @@ public:
 
     bool setStyle(QString imageName);
 
-    void mirroringY();
-
-    void mirroringX();
-
     QString getStyleDir() const;
 
     QString getImageName() const;

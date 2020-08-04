@@ -19,3 +19,8 @@ DespicableBoss::DespicableBoss()
 
     setSprite(":/ressources/images/enemies/despicable_boss.png");
 }
+
+void DespicableBoss::move()
+{
+
+}

@@ -13,6 +13,7 @@
 #include "elements/buttons/pausebutton.h"
 #include "elements/buttons/restartbutton.h"
 #include "elements/buttons/resumebutton.h"
+#include "elements/visual/endgamevisual.h"
 #include "scenes/pausemenu.h"
 
 
@@ -214,15 +215,13 @@ bool GameScene::updateGame()
         }
     }
 
-    if (player->isDead()) {
+    if (player->isDead() || adventure->isWin()) {
         clock->stop();
-        qDebug() << "loose";
-        return false;
 
-    }
-    else if (adventure->isWin()) {
-        clock->stop();
-        qDebug() << "win";
+        endGameVisual = new EndGameVisual(adventure->isWin());
+        endGameVisual->setPos(sceneWidth/2,sceneHeight/3);
+        addItem(endGameVisual);
+
         return false;
 
     }

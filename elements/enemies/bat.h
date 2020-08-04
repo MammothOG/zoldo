@@ -9,6 +9,8 @@ class Bat : public Enemy
     Q_OBJECT
 public:
     Bat();
+
+    void move() override;
 };
 
 #endif // BAT_H

@@ -7,6 +7,8 @@ class DespicableBoss : public Enemy
 {
 public:
     DespicableBoss();
+
+    void move() override;
 };
 
 #endif // DESPICABLEBOSS_H

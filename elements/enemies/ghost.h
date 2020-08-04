@@ -9,6 +9,8 @@ class Ghost : public Enemy
     Q_OBJECT
 public:
     Ghost();
+
+    void move() override;
 };
 
 #endif // GHOST_H

@@ -19,3 +19,8 @@ Garbage::Garbage()
 
     setSprite(":/ressources/images/enemies/garbage.png");
 }
+
+void Garbage::move()
+{
+
+}

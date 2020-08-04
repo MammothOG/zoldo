@@ -11,7 +11,7 @@ AirGust::AirGust()
 
     setDamage(10);
 
-    setMovementSpeed(2);
+    setMovementSpeed(1);
 
     setDefaultRotation(-90);
 

@@ -6,7 +6,7 @@ Ghost::Ghost()
 
     setMoveRate(10);
 
-    setShootRate(1000);
+    setShootRate(2500);
 
     setProjectile(AIR_GUST);
 
@@ -17,4 +17,9 @@ Ghost::Ghost()
     setHeight(1.06);
     setWidth(0.80);
     setSprite(":/ressources/images/enemies/ghost.png");
+}
+
+void Ghost::move()
+{
+
 }

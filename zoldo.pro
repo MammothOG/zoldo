@@ -31,6 +31,7 @@ SOURCES += \
     elements/projectile/dirtyball.cpp \
     elements/projectile/fireball.cpp \
     elements/projectile/stone.cpp \
+    elements/visual/endgamevisual.cpp \
     scenemanager.cpp \
     tools/elementfactory.cpp \
     main.cpp \
@@ -80,6 +81,7 @@ HEADERS += \
     elements/projectile/dirtyball.h \
     elements/projectile/fireball.h \
     elements/projectile/stone.h \
+    elements/visual/endgamevisual.h \
     scenemanager.h \
     tools/elementfactory.h \
     config.h \

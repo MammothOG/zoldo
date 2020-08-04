@@ -9,6 +9,8 @@ class Garbage : public Enemy
     Q_OBJECT
 public:
     Garbage();
+
+    void move() override;
 };
 
 #endif // GARBAGE_H

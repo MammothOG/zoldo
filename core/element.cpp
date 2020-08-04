@@ -234,15 +234,3 @@ void Element::setType(int value)
 {
     type.append(value);
 }
-
-void Element::mirroringY()
-{
-    setTransform(QTransform().scale(-1, 1));
-    setOffset(offset().rx() - width, offset().ry());
-}
-
-void Element::mirroringX()
-{
-    setTransform(QTransform().scale(1, -1));
-    setOffset(offset().rx(), offset().ry() - height);
-}

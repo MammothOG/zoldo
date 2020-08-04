@@ -6,7 +6,7 @@ Bat::Bat()
 
     setMoveRate(10);
 
-    setShootRate(1000);
+    setShootRate(2500);
 
     setProjectile(DIRTY_BALL);
 
@@ -17,4 +17,9 @@ Bat::Bat()
     setHeight(0.67);
     setWidth(0.5);
     setSprite(":/ressources/images/enemies/bat.png");
+}
+
+void Bat::move()
+{
+
 }
