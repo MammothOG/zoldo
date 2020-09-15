@@ -138,7 +138,7 @@ bool Level::load(QString levelName)
     QFile levelFile("levels/" + levelName + ".lvl");
     if(!levelFile.exists())
     {
-        qWarning("Cannot be open : File does not exist!");
+        qWarning().noquote() << QString("Cannot be open : \n >%1 \n File does not exist!").arg(levelName);
         return false;
     }
 

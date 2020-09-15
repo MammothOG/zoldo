@@ -41,7 +41,7 @@ bool Adventure::load(QString name)
     QFile adventureFile("adventures/" + name + ".adv");
     if(!adventureFile.exists())
     {
-        qWarning("Cannot be open : File does not exist!");
+        qWarning().noquote() << QString("Cannot open the file -> %1\nFile does not exist!").arg(adventureFile.fileName());
         return false;
     }
 
@@ -55,6 +55,11 @@ bool Adventure::load(QString name)
 
     // reading adventure levels
     QString line;
+
+    if(reader.atEnd()) {
+        qWarning("Adventure file is empty");
+        return false;
+    }
     while(!reader.atEnd())
     {
         line = reader.readLine();
@@ -70,7 +75,7 @@ bool Adventure::load(QString name)
                 qDebug() << "Load : " << level->getName();
             }
             else {
-                qDebug() << "Cannot load : " << level->getName();
+                return false;
             }
         }
     }

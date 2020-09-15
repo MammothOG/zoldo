@@ -37,6 +37,8 @@ private:
 
     int sceneWidth;
 
+    bool successLoaded;
+
     PauseButton * pauseButton;
 
     PauseMenu * pauseMenu;
@@ -71,7 +73,7 @@ public slots:
     void onResume();
 
 public:
-    GameScene(QGraphicsView * sceneManger);
+    GameScene(QGraphicsView * sceneManager);
 
     ~GameScene();
 
@@ -97,6 +99,9 @@ public:
 
     void keyReleaseEvent(QKeyEvent *event);
 
+    bool getSuccessLoaded() const;
+
+    void setSuccessLoaded(bool value);
 };
 
 #endif // GAMESCENE_H

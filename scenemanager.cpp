@@ -18,25 +18,28 @@ SceneManager::SceneManager(QMainWindow * parent)
     setWindowTitle(TITLE);
     parent->resize(WINSIZE);
 
-    scene = new MenuScene(this);
+    MenuScene * scene = new MenuScene(this);
     setScene(scene);
 }
 
 void SceneManager::setGameScene()
 {
-    scene = new GameScene(this);
-    setScene(scene);
+    GameScene * scene = new GameScene(this);
+    if (scene->getSuccessLoaded())
+    {
+        setScene(scene);
+    }
 }
 
 void SceneManager::setLvlCreatorScene()
 {
-    scene = new LevelCreatorScene(parent, this);
+    LevelCreatorScene * scene = new LevelCreatorScene(parent, this);
     setScene(scene);
 }
 
 void SceneManager::setMenuScene()
 {
-    scene = new MenuScene(this);
+    MenuScene * scene = new MenuScene(this);
     setScene(scene);
 }
 

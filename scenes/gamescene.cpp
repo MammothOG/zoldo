@@ -17,8 +17,10 @@
 #include "scenes/pausemenu.h"
 
 
-GameScene::GameScene(QGraphicsView * sceneManger)
+GameScene::GameScene(QGraphicsView * sceneManager)
 {
+    successLoaded = false;
+
     sceneHeight = VERTICAL_BLOCK * BLOCKSIZE;
     sceneWidth = HORIZONTAL_BLOCK * BLOCKSIZE;
 
@@ -28,8 +30,19 @@ GameScene::GameScene(QGraphicsView * sceneManger)
     setBackgroundBrush(Qt::black);
 
     adventure = new Adventure();
-    adventure->load("testadventure");
-    loadAdventure();
+    if (adventure->load("testadventure")){
+        loadAdventure();
+
+        clock  = new QTimer(this);
+        connect(clock, SIGNAL(timeout()), this, SLOT(updateState()));
+        clock->start(1000/FPS);
+        setBackgroundBrush(Qt::black);
+
+        successLoaded = true;
+    }
+    else {
+        qWarning("Adventure loading has been interrupted!");
+    }
 
     //    pauseButton = new PauseButton();
     //    connect(pauseButton, SIGNAL(onPressClick()), this, SLOT(onPause()));
@@ -41,10 +54,6 @@ GameScene::GameScene(QGraphicsView * sceneManger)
     //    connect(pauseMenu->getResumeButton(), SIGNAL(onReleaseClick()), this, SLOT(onResume()));
     //    connect(pauseMenu->getRestartButton(), SIGNAL(onPressClick()), this, SLOT(onRestart()));
 
-    clock  = new QTimer(this);
-    connect(clock, SIGNAL(timeout()), this, SLOT(updateState()));
-    clock->start(1000/FPS);
-    setBackgroundBrush(Qt::black);
 }
 
 GameScene::~GameScene()
@@ -91,6 +100,16 @@ void GameScene::drawLevel()
         unit->setCenterAsReferencial();
         levelElements->addToGroup(unit);
     }
+}
+
+bool GameScene::getSuccessLoaded() const
+{
+    return successLoaded;
+}
+
+void GameScene::setSuccessLoaded(bool value)
+{
+    successLoaded = value;
 }
 
 void GameScene::updateState()

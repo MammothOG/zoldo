@@ -19,8 +19,6 @@ private:
 
     QMainWindow * parent;
 
-    QGraphicsScene * scene;
-
 protected:
     void mousePressEvent(QMouseEvent *event);
 
