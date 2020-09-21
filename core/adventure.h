@@ -11,11 +11,13 @@ class Player;
 class Adventure
 {
 private:
-    QList<Level*> * levelList;
+    QList<QString> * levelList;
+
+    Level * currentLevel;
+
+    int levelIndex;
 
     Player * player;
-
-    int currentLevel;
 
     bool win;
 

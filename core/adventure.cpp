@@ -10,9 +10,11 @@
 #include <QDebug>
 Adventure::Adventure()
 {
-    levelList = new QList<Level*>();
+    levelList = new QList<QString>();
 
-    currentLevel = 0;
+    currentLevel = new Level;
+
+    levelIndex = 0;
 
     win = false;
 
@@ -24,15 +26,18 @@ Adventure::Adventure()
 
 bool Adventure::nextLevel()
 {
-    if (currentLevel < levelList->length() - 1) {
-        currentLevel++;
+    levelList->removeLast();
+    if (!levelList->isEmpty()) {
+        currentLevel = new Level();
+        currentLevel->load(levelList->last());
+        qDebug() << "Load : " << currentLevel->getName();
+        qDebug() << "Following Level :" << levelList;
         return true;
     }
     else {
         win = true;
         return false;
     }
-
 
 }
 
@@ -65,35 +70,27 @@ bool Adventure::load(QString name)
         line = reader.readLine();
         line = line.trimmed();
 
-        Level * level;
         //check if line is empty
         if (!line.isEmpty())
         {
-            level = new Level;
-            if (level->load(line)) {
-                levelList->prepend(level);
-                qDebug() << "Load : " << level->getName();
-            }
-            else {
-                return false;
-            }
+            levelList->prepend(line);
         }
     }
+    currentLevel->load(levelList->last());
     return true;
 }
 
 void Adventure::generateTestAdventure()
 {
-    Level * level = new Level();
-    level->generateTestLevel();
-    //level->load("test1");
+    //not checked with the new way
 
-    levelList->append(level);
+    currentLevel->generateTestLevel();
+    currentLevel->load("test1");
 }
 
 Level * Adventure::getCurrentLevel() const
 {
-    return levelList->at(levelList->length() - currentLevel - 1);
+    return currentLevel;
 }
 
 Player * Adventure::getPlayer() const

@@ -116,11 +116,11 @@ void GameScene::updateState()
 {
     distancePlayerTarget = 2 * sceneHeight;
 
-    updateUnit(player);
-
     for(Unit * unit: *currentLevel->getUnitList()){
         updateUnit(unit);
     }
+
+    updateUnit(player);
 
     removeDeadUnit();
 
