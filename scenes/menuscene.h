@@ -26,6 +26,8 @@ private:
 
     QGraphicsView * sceneManager;
 
+    QGraphicsPixmapItem * menuBackground;
+
 public:
     MenuScene(QGraphicsView * sceneManager);
 

@@ -9,7 +9,7 @@ Arrow::Arrow()
 
     setSprite(":/ressources/images/projectiles/arrow.png");
 
-    setDamage(10);
+    setDamage(1000);
 
     setMovementSpeed(10);
 

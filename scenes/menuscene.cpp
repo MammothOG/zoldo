@@ -17,6 +17,14 @@ MenuScene::MenuScene(QGraphicsView * sceneManager)
     setSceneRect(0, 0, WINSIZE.rwidth(), WINSIZE.rheight());
     setBackgroundBrush(Qt::white);
 
+    menuBackground = new QGraphicsPixmapItem();
+    QPixmap bgImg = QPixmap(":/ressources/images/visuals/menu_bg.png");
+    bgImg = bgImg.scaled(WINSIZE.rwidth(), WINSIZE.rheight());
+    menuBackground->setPixmap(bgImg);
+    menuBackground->setPos(0,0);
+    menuBackground->setZValue(1);
+    addItem(menuBackground);
+
     playButton = new PlayButton();
     playButton->setPos(WINSIZE.rwidth()/2, WINSIZE.rheight()*3/4);
     addItem(playButton);

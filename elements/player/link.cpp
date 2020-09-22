@@ -16,7 +16,7 @@ Link::Link()
     setShootRate(700);
     setProjectile(ARROW);
 
-    setHealth(90);
+    setHealth(10000);
 
     //setDefaultRotation(180);
 }
