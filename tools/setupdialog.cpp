@@ -17,8 +17,10 @@ SetupDialog::SetupDialog()
 
     setLayout(new QHBoxLayout());
 
+    qDebug() << resolutions;
     resBox = new QComboBox;
     resBox->addItems(resolutions.keys());
+    resBox->setCurrentIndex(resolutions.keys().length()-1);
     layout()->addWidget(resBox);
 
     QPushButton* ok = new QPushButton("ok");

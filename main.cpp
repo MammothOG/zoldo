@@ -26,6 +26,7 @@ int main(int argc, char *argv[])
         lauchGame();
         break;
     case QDialog::Rejected:
+        QApplication::quit();
         break;
     }
 

@@ -134,7 +134,17 @@ void GameScene::removeDeadUnit()
             // if player die dont do this
             currentLevel->getUnitList()->removeOne(unit);
 
+            // remove projectile from the scene if unit is dead
+            if(unit->isType(UNIT_ANIMATE)) {
+                UnitAnimate * unitAnimate = dynamic_cast<UnitAnimate*>(unit);
+                for(Projectile * projectile: *unitAnimate->getProjectileList()) {
+                    removeItem(projectile);
+                    delete projectile;
+                }
+            }
+
             removeItem(unit);
+
             delete unit;
         }
     }
