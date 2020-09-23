@@ -6,7 +6,6 @@
 #include "elements/player/playertest.h"
 #include "elements/player/link.h"
 
-
 #include <QDebug>
 Adventure::Adventure()
 {
@@ -23,7 +22,7 @@ Adventure::Adventure()
     player->setFlag(QGraphicsItem::ItemIsFocusable);
     player->setFocus();
 
-    //music = new QSound(":/ressources/sounds/music_adv1.wav");
+    music = QString("../zoldo/ressources/sounds/music_adv1.wav");
 }
 
 bool Adventure::nextLevel()
@@ -80,7 +79,6 @@ bool Adventure::load(QString name)
     }
     currentLevel->load(levelList->last());
 
-    music->play();
     return true;
 }
 
@@ -110,4 +108,9 @@ bool Adventure::isWin() const
 void Adventure::setWin(bool value)
 {
     win = value;
+}
+
+QString Adventure::getMusic() const
+{
+    return music;
 }

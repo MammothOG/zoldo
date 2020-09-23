@@ -38,11 +38,15 @@ GameScene::GameScene(QGraphicsView * sceneManager)
         clock->start(1000/FPS);
         setBackgroundBrush(Qt::black);
 
+        bgMusic->play();
+
         successLoaded = true;
     }
     else {
         qWarning("Adventure loading has been interrupted!");
     }
+
+    bgMusic = nullptr;
 
     //    pauseButton = new PauseButton();
     //    connect(pauseButton, SIGNAL(onPressClick()), this, SLOT(onPause()));
@@ -58,11 +62,16 @@ GameScene::GameScene(QGraphicsView * sceneManager)
 
 GameScene::~GameScene()
 {
-
+    bgMusic->stop();
+    delete bgMusic;
 }
 
 void GameScene::loadAdventure()
 {
+    bgMusic = new QMediaPlayer();
+    bgMusic->setMedia(QUrl::fromLocalFile(adventure->getMusic()));
+    bgMusic->setVolume(5);
+
     player = adventure->getPlayer();
     addItem(player);
 

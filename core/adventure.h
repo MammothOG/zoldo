@@ -2,7 +2,6 @@
 #define MAP_H
 
 #include <QList>
-#include <QSound>
 
 
 class Level;
@@ -22,7 +21,7 @@ private:
 
     bool win;
 
-    QSound * music;
+    QString music;
 
 public:
     Adventure();
@@ -40,6 +39,8 @@ public:
     bool isWin() const;
 
     void setWin(bool value);
+
+    QString getMusic() const;
 };
 
 #endif // MAP_H

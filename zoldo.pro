@@ -120,7 +120,12 @@ FORMS += \
 
 RESOURCES += \
     ressources/images/ \
-    ressources/sounds/
+    ressources/sounds/airgust.wav \
+    ressources/sounds/fireball.wav \
+    ressources/sounds/stone.wav \
+    ressources/sounds/dirtyball.wav \
+    ressources/sounds/arrow.wav \
+
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

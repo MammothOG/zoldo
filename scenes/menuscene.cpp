@@ -44,7 +44,9 @@ MenuScene::MenuScene(QGraphicsView * sceneManager)
 
     connect(playButton, SIGNAL(onReleaseClick()), sceneManager, SLOT(setGameScene()));
 
-    music = new QSound(":/ressources/sounds/menumusic.wav");
+    music = new QMediaPlayer();
+    music->setMedia(QUrl::fromLocalFile("../zoldo/ressources/sounds/menumusic.wav"));
+    music->setVolume(50);
     music->play();
 }
 

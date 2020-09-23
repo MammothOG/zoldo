@@ -5,6 +5,7 @@
 #include <QGraphicsItemGroup>
 #include <QTimer>
 #include <QKeyEvent>
+#include <QMediaPlayer>
 
 
 class Unit;
@@ -60,6 +61,9 @@ private:
     Level * currentLevel;
 
     float distancePlayerTarget;
+
+    QMediaPlayer * bgMusic;
+
 signals:
     void signalQuitScene();
 
