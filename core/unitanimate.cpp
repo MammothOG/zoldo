@@ -37,6 +37,9 @@ UnitAnimate::UnitAnimate()
 
     directionSprites = new QMap<QString, QPixmap>();
     directionSpritesExist = false;
+
+    shootEffect = new QSoundEffect();
+    shootEffect->setVolume(3);
 }
 
 UnitAnimate::~UnitAnimate()
@@ -152,7 +155,10 @@ void UnitAnimate::fire()
 
         // play sound
         if (!proj->getSound().isEmpty()) {
-            QSound::play(proj->getSound());
+            if(shootEffect->source().isEmpty()) {
+                shootEffect->setSource(QUrl::fromLocalFile(proj->getSound()));
+            }
+            shootEffect->play();
         }
     }
     else {

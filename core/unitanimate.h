@@ -3,6 +3,7 @@
 
 #include <QTimer>
 #include <QVector2D>
+#include <QSoundEffect>
 
 #include "unit.h"
 
@@ -29,6 +30,8 @@ private:
     QMap<QString, QPixmap> * directionSprites;
 
     bool directionSpritesExist;
+
+    QSoundEffect * shootEffect;
 
 protected:
     void setProjectile(int value);
