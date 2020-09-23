@@ -1,6 +1,7 @@
 #include "unitanimate.h"
 
 #include <math.h>
+#include <QSoundEffect>
 
 #include "tools/elementfactory.h"
 #include "core/projectile.h"
@@ -33,6 +34,9 @@ UnitAnimate::UnitAnimate()
 
     // projectile shooted
     projectile = TEST_PROJECTILE;
+
+    directionSprites = new QMap<QString, QPixmap>();
+    directionSpritesExist = false;
 }
 
 UnitAnimate::~UnitAnimate()
@@ -41,6 +45,7 @@ UnitAnimate::~UnitAnimate()
     stopShooting();
 }
 
+#include <QDebug>
 void UnitAnimate::lockTarget(const Unit * const target)
 {
     if (!target->isDead()) {
@@ -55,6 +60,23 @@ void UnitAnimate::lockTarget(const Unit * const target)
 
         targetDistance = direction.length();
         //setRotation(currentRotation + getDefaultRotation());
+
+        if (directionSpritesExist) {
+            int rot = currentRotation;
+            if ((rot > 125 && rot <= 180) || (rot <= -125 && rot > -180)) {
+                setPixmap(directionSprites->value("D"));
+            }
+            else if (rot > 45 && rot <= 125) {
+                setPixmap(directionSprites->value("R"));
+            }
+            else if (rot > -45 && rot <= 45) {
+                setPixmap(directionSprites->value("U"));
+            }
+            else if (rot <= -45 && rot > -125) {
+                setPixmap(directionSprites->value("L"));
+            }
+        }
+
     }
 }
 
@@ -82,6 +104,21 @@ void UnitAnimate::stopShooting()
 void UnitAnimate::setProjectile(int value)
 {
     projectile = value;
+}
+
+void UnitAnimate::insertDirectionSprite(QString key, QString spritePath)
+{
+    QPixmap sprite = QPixmap(spritePath);
+    sprite = sprite.scaled(this->getWidth(), this->getHeight());
+    directionSprites->insert(key, sprite);
+
+    if(directionSprites->contains("D") &&
+            directionSprites->contains("U") &&
+            directionSprites->contains("R") &&
+            directionSprites->contains("L")) {
+        directionSpritesExist = true;
+    }
+
 }
 
 void UnitAnimate::shoot()
@@ -112,6 +149,11 @@ void UnitAnimate::fire()
         proj->setVerticalMov(direction.normalized().y());
 
         projectileList->append(proj);
+
+        // play sound
+        if (!proj->getSound().isEmpty()) {
+            QSound::play(proj->getSound());
+        }
     }
     else {
         qWarning("UnitAnimate projectile are not projectile type.");

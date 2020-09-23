@@ -12,6 +12,8 @@ Projectile::Projectile()
     setMovementSpeed(0);
 
     damage = 0;
+
+    sound = QString("");
 }
 
 Projectile::~Projectile()
@@ -55,4 +57,14 @@ void Projectile::onCollision(Element *element)
 void Projectile::onOutside()
 {
     setDead(true);
+}
+
+QString Projectile::getSound() const
+{
+    return sound;
+}
+
+void Projectile::setSound(QString value)
+{
+    sound = value;
 }

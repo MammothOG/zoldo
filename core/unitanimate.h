@@ -26,8 +26,14 @@ private:
 
     int projectile;
 
+    QMap<QString, QPixmap> * directionSprites;
+
+    bool directionSpritesExist;
+
 protected:
     void setProjectile(int value);
+
+    void insertDirectionSprite(QString key, QString sprite);
 
 public slots:
     virtual void shoot();

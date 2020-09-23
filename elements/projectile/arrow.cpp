@@ -9,6 +9,8 @@ Arrow::Arrow()
 
     setSprite(":/ressources/images/projectiles/arrow.png");
 
+    setSound(":/ressources/sounds/arrow.wav");
+
     setDamage(1000);
 
     setMovementSpeed(10);

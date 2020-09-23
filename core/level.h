@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include <QFile>
+#include <QSound>
 
 
 class Element;
@@ -33,6 +34,8 @@ private:
     float spawnY;
 
     void saveElement(QFile * levelFile, Element * elemen);
+
+    QSound * bgMusic;
 
 public:
     Level();

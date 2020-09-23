@@ -2,6 +2,7 @@
 #define MENUSCENE_H
 
 #include <QGraphicsScene>
+#include <QSound>
 
 
 class PlayButton;
@@ -27,6 +28,8 @@ private:
     QGraphicsView * sceneManager;
 
     QGraphicsPixmapItem * menuBackground;
+
+    QSound * music;
 
 public:
     MenuScene(QGraphicsView * sceneManager);

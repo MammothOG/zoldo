@@ -9,6 +9,8 @@ DirtyBall::DirtyBall()
 
     setSprite(":/ressources/images/projectiles/dirty_ball.png");
 
+    setSound(":/ressources/sounds/dirtyball.wav");
+
     setDamage(10);
 
     setMovementSpeed(2);

@@ -6,10 +6,10 @@ Link::Link()
 {
     setType(LINK);
 
-    setHeight(0.8);
-    setWidth(0.96);
+    setHeight(1);
+    setWidth(0.69);
 
-    setSprite(":/ressources/images/players/zelda1.png");
+    setSprite(":/ressources/images/players/link_up.png");
 
     setMovementSpeed(8);
 
@@ -17,6 +17,11 @@ Link::Link()
     setProjectile(ARROW);
 
     setHealth(10000);
+
+    insertDirectionSprite("D", ":/ressources/images/players/link_down.png");
+    insertDirectionSprite("R", ":/ressources/images/players/link_right.png");
+    insertDirectionSprite("U", ":/ressources/images/players/link_up.png");
+    insertDirectionSprite("L", ":/ressources/images/players/link_left.png");
 
     //setDefaultRotation(180);
 }

@@ -10,6 +10,8 @@ FireBall::FireBall()
 
     setSprite(":/ressources/images/projectiles/fire_ball.png");
 
+    setSound(":/ressources/sounds/fireball.wav");
+
     setDamage(10);
 
     setMovementSpeed(2);

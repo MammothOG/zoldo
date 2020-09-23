@@ -1,6 +1,7 @@
 #include "menuscene.h"
 
 #include <QMetaObject>
+#include <QSound>
 
 #include "config.h"
 #include "elements/buttons/playbutton.h"
@@ -42,11 +43,14 @@ MenuScene::MenuScene(QGraphicsView * sceneManager)
     addItem(title);
 
     connect(playButton, SIGNAL(onReleaseClick()), sceneManager, SLOT(setGameScene()));
+
+    music = new QSound(":/ressources/sounds/menumusic.wav");
+    music->play();
 }
 
 MenuScene::~MenuScene()
 {
-
+    music->stop();
 }
 
 void MenuScene::keyPressEvent(QKeyEvent *keyEvent)

@@ -17,7 +17,6 @@ SetupDialog::SetupDialog()
 
     setLayout(new QHBoxLayout());
 
-    qDebug() << resolutions;
     resBox = new QComboBox;
     resBox->addItems(resolutions.keys());
     resBox->setCurrentIndex(resolutions.keys().length()-1);

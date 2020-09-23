@@ -27,18 +27,21 @@ void SceneManager::setGameScene()
     GameScene * scene = new GameScene(this);
     if (scene->getSuccessLoaded())
     {
+        delete this->scene();
         setScene(scene);
     }
 }
 
 void SceneManager::setLvlCreatorScene()
 {
+    delete this->scene();
     LevelCreatorScene * scene = new LevelCreatorScene(parent, this);
     setScene(scene);
 }
 
 void SceneManager::setMenuScene()
 {
+    delete this->scene();
     MenuScene * scene = new MenuScene(this);
     setScene(scene);
 }

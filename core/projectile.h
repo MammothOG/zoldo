@@ -2,6 +2,7 @@
 #define PROJECTILE_H
 
 #include "unit.h"
+#include <QSound>
 
 class UnitAnimate;
 
@@ -11,6 +12,11 @@ private:
     UnitAnimate * owner;
 
     int damage;
+
+    QString sound;
+
+protected:
+    void setSound(const QString value);
 
 public:
     Projectile();
@@ -32,6 +38,8 @@ public:
     void setOwner(UnitAnimate *value);
 
     void onOutside() override;
+
+    QString getSound() const;
 };
 
 #endif // PROJECTILE_H

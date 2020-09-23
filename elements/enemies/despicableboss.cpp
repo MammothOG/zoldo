@@ -17,7 +17,12 @@ DespicableBoss::DespicableBoss()
     setHeight(2.27);
     setWidth(1);
 
-    setSprite(":/ressources/images/enemies/despicable_boss.png");
+    setSprite(":/ressources/images/enemies/despicable_boss_down.png");
+
+    insertDirectionSprite("D", ":/ressources/images/enemies/despicable_boss_down.png");
+    insertDirectionSprite("R", ":/ressources/images/enemies/despicable_boss_right.png");
+    insertDirectionSprite("U", ":/ressources/images/enemies/despicable_boss_up.png");
+    insertDirectionSprite("L", ":/ressources/images/enemies/despicable_boss_left.png");
 }
 
 void DespicableBoss::move()

@@ -9,6 +9,8 @@ AirGust::AirGust()
 
     setSprite(":/ressources/images/projectiles/air_gust.png");
 
+    setSound(":/ressources/sounds/airgust.wav");
+
     setDamage(10);
 
     setMovementSpeed(1);

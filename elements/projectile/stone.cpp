@@ -9,6 +9,8 @@ Stone::Stone()
 
     setSprite(":/ressources/images/projectiles/slingshot_stone.png");
 
+    setSound(":/ressources/sounds/stone.wav");
+
     setDamage(10);
 
     setMovementSpeed(3);
