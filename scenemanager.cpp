@@ -16,7 +16,7 @@ SceneManager::SceneManager(QMainWindow * parent)
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
     setWindowTitle(TITLE);
-    parent->resize(WINSIZE);
+    parent->setFixedSize(WINSIZE);
 
     MenuScene * scene = new MenuScene(this);
     setScene(scene);

@@ -2,6 +2,7 @@
 #define MAP_H
 
 #include <QList>
+#include <QSound>
 
 
 class Level;
@@ -20,6 +21,8 @@ private:
     Player * player;
 
     bool win;
+
+    QSound * music;
 
 public:
     Adventure();

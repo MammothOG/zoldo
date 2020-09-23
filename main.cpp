@@ -20,6 +20,10 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
 
 
+    QPixmap icon = QPixmap(":/ressources/images/visuals/icon.png");
+    icon = icon.scaled(20,20);
+    a.setWindowIcon(QIcon(icon));
+
     SetupDialog resDialog;
     switch (resDialog.exec()) {
     case QDialog::Accepted:

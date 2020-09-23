@@ -35,8 +35,6 @@ private:
 
     void saveElement(QFile * levelFile, Element * elemen);
 
-    QSound * bgMusic;
-
 public:
     Level();
 

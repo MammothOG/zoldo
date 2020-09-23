@@ -51,6 +51,7 @@ MenuScene::MenuScene(QGraphicsView * sceneManager)
 MenuScene::~MenuScene()
 {
     music->stop();
+    delete music;
 }
 
 void MenuScene::keyPressEvent(QKeyEvent *keyEvent)

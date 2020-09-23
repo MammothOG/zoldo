@@ -22,6 +22,8 @@ Adventure::Adventure()
     player->setCenterAsReferencial();
     player->setFlag(QGraphicsItem::ItemIsFocusable);
     player->setFocus();
+
+    //music = new QSound(":/ressources/sounds/music_adv1.wav");
 }
 
 bool Adventure::nextLevel()
@@ -77,6 +79,8 @@ bool Adventure::load(QString name)
         }
     }
     currentLevel->load(levelList->last());
+
+    music->play();
     return true;
 }
 
