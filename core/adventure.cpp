@@ -26,8 +26,8 @@ Adventure::Adventure()
 
 bool Adventure::nextLevel()
 {
-    levelList->removeLast();
-    if (!levelList->isEmpty()) {
+    if (levelList->length() > 1) {
+        levelList->removeLast();
         currentLevel = new Level();
         currentLevel->load(levelList->last());
         qDebug() << "Load : " << currentLevel->getName();
