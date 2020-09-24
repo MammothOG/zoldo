@@ -95,6 +95,13 @@ void UnitAnimate::startShooting()
     shootTimer->start(shootRate);
 }
 
+void UnitAnimate::defaultDirectionSprite()
+{
+    if(directionSpritesExist) {
+        setPixmap(directionSprites->value("U"));
+    }
+}
+
 void UnitAnimate::stopShooting()
 {
     shootTimer->stop();

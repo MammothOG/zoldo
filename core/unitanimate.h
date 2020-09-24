@@ -65,6 +65,8 @@ public:
     void stopShooting();
 
     void startShooting();
+
+    void defaultDirectionSprite();
 };
 
 #endif // UNITANIMATE_H
