@@ -25,11 +25,11 @@ bool HealthBar::setHealth(float health)
     if (health > 0)
     {
         onNewHealth(health);
-
         return true;
     }
     else
     {
+        onNewHealth(0);
         return false;
     }
 }
