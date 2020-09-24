@@ -10,6 +10,7 @@
 
 QSize WINSIZE;
 int BLOCKSIZE;
+
 SetupDialog::SetupDialog()
 {
     addResolution(1920, 1080);
@@ -21,6 +22,9 @@ SetupDialog::SetupDialog()
     resBox->addItems(resolutions.keys());
     resBox->setCurrentIndex(resolutions.keys().length()-1);
     layout()->addWidget(resBox);
+
+    fullScreen = new QCheckBox("Full Screen", this);
+    layout()->addWidget(fullScreen);
 
     QPushButton* ok = new QPushButton("ok");
     layout()->addWidget(ok);
@@ -51,4 +55,9 @@ void SetupDialog::setupConst()
 {
         WINSIZE = resolutions[resBox->currentText()];
         BLOCKSIZE = (WINSIZE.height() - TOPSPACE - BOTSPACE) / VERTICAL_BLOCK;
+}
+
+QCheckBox *SetupDialog::isFullScreen() const
+{
+    return fullScreen;
 }

@@ -16,11 +16,7 @@ class Player;
 
 class Level;
 
-class PauseButton;
-
-class RestartButton;
-
-class PauseMenu;
+class QuitButton;
 
 class UnitAnimate;
 
@@ -40,9 +36,7 @@ private:
 
     bool successLoaded;
 
-    PauseButton * pauseButton;
-
-    PauseMenu * pauseMenu;
+    QuitButton * quitButton;
 
     QGraphicsItemGroup * levelElements;
 
@@ -69,12 +63,6 @@ signals:
 
 public slots:
     void updateState();
-
-    void onPause();
-
-    void onRestart();
-
-    void onResume();
 
 public:
     GameScene(QGraphicsView * sceneManager);
