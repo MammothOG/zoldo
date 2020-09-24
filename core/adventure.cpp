@@ -25,6 +25,13 @@ Adventure::Adventure()
     music = QString("../zoldo/ressources/sounds/music_adv1.wav");
 }
 
+Adventure::~Adventure()
+{
+    delete player;
+    delete levelList;
+    delete currentLevel;
+}
+
 bool Adventure::nextLevel()
 {
     if (levelList->length() > 1) {

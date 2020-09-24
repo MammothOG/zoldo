@@ -33,8 +33,10 @@ GameScene::GameScene(QGraphicsView * sceneManager)
 
     bgMusic = new QMediaPlayer();
 
+    QString advName = "the-beginning";
+    //QString advName = "testadventure";
     adventure = new Adventure();
-    if (adventure->load("testadventure")){
+    if (adventure->load(advName)){
 
         loadAdventure();
 
@@ -49,6 +51,7 @@ GameScene::GameScene(QGraphicsView * sceneManager)
         successLoaded = true;
     }
     else {
+        delete adventure;
         qWarning("Adventure loading has been interrupted!");
     }
 

@@ -26,6 +26,8 @@ private:
 public:
     Adventure();
 
+    ~Adventure();
+
     bool nextLevel();
 
     bool load(QString name);
