@@ -1,9 +1,9 @@
 #ifndef ENDGAMEVISUAL_H
 #define ENDGAMEVISUAL_H
 
-#include "core/element.h"
+#include <QGraphicsItemGroup>
 
-class EndGameVisual : public Element
+class EndGameVisual : public QGraphicsItemGroup
 {
 public:
     EndGameVisual(bool win);

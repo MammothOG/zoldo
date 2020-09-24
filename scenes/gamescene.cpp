@@ -263,7 +263,7 @@ bool GameScene::updateGame()
         clock->stop();
 
         endGameVisual = new EndGameVisual(adventure->isWin());
-        endGameVisual->setPos(sceneWidth/2,sceneHeight/3);
+        endGameVisual->setPos(this->width()/2,this->height()/2);
         addItem(endGameVisual);
 
         return false;
