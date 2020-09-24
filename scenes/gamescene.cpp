@@ -33,8 +33,8 @@ GameScene::GameScene(QGraphicsView * sceneManager)
 
     bgMusic = new QMediaPlayer();
 
-    //QString advName = "the-beginning";
-    QString advName = "testadventure";
+    QString advName = "the-beginning";
+    //QString advName = "testadventure";
     adventure = new Adventure();
     if (adventure->load(advName)){
 
