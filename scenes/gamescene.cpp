@@ -257,9 +257,9 @@ bool GameScene::updateGame()
 
                 if(el->isColliding(player))
                     changeLevel();
-
             }
         }
+        player->defaultDirectionSprite();
     }
 
     if (player->isDead() || adventure->isWin()) {
