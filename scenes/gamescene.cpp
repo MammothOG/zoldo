@@ -1,5 +1,7 @@
 #include "gamescene.h"
 
+#include <QTime>
+
 #include "config.h"
 #include "core/player.h"
 #include "core/adventure.h"
@@ -29,11 +31,15 @@ GameScene::GameScene(QGraphicsView * sceneManager)
     setSceneRect(0, 0, sceneWidth, sceneHeight);
     setBackgroundBrush(Qt::black);
 
+    bgMusic = new QMediaPlayer();
+
     adventure = new Adventure();
     if (adventure->load("testadventure")){
+
         loadAdventure();
 
         clock  = new QTimer(this);
+        clock->setTimerType(Qt::PreciseTimer);
         connect(clock, SIGNAL(timeout()), this, SLOT(updateState()));
         clock->start(1000/FPS);
         setBackgroundBrush(Qt::black);
@@ -45,8 +51,6 @@ GameScene::GameScene(QGraphicsView * sceneManager)
     else {
         qWarning("Adventure loading has been interrupted!");
     }
-
-    bgMusic = nullptr;
 
     //    pauseButton = new PauseButton();
     //    connect(pauseButton, SIGNAL(onPressClick()), this, SLOT(onPause()));
@@ -68,9 +72,11 @@ GameScene::~GameScene()
 
 void GameScene::loadAdventure()
 {
-    bgMusic = new QMediaPlayer();
-    bgMusic->setMedia(QUrl::fromLocalFile(adventure->getMusic()));
-    bgMusic->setVolume(5);
+    if(!adventure->getMusic().isEmpty()) {
+        bgMusic->setMedia(QUrl::fromLocalFile(adventure->getMusic()));
+        bgMusic->setVolume(5);
+        bgMusic->play();
+    }
 
     player = adventure->getPlayer();
     addItem(player);
