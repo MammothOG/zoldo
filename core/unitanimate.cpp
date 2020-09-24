@@ -44,7 +44,6 @@ UnitAnimate::UnitAnimate()
 
 UnitAnimate::~UnitAnimate()
 {
-    delete projectileList;
     stopShooting();
 }
 
@@ -79,7 +78,6 @@ void UnitAnimate::lockTarget(const Unit * const target)
                 setPixmap(directionSprites->value("L"));
             }
         }
-
     }
 }
 
@@ -100,6 +98,7 @@ void UnitAnimate::startShooting()
 
 void UnitAnimate::stopShooting()
 {
+    delete projectileList;
     shootTimer->stop();
     resetRotation();
 }

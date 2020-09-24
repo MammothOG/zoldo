@@ -11,7 +11,7 @@ Arrow::Arrow()
 
     setSound(":/ressources/sounds/arrow.wav");
 
-    setDamage(1000);
+    setDamage(10);
 
     setMovementSpeed(10);
 

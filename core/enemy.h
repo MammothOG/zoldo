@@ -17,11 +17,17 @@ private:
 public:
     Enemy();
 
+    ~Enemy();
+
     void setMoveRate(int rate);
 
     int getMoveRate() const;
 
     void shoot() override;
+
+    void stopMovement();
+
+    void stop();
 
 public slots:
     //refresh the direction movement

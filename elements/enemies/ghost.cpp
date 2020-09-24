@@ -6,12 +6,13 @@ Ghost::Ghost()
 
     setMoveRate(10);
 
-    setShootRate(2500);
 
     setProjectile(AIR_GUST);
 
     setMovementSpeed(0);
-    setHealth(100);
+
+    setHealth(20);
+    setShootRate(2500);
 
     // setup graphics
     setHeight(1.06);

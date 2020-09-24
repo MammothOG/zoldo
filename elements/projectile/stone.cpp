@@ -11,7 +11,7 @@ Stone::Stone()
 
     setSound(":/ressources/sounds/stone.wav");
 
-    setDamage(10);
+    setDamage(5);
 
     setMovementSpeed(3);
 

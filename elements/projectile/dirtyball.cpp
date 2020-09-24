@@ -13,7 +13,7 @@ DirtyBall::DirtyBall()
 
     setDamage(10);
 
-    setMovementSpeed(2);
+    setMovementSpeed(10);
 
     setDefaultRotation(180);
 

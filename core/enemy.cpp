@@ -19,6 +19,11 @@ Enemy::Enemy()
     setShootRate(100);
 }
 
+Enemy::~Enemy()
+{
+    stopMovement();
+}
+
 void Enemy::move()
 {
     qDebug() << "move method to be override";
@@ -29,9 +34,22 @@ void Enemy::shoot()
     fire();
 }
 
+void Enemy::stopMovement()
+{
+    moveTimer->stop();
+    delete moveTimer;
+}
+
+void Enemy::stop()
+{
+    stopShooting();
+    stopMovement();
+}
+
 void Enemy::setMoveRate(int rate)
 {
     moveRate = rate;
+    moveTimer->setInterval(moveRate);
 }
 
 int Enemy::getMoveRate() const

@@ -6,12 +6,12 @@ Garbage::Garbage()
 
     setMoveRate(10);
 
-    setShootRate(3000);
+    setShootRate(1500);
 
     setProjectile(STONE);
+    setHealth(30);
 
     setMovementSpeed(0);
-    setHealth(100);
 
     // setup graphics
     setHeight(0.5);

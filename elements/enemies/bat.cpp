@@ -6,12 +6,12 @@ Bat::Bat()
 
     setMoveRate(10);
 
-    setShootRate(2500);
+    setHealth(20);
+    setShootRate(1000);
 
     setProjectile(DIRTY_BALL);
 
     setMovementSpeed(0);
-    setHealth(100);
 
     // setup graphics
     setHeight(0.67);

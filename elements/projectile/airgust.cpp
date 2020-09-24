@@ -11,9 +11,9 @@ AirGust::AirGust()
 
     setSound(":/ressources/sounds/airgust.wav");
 
-    setDamage(10);
+    setDamage(20);
 
-    setMovementSpeed(1);
+    setMovementSpeed(1.5);
 
     setDefaultRotation(-90);
 

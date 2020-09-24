@@ -33,8 +33,8 @@ GameScene::GameScene(QGraphicsView * sceneManager)
 
     bgMusic = new QMediaPlayer();
 
-    QString advName = "the-beginning";
-    //QString advName = "testadventure";
+    //QString advName = "the-beginning";
+    QString advName = "testadventure";
     adventure = new Adventure();
     if (adventure->load(advName)){
 
@@ -268,6 +268,15 @@ bool GameScene::updateGame()
         endGameVisual = new EndGameVisual(adventure->isWin());
         endGameVisual->setPos(this->width()/2,this->height()/2);
         addItem(endGameVisual);
+
+        for (Unit * unit: * currentLevel->getUnitList()) {
+            if (unit->isType(ENEMY)) {
+                Enemy * enemy = dynamic_cast<Enemy*>(unit);
+                enemy->stop();
+            }
+        }
+
+        delete player;
 
         return false;
 

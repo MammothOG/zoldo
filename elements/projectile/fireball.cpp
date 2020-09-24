@@ -5,16 +5,16 @@ FireBall::FireBall()
 {
     setType(FIREBALL);
 
-    setWidth(0.28);
-    setHeight(0.60);
+    setWidth(0.56);
+    setHeight(1.20);
 
     setSprite(":/ressources/images/projectiles/fire_ball.png");
 
     setSound(":/ressources/sounds/fireball.wav");
 
-    setDamage(10);
+    setDamage(20);
 
-    setMovementSpeed(2);
+    setMovementSpeed(10);
 
     setCenterAsReferencial();
 }

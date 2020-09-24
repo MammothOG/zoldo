@@ -15,10 +15,6 @@ class UnitAnimate : public Unit
 private:
     int currentRotation;
 
-    QVector2D direction;
-
-    float targetDistance;
-
     QList<Projectile*> * projectileList;
 
     float shootRate;
@@ -37,6 +33,10 @@ protected:
     void setProjectile(int value);
 
     void insertDirectionSprite(QString key, QString sprite);
+
+    float targetDistance;
+
+    QVector2D direction;
 
 public slots:
     virtual void shoot();
@@ -65,7 +65,6 @@ public:
     void stopShooting();
 
     void startShooting();
-
 };
 
 #endif // UNITANIMATE_H

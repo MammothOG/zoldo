@@ -4,14 +4,14 @@ DespicableBoss::DespicableBoss()
 {
     setType(DESPICABLE_BOSS);
 
-    setMoveRate(10);
+    setMoveRate(5000);
 
-    setShootRate(1000);
+    setShootRate(800);
 
     setProjectile(FIREBALL);
 
     setMovementSpeed(0);
-    setHealth(500);
+    setHealth(100);
 
     // setup graphics
     setHeight(2.27);
@@ -25,7 +25,11 @@ DespicableBoss::DespicableBoss()
     insertDirectionSprite("L", ":/ressources/images/enemies/despicable_boss_left.png");
 }
 
+#include <QDebug>
 void DespicableBoss::move()
 {
-
+    float newPosX = direction.normalized().x() * (targetDistance / 2);
+    float newPosY = direction.normalized().y() * (targetDistance / 2);
+    this->setPos(this->x() + newPosX, this->y() + newPosY);
+    qDebug() << targetDistance;
 }

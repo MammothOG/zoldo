@@ -16,7 +16,7 @@ Link::Link()
     setShootRate(700);
     setProjectile(ARROW);
 
-    setHealth(10000);
+    setHealth(60);
 
     insertDirectionSprite("D", ":/ressources/images/players/link_down.png");
     insertDirectionSprite("R", ":/ressources/images/players/link_right.png");
