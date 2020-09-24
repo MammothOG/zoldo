@@ -97,7 +97,6 @@ void UnitAnimate::startShooting()
 
 void UnitAnimate::stopShooting()
 {
-    delete projectileList;
     shootTimer->stop();
     resetRotation();
 }
