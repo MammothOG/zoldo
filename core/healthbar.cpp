@@ -30,6 +30,7 @@ bool HealthBar::setHealth(float health)
     }
     else
     {
+        onNewHealth(0);
         return false;
     }
 }
