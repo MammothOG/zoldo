@@ -273,6 +273,7 @@ bool GameScene::updateGame()
             }
         }
         player->stopShooting();
+        removeItem(player);
 
         return false;
 
