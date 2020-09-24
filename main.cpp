@@ -6,10 +6,13 @@
 #include "tools/setupdialog.h"
 
 
-void lauchGame() {
+void lauchGame(bool fullScreenEnabled) {
 
     QMainWindow * mainWindow = new QMainWindow();
     SceneManager * game = new SceneManager(mainWindow);
+
+    if (fullScreenEnabled)
+        mainWindow->showFullScreen();
 
     mainWindow->setCentralWidget(game);
     mainWindow->show();
@@ -26,7 +29,7 @@ int main(int argc, char *argv[])
     SetupDialog resDialog;
     switch (resDialog.exec()) {
     case QDialog::Accepted:
-        lauchGame();
+        lauchGame(resDialog.isFullScreen()->isChecked());
         break;
     case QDialog::Rejected:
         QApplication::quit();

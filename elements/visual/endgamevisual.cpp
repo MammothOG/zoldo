@@ -2,9 +2,10 @@
 #include "core/element.h"
 #include "config.h"
 
-#include <QDebug>
 EndGameVisual::EndGameVisual(bool win)
 {
+    setHandlesChildEvents(false);
+
     QPixmap finalMessage;
     if(win) {
         finalMessage = QPixmap(":/ressources/images/visuals/you_win.png");
@@ -16,7 +17,6 @@ EndGameVisual::EndGameVisual(bool win)
         zeldaPxm->setOffset(-zelda.width()/2, -zelda.height()/2);
         zeldaPxm->setPos(0, BLOCKSIZE*3);
         addToGroup(zeldaPxm);
-
     }
     else {
         finalMessage = QPixmap(":/ressources/images/visuals/you_lose.png");

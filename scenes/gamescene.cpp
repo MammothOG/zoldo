@@ -12,9 +12,7 @@
 #include "core/background.h"
 #include "elements/healthbar/zeldahealthbar.h"
 #include "elements/healthbar/basichealthbar.h"
-#include "elements/buttons/pausebutton.h"
-#include "elements/buttons/restartbutton.h"
-#include "elements/buttons/resumebutton.h"
+#include "elements/buttons/quitbutton.h"
 #include "elements/visual/endgamevisual.h"
 #include "scenes/pausemenu.h"
 
@@ -55,10 +53,9 @@ GameScene::GameScene(QGraphicsView * sceneManager)
         qWarning("Adventure loading has been interrupted!");
     }
 
-    //    pauseButton = new PauseButton();
-    //    connect(pauseButton, SIGNAL(onPressClick()), this, SLOT(onPause()));
-    //    pauseButton->setPos(BLOCKSIZE*(HORIZONTAL_BLOCK-1), 0);
-    //    addItem(pauseButton);
+    quitButton = new QuitButton();
+    quitButton->setPos(BLOCKSIZE*(HORIZONTAL_BLOCK-0.5), BLOCKSIZE*0.5);
+    addItem(quitButton);
     //
     //    pauseMenu = new PauseMenu();
     //    pauseMenu->setPos(WIN_WIDTH/2, WIN_HEIGHT/2);
@@ -303,24 +300,6 @@ void GameScene::changeLevel()
 
         player->startShooting();
     }
-}
-
-void GameScene::onPause()
-{
-    qDebug() << "click in pause";
-    addItem(pauseMenu);
-}
-
-void GameScene::onRestart()
-{
-    qDebug() << "click on restart";
-}
-
-void GameScene::onResume()
-{
-    qDebug() << "click on resume";
-    removeItem(pauseMenu);
-    pauseButton->setPressed(false);
 }
 
 void GameScene::keyPressEvent(QKeyEvent *event)
