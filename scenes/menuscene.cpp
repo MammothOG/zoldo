@@ -31,11 +31,11 @@ MenuScene::MenuScene(QGraphicsView * sceneManager)
     addItem(playButton);
 
     quitButton = new QuitButton();
-    quitButton->setPos(WINSIZE.rwidth() - 45, WINSIZE.rheight() - 45);
+    quitButton->setPos(WINSIZE.rwidth() - 20, 20);
     addItem(quitButton);
 
     settingButton = new SettingButton();
-    settingButton->setPos(WINSIZE.rwidth() - 75, 20);
+    settingButton->setPos(20, 20);
     addItem(settingButton);
 
     title = new MenuTitle();

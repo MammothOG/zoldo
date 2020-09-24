@@ -1,9 +1,7 @@
 #include "endgamevisual.h"
 #include "core/element.h"
 #include "config.h"
-#include "elements/buttons/quitbutton.h"
 
-#include <QDebug>
 EndGameVisual::EndGameVisual(bool win)
 {
     setHandlesChildEvents(false);
@@ -28,8 +26,4 @@ EndGameVisual::EndGameVisual(bool win)
     finalMessagePxm->setOffset(-finalMessage.width()/2, -finalMessage.height()/2);
     finalMessagePxm->setPos(0, -BLOCKSIZE*3);
     addToGroup(finalMessagePxm);
-
-    quitButton = new QuitButton();
-    quitButton->setPos(0, BLOCKSIZE*7);
-    addToGroup(quitButton);
 }
