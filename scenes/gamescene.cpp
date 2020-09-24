@@ -275,8 +275,7 @@ bool GameScene::updateGame()
                 enemy->stop();
             }
         }
-
-        delete player;
+        player->stopShooting();
 
         return false;
 

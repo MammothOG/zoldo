@@ -25,11 +25,9 @@ DespicableBoss::DespicableBoss()
     insertDirectionSprite("L", ":/ressources/images/enemies/despicable_boss_left.png");
 }
 
-#include <QDebug>
 void DespicableBoss::move()
 {
     float newPosX = direction.normalized().x() * (targetDistance / 2);
     float newPosY = direction.normalized().y() * (targetDistance / 2);
     this->setPos(this->x() + newPosX, this->y() + newPosY);
-    qDebug() << targetDistance;
 }

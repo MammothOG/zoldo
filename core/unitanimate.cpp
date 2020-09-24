@@ -47,7 +47,6 @@ UnitAnimate::~UnitAnimate()
     stopShooting();
 }
 
-#include <QDebug>
 void UnitAnimate::lockTarget(const Unit * const target)
 {
     if (!target->isDead()) {
