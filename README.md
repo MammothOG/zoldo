@@ -2,7 +2,7 @@
 
 This game was created as part of a 5th year project at the engineer school [ESME Sudria](https://www.esme.fr). The gameplay is inspired by Archero on the theme of Zelda.
 
-![menu](/readme-images/menu.png)
+![menu](/zoldo/readme-images/menu.png)
 
 ## Bluild
 
