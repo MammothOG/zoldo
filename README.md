@@ -4,6 +4,8 @@ This game was created as part of a 5th year project at the engineer school [ESME
 
 ![menu](/readme-images/menu.PNG)
 
+![game](/readme-images/game1.PNG)
+
 ## Bluild
 
 QT version : 5.14.2
