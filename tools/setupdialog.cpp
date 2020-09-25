@@ -20,12 +20,11 @@ SetupDialog::SetupDialog()
 
     resBox = new QComboBox;
     resBox->addItems(resolutions.keys());
-    resBox->setCurrentIndex(resolutions.keys().length()-1);
     layout()->addWidget(resBox);
 
     fullScreen = new QCheckBox("Full Screen", this);
     layout()->addWidget(fullScreen);
-
+    fullScreen->setChecked(true);
     QPushButton* ok = new QPushButton("ok");
     layout()->addWidget(ok);
     connect(ok, &QPushButton::clicked, this, [this]()
